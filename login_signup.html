@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Contact Us</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="./images/favicon.png"/>
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" type="text/css" href="./CSS/contact_us/main.css">
+    <link rel="stylesheet" href="./CSS/login_signup.css">
+</head>
+<body>
+
+	<!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee-text">| Linen your Way |</div>
+        <div class="marquee-text">Sustainable | Handcrafted | Timeless luxury</div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white p-3 fs-6 align-items-center shadow-sm">
+        <div class="container-fluid d-flex align-items-center">
+            <a class="navbar-brand" href="#">
+                <img class="logo_img" src="./images/logo b.png" alt="logo">
+            </a>
+        
+            <div class="search_box_container me-auto">
+                <div class="search_box position-relative">
+                    <input type="text" name="search" id="search" placeholder=" " required>
+                    <label for="search" class="floating_label">Search</label>
+                    <i class="fa fa-search position-absolute end-0 me-2"></i>
+                </div>
+            </div>
+        
+            <button class="navbar-toggler order-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse content_bar order-2" id="navbarContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="product.html">Products</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="collectionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Collections
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="collectionsDropdown">
+                            <li><a class="dropdown-item" href="#">Collection Padma</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about_us.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        
+            <!-- desktop view -->
+            <div class="icon-bar d-none d-lg-flex align-items-center ms-lg-3 order-2">
+                <a href="/cart" class="nav-link position-relative me-3">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                </a>
+                <a href="/account" class="nav-link">
+                    <i class="fa fa-user"></i>
+                </a>
+            </div>
+        
+            <!-- mobile view -->
+            <div class="icon-bar d-flex d-lg-none align-items-center order-1 ms-auto">
+                <a href="/cart" class="nav-link position-relative me-3">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                </a>
+                <a href="/account" class="nav-link">
+                    <i class="fa fa-user"></i>
+                </a>
+            </div>
+        </div>
+        
+    </nav>
+
+	<main>
+
+		<div class="container-fluid contact1">
+			<div class="container-contact1">
+				<div class="contact1-pic js-tilt" data-tilt>
+					<img src="./images/contact_us.png" alt="IMG">
+				</div>
+
+				<form class="login-form validate-form active" id="login_form">
+					<span class="contact1-form-title">
+						Login
+					</span>
+					
+					<div class="wrap-input1 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input1" type="text" name="email" placeholder="Email">
+						<span class="shadow-input1"></span>
+					</div>
+					
+					<div class="wrap-input1 validate-input" data-validate = "Password is required">
+						<input class="input1" type="password" name="password" placeholder="Password">
+						<span class="shadow-input1"></span>
+					</div>
+					
+					<div class="container-contact1-form-btn">
+						<button class="contact1-form-btn">
+							<span>
+								Login
+								<i class="fa fa-long-arrow-right right_arrow" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>	
+
+                    <div class="change_links">
+                        <a href="#" id="show-register" class="switch_link">New User? <b>Register Here</b></a>
+                    </div>
+				</form>
+
+
+                <!-- register form -->
+                <form class="register-form validate-form" id="register_form">
+					<span class="contact1-form-title">
+						Register
+					</span>
+					
+					<div class="wrap-input1 validate-input" data-validate = "Name is required">
+                        <input class="input1" type="text" name="name" placeholder="Name">
+						<span class="shadow-input1"></span>
+					</div>
+					
+					<div class="wrap-input1 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input1" type="text" name="email" placeholder="Email">
+						<span class="shadow-input1"></span>
+					</div>
+					
+					<div class="wrap-input1 validate-input" data-validate = "Subject is required">
+                        <input class="input1" type="tel" name="contact" placeholder="Contact">
+						<span class="shadow-input1"></span>
+					</div>
+					
+                    <!-- <div class="wrap-input1 validate-input" data-validate = "Subject is required">
+                        <input class="input" type="radio" name="gender" value="male"> Male 
+						<input class="input" type="radio" name="gender" value="female"> Female 
+                        
+						<span class="shadow-input1"></span>
+					</div> -->
+
+                    <div class="wrap-input1">
+
+                        <div class="radio-container">
+                            <label class="radio-label">
+                                <input type="radio" name="option" value="male" class="radio-input" />
+                                <span class="radio-circle"></span>
+                                Male
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="option" value="female" class="radio-input" />
+                                <span class="radio-circle"></span>
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                      
+					<div class="wrap-input1">
+                        <div class="terms-container">
+                            <label class="terms-checkbox">
+                                <input type="checkbox" checked />
+                                <span class="checkmark"></span>
+                            </label>
+                            <span>By registering, you agree to our  <a href="terms_and_conditions.html" style="color: #166e22;">Terms & Conditions</a>
+                                <br> and our <a href="delivery_and_return_policy.html" style="color: #166e22;">Delivery & Return Policy</a>.</span>
+                          </div>
+                          
+                          
+                    </div>
+
+					<div class="container-contact1-form-btn">
+                        <button class="contact1-form-btn">
+                            <span>
+                                Register
+								<i class="fa fa-long-arrow-right right_arrow" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>	
+                    <div class="change_links">
+                        <a href="#" id="show-login" class="switch_link">Already a User? <b>Login Here</b></a>
+                    </div>
+				</form>
+
+                <form action="#" class="otp-form validate-form">
+                    <div class="position-relative">
+                        <div class="card p-2 text-center">
+                            <h6>Please enter the one time password <br> to verify your account</h6>
+                            <div> <span>A code has been sent to</span> <small id="maskedNumber">*******9897</small> </div>
+                            <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+                                <input class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1" />
+                                <input class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1" />
+                                <input class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1" />
+                                <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1" />
+                                <input class="m-2 text-center form-control rounded" type="text" id="fifth" maxlength="1" />
+                                <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1" />
+                            </div>
+                            <div class="mt-4"> 
+                                <button id="validateBtn" class="btn btn-danger px-4 validate">Validate</button> 
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+			</div>
+		</div>
+	</main>
+	
+	<!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-left mb-4" style="align-self: center;">
+                    <img src="./images/footer_logo.png" alt="Brand Logo" class="img-fluid" style="max-width: 200px; align-items:center ; ">
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="wash_care.html">Wash Care</a></li>
+                        <li><a href="about_us.html">About Us</a></li>
+                        <li><a href="terms_and_conditions.html">Terms & Conditions</a></li>
+                        <li><a href="delivery_and_return_policy.html">Returns & Exchange</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 mb-4 f-sec-3">
+                    <h4>Contact Us</h4>
+                    <a href="mailto:your-email@example.com"><i class="fa-solid fa-envelope"></i> mokshiigada@gmail.com</a><br><br>
+                    <a href="tel:+1234567890"><i class="fa-solid fa-phone"></i> +1 (234) 567-890</a><br><br>
+                    <p><a href="https://www.instagram.com/chaandbymokshii?igsh=dm93OHhjeDJ2b2Zz" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+		
+		
+		
+		<!--===============================================================================================-->
+		<script src="./JS/contact_us/jquery-3.2.1.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="./JS/contact_us/popper.js"></script>
+		<script src="./JS/contact_us/bootstrap.min.js"></script>
+		<!--=======================================================	========================================-->
+		<script src="./JS/contact_us/tilt.jquery.min.js"></script>
+		<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+
+<!--===============================================================================================-->
+	<script src="./JS/contact_us/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.querySelector('.login-form');
+            const registerForm = document.querySelector('.register-form');
+            const switchToRegister = document.querySelector('#show-register');
+            const switchToLogin = document.querySelector('#show-login');
+
+            switchToRegister.addEventListener('click', () => {
+                loginForm.classList.remove('active');
+                registerForm.classList.add('active');
+            });
+
+            switchToLogin.addEventListener('click', () => {
+                registerForm.classList.remove('active');
+                loginForm.classList.add('active');
+            });
+        });
+
+    </script>
+
+</body>
+</html>

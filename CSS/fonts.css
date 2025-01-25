@@ -1,0 +1,56 @@
+/* fonts */
+@font-face {
+    font-family: Playfair-regular;
+    src: url("../fonts/PlayfairDisplay-Regular.ttf");
+}
+
+@font-face {
+    font-family: Playfair-black;
+    src: url("../fonts/Playfairblack-Regular.ttf");
+}
+
+@font-face {
+    font-family: Playfair-blackitalic;
+    src: url("../Fonts/PlayfairDisplay-BlackItalic.ttf");
+}
+
+@font-face {
+    font-family: Playfair-bold;
+    src: url("../Fonts/PlayfairDisplay-Bold.ttf");
+}
+
+@font-face {
+    font-family: Playfair-bolditalic;
+    src: url("../fonts/PlayfairDisplay-BoldItalic.ttf");
+}
+
+@font-face {
+    font-family: Playfair-italic;
+    src: url("../fonts/Playfairblack-Italic.ttf");
+}
+
+@font-face {
+    font-family: Lora-regular;
+    src: url("../fonts/Lora-Regular.ttf");
+}
+
+@font-face {
+    font-family: Lora-bold;
+    src: url("../fonts/Lora-Bold.ttf");
+}
+
+@font-face {
+    font-family: Lora-bolditalic;
+    src: url("../fonts/Lora-BoldItalic.ttf");
+}
+
+@font-face {
+    font-family: Lora-italic;
+    src: url("../fonts/Lora-Italic.ttf");
+}
+
+@font-face
+{
+    font-family: Brown-sugar;
+    src: url("../fonts/brown-sugar.ttf");
+}

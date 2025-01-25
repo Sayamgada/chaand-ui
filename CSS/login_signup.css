@@ -1,0 +1,327 @@
+
+.register-form, .otp-form, .new_password-form {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    position: absolute;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
+}
+
+.register-form.active, .otp-form.active, .new_password-form.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    position: static;
+    transition: opacity 0.5s ease, transform 0.5s ease-in;
+}
+
+
+
+.switch_link {
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.switch_link:hover {
+    color: #166e22;
+    text-decoration: underline;
+}
+
+
+.change_links
+{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: Montserrat-Bold;
+    font-size: 16px;
+    color: #666666;
+    position: relative;
+    padding-left: 35px;
+}
+
+.radio-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.radio-circle {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: #dedddd;
+    border-radius: 50%;
+    border: 2px solid #3d7f32;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.radio-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 12px;
+    height: 12px;
+    background-color: #3d7f32;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.radio-input:checked ~ .radio-circle {
+    border-color: #166e22;
+}
+
+.radio-input:checked ~ .radio-circle::after 
+{
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.radio-label:hover .radio-circle {
+    border-color: #166e22;
+}
+
+
+.radio-input:focus ~ .radio-circle {
+    box-shadow: 0 0 3px #166e22;
+}
+
+
+@media (max-width: 768px) {
+    .radio-label {
+        font-size: 14px;
+    }
+    .radio-circle {
+        width: 16px;
+        height: 16px;
+    }
+    .radio-circle::after {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+.terms-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-family: Montserrat-Regular;
+    font-size: 14px;
+    color: #666666;
+    text-align: center;
+}
+  
+.terms-checkbox {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+  
+.terms-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+.terms-checkbox .checkmark {
+    width: 20px;
+    height: 20px;
+    background-color: #dedddd;
+    border: 2px solid #3d7f32;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+  
+.terms-checkbox .checkmark::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    top: 4px;
+    left: 6px;
+    transform: rotate(45deg);
+    display: none;
+}
+  
+.terms-checkbox input:checked ~ .checkmark {
+    background-color: #166e22;
+    border-color: #166e22;
+}
+  
+.terms-checkbox input:checked ~ .checkmark::after {
+    display: block;
+}
+.card {
+    width: 100%;
+    border: none;
+    height: auto;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: unset;
+    padding: 20px;
+}
+
+.card h6 {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.inputs input {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    font-size: 20px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.validate {
+    border-radius: 20px;
+    height: 40px;
+    background-color: rgb(61, 127, 50);
+    border: 1px solid rgb(61, 127, 50);
+    width: 140px;
+    color: white;
+    transition: color 0.3s ease;
+    margin-top: 15px;
+}
+
+.validate:hover {
+    background-color: rgb(61, 127, 50);
+    border: 1px solid white;
+    color: white;
+}
+
+.go-back {
+    font-size: large;
+    margin-top: 10px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 2px solid red;
+}
+
+@media (max-width: 992px) {
+    .card {
+        width: 80%;
+    }
+    .card h6 {
+        font-size: 18px;
+    }
+    .inputs input {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+    .card {
+        width: 85%;
+        padding: 15px;
+    }
+    .card h6 {
+        font-size: 17px;
+    }
+    .inputs input {
+        width: 55px;
+        height: 55px;
+        font-size: 20px;
+    }
+    .validate {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+        padding: 15px;
+    }
+    .card h6 {
+        font-size: 16px;
+    }
+    .inputs input {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    .validate {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+        padding: 10px;
+    }
+    .card h6 {
+        font-size: 14px;
+    }
+    .inputs input {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    .validate {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px)
+{
+    .forgot_password
+    {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-top: -25px;
+        margin-bottom: 20px;
+        color: #166e22;
+    }
+
+    .otp_buttons
+    {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+    }
+}

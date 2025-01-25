@@ -1,0 +1,116 @@
+@import url("../navbar_footer.css");
+
+.hr
+{
+    display: flex;
+    justify-self: center;
+    border-top: 2px solid #166e22;
+    width: 90vw;
+    margin-top: 3%;
+}
+
+@media (max-width: 768px)
+{
+    .hr
+    {
+        margin-top: 5%;
+    }
+}
+
+@media (max-width: 768px)
+{
+    .hr
+    {
+        margin-top: 7%;
+    }
+}
+
+/* founders pick */
+.founder_pick
+{
+    padding-top: 5px;
+    color: #166e22;
+}
+
+.heading{
+    color: #166e22;
+    font-family: Playfair-bold;
+    font-size: 2.5rem;
+}
+
+.founder_pick .image-container {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: var(--bs-body-bg);
+}
+
+.founder_pick .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.founder_pick .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.founder_pick .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.founder_pick .btn {
+    border-radius: 25px;
+    padding: 5px 15px;
+}
+
+.card {
+    box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    background-color: var(--bs-body-bg);
+}
+
+.card-title {
+    font-family: Lora-bold;
+    font-size: 1.4rem;  
+    color: #166e22 !important;
+}
+
+.card-text {
+    font-family: Lora-regular;
+}
+
+.founders_card
+{
+    padding: 1rem;
+    max-width: 100%;
+}
+
+@media (min-width: 1400px)
+{
+    .founder_pick
+    {
+        max-width: 90%;
+        max-height: 100vh;
+    }
+
+    .founder_pick .image-container
+    {
+        height: 300px;
+    }
+
+    .founders_card
+    {
+        padding: 1.2rem !important;
+        max-width: 20% !important;
+    }
+}
+
+
+

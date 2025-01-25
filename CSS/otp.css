@@ -1,0 +1,256 @@
+@import url("../CSS/navbar_footer.css");
+
+body
+{
+    font-family: Lora-regular;
+}
+
+.main-container {
+    display: flex;
+    justify-self: center;
+    width: 60%;
+    height: 50vh;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-top: 3%;
+    overflow: hidden;
+    margin-bottom: 3%;
+}
+
+.left-panel {
+    flex: 1;
+    background: linear-gradient(150deg, #166e22, #6c7e6f);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.left-panel h1 {
+    font-size: 3em;
+    z-index: 1;
+    font-family: Playfair-bolditalic;
+    font-style: italic;
+    font-weight: bold;
+    animation: slideInLeft 1.5s ease;
+}
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.left-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(22, 110, 34, 0.8), #6c7e6f);
+    z-index: 0;
+    animation: gradientMove 4s infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.right-panel {
+    flex: 1;
+    background-color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.right-panel h2 {
+    margin-bottom: 10px;
+    font-size: 2.7em;
+    color: #333;
+    font-family: Lora-bold;
+    font-weight: bold;
+    animation: slideInRight 1.5s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.right-panel p {
+    margin-bottom: 20px;
+    color: #666;
+    font-family: Lora-regular;
+    font-size: 1.3em;
+}
+
+.otp-input-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.otp-input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.5em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.otp-input:focus {
+    border-color: #166e22;
+    box-shadow: 0 0 8px rgba(22, 110, 34, 0.4);
+}
+
+.otp-input:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.form-options {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-options a {
+    color: #166e22;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.3s;
+}
+
+.form-options a:hover {
+    color: #0f4f19;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #166e22;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #145a1c;
+    transform: scale(1.05);
+}
+
+
+
+@media (max-width: 1200px) {
+    .main-container {
+        width: 80%;
+        height: 50vh;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+    
+    .left-panel, .right-panel {
+        flex: none;
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .right-panel h2 {
+        font-size: 2em;
+    }
+
+    .otp-input-group {
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .otp-input {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-container {
+        width: 95%;
+        height: auto;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    .left-panel h1 {
+        font-size: 2em;
+    }
+
+    .right-panel h2 {
+        font-size: 1.8em;
+    }
+
+    .otp-input {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+    }
+
+    .btn {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 400px) {
+    .otp-input {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2em;
+    }
+
+    .btn {
+        padding: 10px;
+        font-size: 1em;
+    }
+}

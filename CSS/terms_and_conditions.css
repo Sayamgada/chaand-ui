@@ -1,0 +1,115 @@
+@import url("../CSS/fonts.css");
+@import url("../CSS/navbar_footer.css");
+
+body {
+    margin: 0;
+    font-family: Lora-regular;
+    background-color: #f4f4f4;
+}
+
+/* main section */
+.container-main {
+    padding: 40px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-tnc {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    background: linear-gradient(to bottom right, #ffffff, #f4f4f4);
+}
+
+.container-tnc h1 {
+    font-size: 2.5rem;
+    font-family: Playfair-bold;
+    font-weight: 700;
+    color: #166e22;
+}
+
+.container-tnc h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    font-family: Lora-bold;
+}
+
+.container-tnc ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.container-tnc ul li {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.container-tnc ul li::before {
+    content: "\2022";
+    color: #166e22;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.tnc-h {
+    color: #166e22;
+    border-bottom: 2px solid #166e22;
+    padding-bottom: 5px;
+
+}
+
+@media (max-width: 768px) {
+    .container-tnc {
+        padding: 20px;
+    }
+
+    .container-tnc h1 {
+        font-size: 2rem;
+    }
+
+    .container-tnc h2 {
+        font-size: 1.5rem;
+    }
+
+    .container-main {
+        padding: 20px;
+    }
+}
+
+
+/* Footer */
+.footer {
+    background-color: white;
+    padding: 40px 0;
+}
+
+.footer h4 {
+    margin-bottom: 20px;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer a, i, p {
+    color: #166e22;
+}
+
+@media (max-width: 767px) {
+    .footer {
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+}
