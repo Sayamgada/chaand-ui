@@ -638,7 +638,7 @@ a:hover {
 .search-wrap .form-control {
   position: absolute;
   top: 50%;
-  width: 100%;
+  width: 90%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
