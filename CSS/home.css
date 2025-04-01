@@ -4,7 +4,7 @@
 
 body
 {
-    font-family: Lora-body;
+    font-family: Lora-regular;
 }
 
 
@@ -140,7 +140,4 @@ body
 
 }
 
-.container
-{
-    max-width: 100%;
-}
+

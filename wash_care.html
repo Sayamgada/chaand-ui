@@ -10,7 +10,13 @@
     
     <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
 
+    <link rel="stylesheet" href="./CSS/navbar_footer.css">
+    <link rel="stylesheet" href="./CSS/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./CSS/css/style.css">
+    <link rel="stylesheet" href="./Fonts/icomoon/style.css">
+    
     <link rel="stylesheet" href="./CSS/terms_and_conditions.css">
+
 </head>
 <body>
     <!-- Marquee container -->
@@ -20,88 +26,60 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white p-3 fs-6 align-items-center shadow-sm">
-        <div class="container-fluid d-flex align-items-center">
-            <a class="navbar-brand" href="#">
-                <img class="logo_img" src="./images/logo b.png" alt="logo">
-            </a>
-        
-            <div class="search_box_container me-auto">
-                <div class="search_box position-relative">
-                    <input type="text" name="search" id="search" placeholder=" " required>
-                    <label for="search" class="floating_label">Search</label>
-                    <i class="fa fa-search position-absolute end-0 me-2"></i>
+    <div class="site-wrap">
+        <div class="site-navbar bg-white py-2">
+            <div class="search-wrap">
+                <div class="container">
+                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+                <form action="#" method="post">
+                    <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+                </form>  
                 </div>
             </div>
-        
-            <button class="navbar-toggler order-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        
-            <div class="collapse navbar-collapse content_bar order-2" id="navbarContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="product.html">Products</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="collectionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Collections
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="collectionsDropdown">
-                            <li><a class="dropdown-item" href="#">Collection Padma</a></li>
+    
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="logo">
+                        <div class="site-logo">
+                        <a href="index.html" class="js-logo-clone"><img src="./images/logo b.png" width="200px" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="main-nav d-none d-lg-block">
+                        <nav class="site-navigation text-right text-md-center" role="navigation">
+                        <ul class="site-menu js-clone-nav d-none d-lg-block">
+                            <li><a href="index.html">Home</a> </li>
+                            
+                            <li><a href="product.html">Products</a></li>
+                            <li class="has-children active">
+                                <a href="#">Collections</a>
+                                <ul class="dropdown">
+                                    <li><a href="collections.html">Menu One</a></li>
+                                    <li><a href="#">Menu Two</a></li>
+                                    <li><a href="#">Menu Three</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li><a href="about_us.html">About Us</a></li>
+                            <li><a href="contact_us.html">Contact Us</a></li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about_us.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact_us.html">Contact Us</a>
-                    </li>
-                </ul>
-            </div>
-        
-            <!-- desktop view -->
-            <div class="icon-bar d-none d-lg-flex align-items-center ms-lg-3 order-2">
-                <a href="my_cart.html" class="nav-link position-relative me-3">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-                </a>
-                <div class="dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="userDropdown" style="left: auto; right: 0;">
-                        <li><a href="my_acc_dashboard.html" class="dropdown-item">My Account</a></li>
-                        <li><a href="login.html" class="dropdown-item">Login</a></li>
-                    </ul>
+                        </nav>
+                    </div>
+                    <div class="icons">
+                        <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+                        <a href="#" class="icons-btn d-inline-block"><span class="icon-heart-o"></span></a>
+                        <a href="my_cart.html" class="icons-btn d-inline-block bag">
+                        <span class="icon-shopping-bag"></span>
+                        <span class="number">2</span>
+                        </a>
+                        <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
+                    </div>
                 </div>
             </div>
-        
-            <!-- mobile view -->
-            <div class="icon-bar d-flex d-lg-none align-items-center order-1 ms-auto">
-                <a href="my_cart.html" class="nav-link position-relative me-3">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-                </a>
-                <div class="dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="userDropdown" style="left: auto; right: 0;">
-                        <li><a href="my_acc_dashboard.html" class="dropdown-item">My Account</a></li>
-                        <li><a href="login.html" class="dropdown-item">Login</a></li>
-
-                    </ul>
-                </div>
-            </div>
-        </div> 
-    </nav>
+        </div>     
+    </div> 
 
     <main class="container-fluid my-5 container-main">
-        <section class="container container-tnc">
+        <section class="main_container container container-tnc">
             <h1 class="text-center py-5">Linen Wash Care Guide</h1>
 
             <section class="mb-4 py-1">
@@ -176,7 +154,7 @@
                 <div class="col-md-4 mb-4">
                     <h4>Quick Links</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#">Wash Care</a></li>
+                        <li><a href="wash_care.html">Wash Care</a></li>
                         <li><a href="about_us.html">About</a></li>
                         <li><a href="terms_and_conditions.html">Terms & Conditions</a></li>
                         <li><a href="delivery_and_return_policy.html">Shipping & Exchange</a></li>
@@ -194,6 +172,17 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+        <!-- Custom JS -->
+    <script src="./JS/home.js"></script>
+    <script src="./JS/js/jquery-3.3.1.min.js"></script>
+    <script src="./JS/js/jquery-ui.js"></script>
+    <!-- <script src="./JS/js/popper.min.js"></script> -->
+    <script src="./JS/js/bootstrap.min.js"></script>
+    <script src="./JS/js/owl.carousel.min.js"></script>
+    <script src="./JS/js/jquery.magnific-popup.min.js"></script>
+    <script src="./JS/js/aos.js"></script>
+    
+    <script src="./JS/js/main.js"></script>
 </body>
 </html>

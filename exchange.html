@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chaand</title>
+    
+    <link rel="stylesheet" href="../CSS/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../CSS/css/style.css">
+    <link rel="stylesheet" href="../Fonts/icomoon/style.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    <!-- Title Icon -->
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./CSS/products/products.css">
+    <link rel="stylesheet" href="./CSS/home.css">
+
+    <link rel="stylesheet" href="./CSS/navbar_footer.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./CSS/exchange.css">
+    <style>
+        /* Main Section */
+.container-main {
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 40px;
+    border-radius: 1rem;
+}
+
+/* Form Control Styling */
+.form-select, .form-control, textarea {
+    border-radius: 0.75rem;
+    border: 1px solid #d1d1d1;
+    padding: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+/* Focus state for form inputs */
+.form-select:focus, .form-control:focus, textarea:focus {
+    border-color: #166e22;
+    box-shadow: 0 0 0 0.2rem rgba(22, 110, 34, 0.25);
+    outline: none;
+}
+
+/* Button Styling */
+.btn-success {
+    background-color: #166e22;
+    border: none;
+    font-size: 1.1rem;
+    padding: 12px 35px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+    background-color: #14581c;
+    transform: translateY(-2px);
+}
+
+.btn-success:active {
+    background-color: #14581c;
+    transform: translateY(0);
+}
+
+/* Card Styling */
+.card {
+    border-radius: 1rem;
+    border: 1px solid #f0f0f0;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 6px;
+}
+
+/* Heading Styling */
+.card h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #166e22;
+}
+
+/* Validation Feedback */
+.invalid-feedback {
+    display: block;
+    color: #d9534f;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container-main {
+        padding: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-success {
+        width: 100%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee-text">| Linen your Way |</div>
+        <div class="marquee-text">Sustainable | Handcrafted | Timeless luxury</div>
+    </div>
+
+    <!-- Navbar -->
+    <div class="site-wrap">
+        <div class="site-navbar bg-white py-2">
+    
+            <div class="search-wrap">
+                <div class="container">
+                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+                <form action="#" method="post">
+                    <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+                </form>  
+                </div>
+            </div>
+    
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between">
+                <div class="logo">
+                    <div class="site-logo">
+                    <a href="index.html" class="js-logo-clone"><img src="./images/logo b.png" width="200px" alt="logo"></a>
+                    </div>
+                </div>
+                <div class="main-nav d-none d-lg-block">
+                    <nav class="site-navigation text-right text-md-center" role="navigation">
+                    <ul class="site-menu js-clone-nav d-none d-lg-block">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        
+                        <li><a href="/product.html">Products</a></li>
+                        <li class="has-children"><a href="#">Collections</a>
+                            <ul class="dropdown">
+                                <li><a href="/collections.html">Collection Padma</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/about_us.html">About Us</a></li>
+                        <li><a href="/contact_us.html">Contact Us</a></li>
+                    </ul>
+                    </nav>
+                </div>
+                <div class="icons">
+                    <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+                    <a href="my_acc_dashboard.html" class="icons-btn d-inline-block"><span class="icon-user"></span></a>
+                    <a href="my_cart.html" class="icons-btn d-inline-block bag">
+                        <span class="icon-shopping-bag"></span>
+                        <span class="number">2</span>
+                    </a>
+                    <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
+                </div>
+                </div>
+            </div>
+        </div>     
+    </div> 
+    
+    <main class="container-fluid my-5 container-main">
+        <section class="container container-tnc h-100 h-custom cart-section">
+            <div class="container py-5 h-100">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8">
+                        <div class="card shadow-lg border-light rounded-4">
+                            <div class="card-body">
+                                <h2 class="text-center mb-4 text-success">Exchange Order</h2>
+                                <form action="#" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                                    
+                                    <div class="mb-4">
+                                        <label for="reason" class="form-label">Reason for Exchange</label>
+                                        <select class="form-select" id="reason" name="reason" required onchange="toggleOtherReasonInput()">
+                                            <option value="" disabled selected>Select a reason</option>
+                                            <option value="size_issue">Size Issue</option>
+                                            <option value="defective_item">Defective Item</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid reason.
+                                        </div>
+                                    </div>
+    
+                                    <div class="mb-4 d-none" id="other-reason-container">
+                                        <label for="other-reason" class="form-label">Specify the Reason</label>
+                                        <input type="text" class="form-control" id="other-reason" name="other_reason" placeholder="Enter the reason" required>
+                                        <div class="invalid-feedback">
+                                            Please specify the reason.
+                                        </div>
+                                    </div>
+    
+                                    <div class="mb-4">
+                                        <label for="images" class="form-label">Upload Images</label>
+                                        <input type="file" class="form-control" id="images" name="images[]" accept="image/*" multiple required>
+                                        <div class="invalid-feedback">
+                                            Please upload at least one image.
+                                        </div>
+                                    </div>
+    
+                                    <div class="mb-4">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Provide details about the issue" required></textarea>
+                                        <div class="invalid-feedback">
+                                            Please provide a description.
+                                        </div>
+                                    </div>
+    
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-success btn-lg px-4 py-2 rounded-pill shadow-sm">Submit Exchange Request</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+
+
+<!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-left mb-4" style="align-self: center;">
+                    <img src="./images/footer_logo.png" alt="Brand Logo" class="img-fluid" style="max-width: 200px; align-items:center ; ">
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="wash_care.html">Wash Care</a></li>
+                        <li><a href="about_us.html">About Us</a></li>
+                        <li><a href="terms_and_conditions.html">Terms & Conditions</a></li>
+                        <li><a href="delivery_and_return_policy.html">Returns & Exchange</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 mb-4 f-sec-3">
+                    <h4>Contact Us</h4>
+                    <a href="mailto:your-email@example.com"><i class="fa-solid fa-envelope"></i> mokshiigada@gmail.com</a><br><br>
+                    <a href="tel:+1234567890"><i class="fa-solid fa-phone"></i> +1 (234) 567-890</a><br><br>
+                    <p><a href="https://www.instagram.com/chaandbymokshii?igsh=dm93OHhjeDJ2b2Zz" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+    function toggleOtherReasonInput() {
+        const reasonSelect = document.getElementById('reason');
+        const otherReasonContainer = document.getElementById('other-reason-container');
+        if (reasonSelect.value === 'other') {
+            otherReasonContainer.classList.remove('d-none');
+        } else {
+            otherReasonContainer.classList.add('d-none');
+        }
+    }
+</script>
+</html>

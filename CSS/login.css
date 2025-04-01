@@ -141,8 +141,9 @@ body
 
 .form-options {
     display: flex;
-    justify-content: end;
+    justify-content: flex-start;
     align-items: center;
+    margin-top: 15px;
     margin-bottom: 20px;
 }
 
@@ -297,4 +298,16 @@ body
     {
         font-size: 1.2em;
     }
+}
+
+.form-check input[type="checkbox"]
+{
+    width: 1.2rem !important;
+    height: 1.2rem !important;
+}
+
+.form-check input[type="checkbox"]:checked
+{
+    background-color: #166e22;
+    border: none;
 }
