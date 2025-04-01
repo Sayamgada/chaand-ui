@@ -415,7 +415,10 @@ input[type=number]::-webkit-outer-spin-button {
 .product-images .main-image {
     max-width: 100%;
     height: auto;
+<<<<<<< HEAD
     max-height: 65vh !important;
+=======
+>>>>>>> 289c9d8 (sec)
 }
 
 .thumbnail-images img {
@@ -516,7 +519,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 .diagonal-discount-tag {
     padding: 5px 50px; 
+<<<<<<< HEAD
     /* transform: rotate(-45deg); */
+=======
+    transform: rotate(-45deg);
+>>>>>>> 289c9d8 (sec)
     transform-origin: top left;
     z-index: 10;
     text-align: center;
@@ -528,14 +535,24 @@ input[type=number]::-webkit-outer-spin-button {
 
 .diagonal-discount-tag {
     position: absolute;
+<<<<<<< HEAD
     top: -5px; 
     left: -19px; 
     /* background-color: #ff4d4d;  */
+=======
+    top: 65px; 
+    left: 5px; 
+    background-color: #ff4d4d; 
+>>>>>>> 289c9d8 (sec)
     color: white; 
     font-size: 0.9rem; 
     font-weight: bold; 
     padding: 5px 20px; 
+<<<<<<< HEAD
     /* transform: rotate(-49deg) translate(-10%, 10%);  */
+=======
+    transform: rotate(-49deg) translate(-10%, 10%); 
+>>>>>>> 289c9d8 (sec)
     transform-origin: top left; 
     z-index: 10; 
     text-align: center; 
@@ -544,9 +561,12 @@ input[type=number]::-webkit-outer-spin-button {
     /* border-radius: 4px; */
     overflow: visible;
 }
+<<<<<<< HEAD
 .diagonal-discount-tag img{
     width: 5rem;
 }
+=======
+>>>>>>> 289c9d8 (sec)
 
 .tag-bg-b {
     position: absolute;
@@ -598,6 +618,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 
+<<<<<<< HEAD
         .ribbon-wrapper {
             perspective: 800px;
         }
@@ -716,3 +737,8 @@ input[type=number]::-webkit-outer-spin-button {
                 font-size: 2rem;
             }
         }
+=======
+
+
+
+>>>>>>> 289c9d8 (sec)
