@@ -3,313 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>E-Commerce Admin - Products</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-     <style>
-      :root {
-    --primary-color: #166e22;
-    --light-bg: #f8f9fa;
-    --white: #ffffff;
-    --gray-100: #f8f9fa;
-    --gray-200: #e9ecef;
-    --gray-300: #dee2e6;
-    --gray-500: #adb5bd;
-    --gray-700: #495057;
-    --gray-900: #212529;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-bg);
-}
-
-/* Override Bootstrap primary color */
-.bg-primary {
-    background-color: var(--primary-color) !important;
-}
-
-.text-primary {
-    color: var(--primary-color) !important;
-}
-
-/* Navbar styling */
-.navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    z-index: 1030;
-}
-
-.logo-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-}
-
-/* Sidebar styling */
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    padding: 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    transition: all 0.3s;
-}
-
-.sidebar .nav-link {
-    font-weight: 500;
-    color: var(--gray-700);
-    padding: 0.75rem 1rem;
-    display: flex;
-    align-items: center;
-    border-radius: 0.25rem;
-    margin: 0.2rem 0.5rem;
-}
-
-.sidebar .nav-link:hover {
-    background-color: var(--gray-100);
-}
-
-.sidebar .nav-link.active {
-    color: var(--primary-color);
-    background-color: var(--gray-100);
-}
-
-.sidebar .nav-link i {
-    margin-right: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.sidebar .nav-link:hover i {
-    color: var(--primary-color);
-}
-
-.sidebar-hidden {
-    margin-left: -100%;
-}
-
-/* Main content area */
-.main-content {
-    padding-top: 56px; /* Height of navbar */
-    transition: all 0.3s;
-}
-
-/* Card styling */
-.card {
-    border: none;
-    border-radius: 0.5rem;
-}
-
-.shadow-sm {
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 767.98px) {
-    .sidebar {
-        margin-left: -100%;
-    }
-    
-    .sidebar.show {
-        margin-left: 0;
-        width: 260px;
-    }
-    
-    .main-content {
-        width: 100%;
-    }
-}
-
-@media (min-width: 768px) {
-    .main-content {
-        margin-left: 25%; /* Width of sidebar */
-    }
-}
-
-@media (min-width: 992px) {
-    .main-content {
-        margin-left: 16.66666667%; /* Width of sidebar */
-    }
-}
-     </style>
+    <link rel="stylesheet" href="./dummy.css">
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top border-bottom">
-            <div class="container-fluid">
-                <button id="sidebarToggle" class="btn me-2 d-lg-none">
-                    <i class="bi bi-list"></i>
-                </button>
-                <div class="d-flex align-items-center">
-                    <div class="logo-badge bg-primary text-white p-2 rounded me-2">
-                        <i class="bi bi-grid-1x2"></i>
-                    </div>
-                    <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
+    <!-- Toggle Sidebar Button (Mobile) -->
+    <button class="toggle-sidebar" id="toggleSidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <i class="fas fa-store"></i> EcoShop
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="products.html">
+                    <i class="fas fa-box"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="orders.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="customers.html">
+                    <i class="fas fa-users"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="categories.html">
+                    <i class="fas fa-tags"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="discounts.html">
+                    <i class="fas fa-percent"></i>
+                    <span>Discounts</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="analytics.html">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="settings.html">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Header -->
+        <div class="header">
+            <h4 class="mb-0">Products Management</h4>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge rounded-pill bg-danger">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                        <li><a class="dropdown-item" href="#">New order received</a></li>
+                        <li><a class="dropdown-item" href="#">Product out of stock</a></li>
+                        <li><a class="dropdown-item" href="#">Customer support request</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://via.placeholder.com/30" class="rounded-circle me-2" alt="Admin">
+                        <span>Admin</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
                 </div>
             </div>
-        </nav>
+        </div>
 
+        <!-- Products Page Content -->
         <div class="container-fluid">
-            <div class="row">
-                <!-- Sidebar -->
-                <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-white sidebar">
-                    <div class="position-sticky pt-5">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">
-                                    <i class="bi bi-grid-1x2 text-primary"></i>
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-people"></i>
-                                    <span>Users</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-cart"></i>
-                                    <span>Products</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-bar-chart"></i>
-                                    <span>Analytics</span>
-                                </a>
-                            </li>
-                            <li class="nav-item border-top mt-3 pt-3">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-question-circle"></i>
-                                    <span>Help</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    <span>Logout</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-                <!-- Main Content -->
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-                    <div class="container-fluid pt-4">
-                        <div class="card shadow-sm mb-4">
-                            <div class="card-body">
-                                <h1 class="card-title h4 mb-4">Welcome to Admin Dashboard</h1>
-                                <p class="text-muted">
-                                    This is the main content area that will change based on navigation.
-                                    Select an option from the sidebar to view different content.
-                                </p>
+            <!-- Action Bar -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-success">
+                                    <i class="fas fa-plus"></i> Add Product
+                                </button>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="fas fa-file-import"></i> Import
+                                </button>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="fas fa-file-export"></i> Export
+                                </button>
                             </div>
+                            <div class="d-flex gap-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search products...">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="fas fa-filter"></i> Filter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-container">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" class="form-check-input">
+                                        </th>
+                                        <th>Product</th>
+                                        <th>SKU</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="form-check-input">
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" class="me-2" alt="Product">
+                                                <span>Organic Green Tea</span>
+                                            </div>
+                                        </td>
+                                        <td>PRD-001</td>
+                                        <td>Beverages</td>
+                                        <td>$15.00</td>
+                                        <td>120</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Actions
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#">View</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="form-check-input">
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" class="me-2" alt="Product">
+                                                <span>Eco-Friendly Water Bottle</span>
+                                            </div>
+                                        </td>
+                                        <td>PRD-002</td>
+                                        <td>Accessories</td>
+                                        <td>$28.50</td>
+                                        <td>85</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Actions
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#">View</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="form-check-input">
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" class="me-2" alt="Product">
+                                                <span>Bamboo Toothbrush Set</span>
+                                            </div>
+                                        </td>
+                                        <td>PRD-003</td>
+                                        <td>Personal Care</td>
+                                        <td>$12.99</td>
+                                        <td>210</td>
+                                        <td><span class="badge badge-success">Active</span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Actions
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#">View</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="form-check-input">
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" class="me-2" alt="Product">
+                                                <span>Reusable Shopping Bags</span>
+                                            </div>
+                                        </td>
+                                        <td>PRD-004</td>
+                                        <td>Home & Living</td>
+                                        <td>$18.75</td>
+                                        <td>150</td>
+                                        <td><span class="badge badge-pending">Low Stock</span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Actions
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#">View</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" class="form-check-input">
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" class="me-2" alt="Product">
+                                                <span>Solar Power Bank</span>
+                                            </div>
+                                        </td>
+                                        <td>PRD-005</td>
+                                        <td>Electronics</td>
+                                        <td>$65.20</td>
+                                        <td>0</td>
+                                        <td><span class="badge badge-cancelled">Out of Stock</span></td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Actions
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                    <li><a class="dropdown-item" href="#">View</a></li>
+                                                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         
-                        <!-- Example content cards -->
-                        <div class="row">
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="card shadow-sm h-100">
-                                    <div class="card-body">
-                                        <h3 class="card-title h5 mb-3">Content Card 1</h3>
-                                        <p class="card-text text-muted">
-                                            This is a placeholder content card. Real content would be loaded here
-                                            based on the selected navigation item.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="card shadow-sm h-100">
-                                    <div class="card-body">
-                                        <h3 class="card-title h5 mb-3">Content Card 2</h3>
-                                        <p class="card-text text-muted">
-                                            This is a placeholder content card. Real content would be loaded here
-                                            based on the selected navigation item.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 mb-4">
-                                <div class="card shadow-sm h-100">
-                                    <div class="card-body">
-                                        <h3 class="card-title h5 mb-3">Content Card 3</h3>
-                                        <p class="card-text text-muted">
-                                            This is a placeholder content card. Real content would be loaded here
-                                            based on the selected navigation item.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div>Showing 1 to 5 of 24 entries</div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
-                </main>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
-    <!-- <script src="script.js"></script> -->
-     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-    // Get sidebar element
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <!-- <script src="sidebar.js"></script> -->
+    <script src="header.js"></script>
+    <script>
+        // Sidebar functionality 
+function initSidebar() {
+    // Toggle Sidebar on mobile 
+    const toggleBtn = document.getElementById('toggleSidebar');
     const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    
-    // Toggle sidebar on button click
-    sidebarToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('show');
-    });
-    
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(event) {
-        const isClickInsideSidebar = sidebar.contains(event.target);
-        const isClickOnToggle = sidebarToggle.contains(event.target);
-        
-        if (!isClickInsideSidebar && !isClickOnToggle && window.innerWidth < 768) {
-            sidebar.classList.remove('show');
-        }
-    });
-    
-    // Handle window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth >= 768) {
-            sidebar.classList.remove('show');
-        }
-    });
-    
-    // Add active class to nav items on click
-    const navLinks = document.querySelectorAll('.sidebar .nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // Remove active class from all links
-            navLinks.forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Add active class to clicked link
-            this.classList.add('active');
+
+    if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
         });
+    }
+
+    // Set active menu item based on current page 
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const menuLinks = document.querySelectorAll('.sidebar .nav-link');
+
+    menuLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage) {
+            link.classList.add('active');
+        } else if (currentPage === 'index.html' && href === '#') {
+            link.classList.add('active');
+        }
     });
-});
-     </script>
+}
+
+// Initialize sidebar when DOM is loaded 
+document.addEventListener('DOMContentLoaded', initSidebar);
+// Header functionality 
+function initHeader() {
+    // Initialize dropdowns if Bootstrap JS is loaded
+    if (typeof bootstrap !== 'undefined') {
+        const dropdownElementList = document.querySelectorAll('.dropdown-toggle');
+        const dropdownList = [...dropdownElementList].map(dropdownToggleEl => 
+            new bootstrap.Dropdown(dropdownToggleEl)
+        );
+    }
+}
+
+// Initialize header when DOM is loaded
+document.addEventListener('DOMContentLoaded', initHeader);
+
+
+    </script>
 </body>
 </html>
