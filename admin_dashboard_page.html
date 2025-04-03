@@ -1,672 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
+    <title>Book'd | Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
     <style>
         :root {
-            --primary: #166e22;
-            --primary-light: #2a8336;
-            --primary-dark: #0e5518;
-            --white: #ffffff;
-            --light-gray: #f8f9fa;
-            --text-dark: #343a40;
+            --primary-color: #166e22;
+            --white-color: #ffffff;
+            --border-color: #e0e0e0;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f5f5;
+            overflow-x: hidden;
         }
-        
-        /* Sidebar */
-        .sidebar {
-            background-color: var(--primary);
-            color: var(--white);
-            height: 100vh;
+
+        .header {
+            background-color: var(--white-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
             position: fixed;
-            padding: 0;
-            transition: all 0.3s;
+            top: 0;
+            width: 100%;
             z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .sidebar .logo {
-            padding: 20px 15px;
-            font-size: 24px;
+
+        .logo {
+            font-size: 1.5rem;
             font-weight: bold;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
         }
-        
-        .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 12px 20px;
-            margin: 4px 0;
-            border-radius: 0;
+
+        .header-title {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: calc(100vh - 70px);
+            width: 250px;
+            background-color: var(--white-color);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            z-index: 900;
+            overflow-y: auto;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-menu li a {
+            display: block;
+            padding: 15px 20px;
+            color: #333;
+            text-decoration: none;
             transition: all 0.3s;
         }
-        
-        .sidebar .nav-link:hover, 
-        .sidebar .nav-link.active {
-            background-color: var(--primary-light);
-            color: var(--white);
-            border-left: 4px solid var(--white);
+
+        .sidebar-menu li a:hover,
+        .sidebar-menu li a.active {
+            background-color: var(--primary-color);
+            color: var(--white-color);
         }
-        
-        .sidebar .nav-link i {
+
+        .sidebar-menu li a i {
             margin-right: 10px;
             width: 20px;
             text-align: center;
         }
-        
-        /* Main Content */
+
         .main-content {
             margin-left: 250px;
+            margin-top: calc(1rem + 52px);
             padding: 20px;
             transition: all 0.3s;
         }
-        
-        /* Header */
-        .header {
-            background-color: var(--white);
-            padding: 15px 20px;
+
+        .dashboard-card {
+            background-color: var(--white-color);
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-        }
-        
-        /* Stats Cards */
-        .stat-card {
-            background-color: var(--white);
-            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+            margin-bottom: 20px;
             height: 100%;
+            transition: transform 0.3s;
         }
-        
-        .stat-card:hover {
+
+        .dashboard-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
-        .stat-card .icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
             margin-bottom: 15px;
         }
-        
-        .stat-card .number {
-            font-size: 28px;
+
+        .card-value {
+            font-size: 2.5rem;
             font-weight: bold;
+            color: var(--primary-color);
             margin-bottom: 5px;
         }
-        
-        .stat-card .label {
-            color: #6c757d;
-            font-size: 14px;
+
+        .card-label {
+            font-size: 1rem;
+            color: #666;
         }
-        
-        /* Charts */
-        .chart-container {
-            background-color: var(--white);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-        }
-        
-        /* Tables */
-        .table-container {
-            background-color: var(--white);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-        }
-        
-        .table-container .table {
-            margin-bottom: 0;
-        }
-        
-        /* Responsive */
+
         @media (max-width: 992px) {
             .sidebar {
                 width: 70px;
-                overflow: hidden;
+                transform: translateX(0);
             }
-            
-            .sidebar .logo {
-                font-size: 18px;
-                text-align: center;
-                padding: 15px 5px;
-            }
-            
-            .sidebar .nav-link span {
+
+            .sidebar-menu li a span {
                 display: none;
             }
-            
-            .sidebar .nav-link i {
+
+            .sidebar-menu li a i {
                 margin-right: 0;
-                font-size: 18px;
+                font-size: 1.2rem;
             }
-            
+
             .main-content {
                 margin-left: 70px;
             }
         }
-        
+
         @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 250px;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-menu li a span {
+                display: inline-block;
+            }
+
             .main-content {
                 margin-left: 0;
             }
-            
-            .sidebar {
-                left: -70px;
-            }
-            
-            .sidebar.show {
-                left: 0;
-            }
-            
+
             .toggle-sidebar {
                 display: block !important;
             }
+
+            .logo img {
+                min-width: 15vw;
+            }
         }
-        
-        /* Status Badges */
-        .badge-success {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .badge-pending {
-            background-color: #ffc107;
-            color: #212529;
-        }
-        
-        .badge-cancelled {
-            background-color: #dc3545;
-            color: white;
-        }
-        
-        /* Toggle Button */
+
         .toggle-sidebar {
             display: none;
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1001;
-            background-color: var(--primary);
-            color: white;
+            background-color: var(--primary-color);
+            color: var(--white-color);
             border: none;
             border-radius: 4px;
-            padding: 8px 12px;
+            padding: 5px 10px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        .bg-primary {
+            background-color: var(--primary-color) !important;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        @media (min-width: 1500px) {
+            .sidebar {
+                margin-top: 60px;
+            }
+
+            .main-content {
+                margin-top: 125px;
+            }
+        }
+
+        @media ((min-width: 800px) and (max-width: 1200px)) {
+            .sidebar {
+                margin-top: 15px;
+            }
+
+            .main-content {
+                margin-top: 90px;
+            }
+        }
+
+        @media ((min-width: 1200px) and (max-width: 1500px)) {
+            .sidebar {
+                margin-top: 30px;
+            }
+
+            .main-content {
+                margin-top: 100px;
+            }
+        }
+
+        @media (min-width: 2000px) {
+            .sidebar {
+                margin-top: 100px;
+            }
+
+            .main-content {
+                margin-top: 200px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <!-- Toggle Sidebar Button (Mobile) -->
-    <button class="toggle-sidebar" id="toggleSidebar">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="logo">
-            <i class="fas fa-store"></i> EcoShop
+    <header class="header">
+        <div class="d-flex align-items-center">
+            <button class="toggle-sidebar me-2">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo" style="padding-left: 5vw;">
+                <img src="./images/logo b.png" alt="" style="max-width: 10vw; max-height: 10vh;">
+            </div>
         </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+        <div class="text-muted">Admin Dashboard</div>
+        <!-- <a href="admin_register.html" class="btn btn-primary"><i class="fas fa-plus"></i> Add Admin</a> -->
+    </header>
+
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-box"></i>
-                    <span>Products</span>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-book"></i><span>Products</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Orders</span>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-broadcast-tower"></i><span>Collections</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-users"></i>
-                    <span>Customers</span>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-broadcast-tower"></i><span>Featured Products</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-tags"></i>
-                    <span>Categories</span>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-clipboard-list"></i><span>User Data</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-percent"></i>
-                    <span>Discounts</span>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i><span>CMS</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analytics</span>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-history"></i><span>Orders</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-cog"></i>
-                    <span>Settings</span>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-envelope"></i><span>Contact Us</span></a>
+            </li>
+            </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-search"></i><span>SEO</span>
                 </a>
             </li>
+
         </ul>
-    </div>
+    </aside>
 
-    <!-- Main Content -->
-    <div class="main-content" id="mainContent">
-        <!-- Header -->
-        <div class="header d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">Admin Dashboard</h4>
-            <div class="d-flex align-items-center">
-                <div class="dropdown me-3">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge rounded-pill bg-danger">3</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
-                        <li><a class="dropdown-item" href="#">New order received</a></li>
-                        <li><a class="dropdown-item" href="#">Product out of stock</a></li>
-                        <li><a class="dropdown-item" href="#">Customer support request</a></li>
-                    </ul>
+    <main class="main-content">
+        <section id="dashboard" class="content-section active">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <div class="card-value" id="user-count"></div>
+                        <div class="card-label">Total Users</div>
+                    </div>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://via.placeholder.com/30" class="rounded-circle me-2" alt="Admin">
-                        <span>Admin</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
-                    </ul>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="card-value" id="transaction-count"></div>
+                        <div class="card-label">Successful Transactions</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="fas fa-upload"></i></div>
+                        <div class="card-value" id="total-live-books"></div>
+                        <div class="card-label">Total Live Uploads</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="fas fa-clock"></i></div>
+                        <div class="card-value" id="request-count"></div>
+                        <div class="card-label">Pending Requests</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Stats Cards -->
-        <div class="row g-4 mb-4">
-            <div class="col-md-6 col-lg-3">
-                <div class="stat-card">
-                    <div class="icon" style="background-color: rgba(22, 110, 34, 0.1); color: #166e22;">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <div class="number">1,254</div>
-                    <div class="label">Total Orders</div>
-                    <div class="mt-2 text-success"><i class="fas fa-arrow-up"></i> 12.5% increase</div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="stat-card">
-                    <div class="icon" style="background-color: rgba(22, 110, 34, 0.1); color: #166e22;">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <div class="number">$24,580</div>
-                    <div class="label">Total Revenue</div>
-                    <div class="mt-2 text-success"><i class="fas fa-arrow-up"></i> 8.3% increase</div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="stat-card">
-                    <div class="icon" style="background-color: rgba(22, 110, 34, 0.1); color: #166e22;">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="number">854</div>
-                    <div class="label">Total Customers</div>
-                    <div class="mt-2 text-success"><i class="fas fa-arrow-up"></i> 5.7% increase</div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="stat-card">
-                    <div class="icon" style="background-color: rgba(22, 110, 34, 0.1); color: #166e22;">
-                        <i class="fas fa-box"></i>
-                    </div>
-                    <div class="number">328</div>
-                    <div class="label">Products</div>
-                    <div class="mt-2 text-success"><i class="fas fa-arrow-up"></i> 3.2% increase</div>
-                </div>
-            </div>
-        </div>
+    </main>
 
-        <!-- Recent Orders -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="table-container">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="mb-0">Recent Orders</h5>
-                        <a href="#" class="btn btn-sm" style="background-color: #166e22; color: white;">View All</a>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Product</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#ORD-0123</td>
-                                    <td>John Doe</td>
-                                    <td>Organic Green Tea</td>
-                                    <td>Apr 05, 2023</td>
-                                    <td>$45.00</td>
-                                    <td><span class="badge badge-success">Delivered</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-0122</td>
-                                    <td>Jane Smith</td>
-                                    <td>Eco-Friendly Water Bottle</td>
-                                    <td>Apr 04, 2023</td>
-                                    <td>$28.50</td>
-                                    <td><span class="badge badge-pending">Pending</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-0121</td>
-                                    <td>Robert Johnson</td>
-                                    <td>Bamboo Toothbrush Set</td>
-                                    <td>Apr 03, 2023</td>
-                                    <td>$12.99</td>
-                                    <td><span class="badge badge-success">Delivered</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-0120</td>
-                                    <td>Emily Wilson</td>
-                                    <td>Reusable Shopping Bags</td>
-                                    <td>Apr 02, 2023</td>
-                                    <td>$18.75</td>
-                                    <td><span class="badge badge-cancelled">Cancelled</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-0119</td>
-                                    <td>Michael Brown</td>
-                                    <td>Solar Power Bank</td>
-                                    <td>Apr 01, 2023</td>
-                                    <td>$65.20</td>
-                                    <td><span class="badge badge-success">Delivered</span></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Row -->
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="chart-container">
-                    <h5>Customer Demographics</h5>
-                    <canvas id="customerChart" height="250"></canvas>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="table-container">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="mb-0">Top Selling Products</h5>
-                        <a href="#" class="btn btn-sm" style="background-color: #166e22; color: white;">View All</a>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>Sold</th>
-                                    <th>Revenue</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Organic Green Tea</td>
-                                    <td>Beverages</td>
-                                    <td>$15.00</td>
-                                    <td>245</td>
-                                    <td>$3,675.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Eco-Friendly Water Bottle</td>
-                                    <td>Accessories</td>
-                                    <td>$28.50</td>
-                                    <td>189</td>
-                                    <td>$5,386.50</td>
-                                </tr>
-                                <tr>
-                                    <td>Bamboo Toothbrush Set</td>
-                                    <td>Personal Care</td>
-                                    <td>$12.99</td>
-                                    <td>312</td>
-                                    <td>$4,052.88</td>
-                                </tr>
-                                <tr>
-                                    <td>Reusable Shopping Bags</td>
-                                    <td>Home & Living</td>
-                                    <td>$18.75</td>
-                                    <td>278</td>
-                                    <td>$5,212.50</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+
     <script>
-        // Toggle Sidebar
-        document.getElementById('toggleSidebar').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('show');
-        });
-        
-        // Sales Chart
-        const salesCtx = document.getElementById('salesChart').getContext('2d');
-        const salesChart = new Chart(salesCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Sales',
-                    data: [3500, 4200, 3800, 5100, 4800, 5800, 6200, 5900, 6800, 7200, 7800, 8500],
-                    backgroundColor: 'rgba(22, 110, 34, 0.1)',
-                    borderColor: '#166e22',
-                    borderWidth: 2,
-                    tension: 0.3,
-                    pointBackgroundColor: '#166e22'
-                }, {
-                    label: 'Revenue',
-                    data: [6500, 7200, 6800, 8100, 7800, 8800, 9200, 8900, 9800, 10200, 10800, 11500],
-                    backgroundColor: 'rgba(22, 110, 34, 0.05)',
-                    borderColor: '#2a8336',
-                    borderWidth: 2,
-                    tension: 0.3,
-                    pointBackgroundColor: '#2a8336'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Category Chart
-        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-        const categoryChart = new Chart(categoryCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Beverages', 'Accessories', 'Personal Care', 'Home & Living', 'Food'],
-                datasets: [{
-                    data: [25, 20, 18, 22, 15],
-                    backgroundColor: [
-                        '#166e22',
-                        '#2a8336',
-                        '#3c9748',
-                        '#4eab5a',
-                        '#60bf6c'
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                },
-                cutout: '70%'
-            }
-        });
-        
-        // Customer Chart
-        const customerCtx = document.getElementById('customerChart').getContext('2d');
-        const customerChart = new Chart(customerCtx, {
-            type: 'bar',
-            data: {
-                labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
-                datasets: [{
-                    label: 'Age Groups',
-                    data: [15, 30, 25, 18, 12],
-                    backgroundColor: '#166e22',
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                }
-            }
+        $(document).ready(function () {
+            $('.toggle-sidebar').click(function () {
+                $('.sidebar').toggleClass('active');
+            });
+
+            $('.sidebar-menu li a').click(function () {
+                $('.sidebar-menu li a').removeClass('active');
+                $(this).addClass('active');
+            });
         });
     </script>
+
+
 </body>
+
 </html>
