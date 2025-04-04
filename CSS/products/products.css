@@ -1,6 +1,5 @@
 @import url("../navbar_footer.css");
 @import url("../fonts.css");
-
 .hr
 {
     display: flex;
@@ -37,7 +36,7 @@
     color: #166e22;
     font-family: Playfair-bold !important;
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 3rem !important;
 }
 
 .founder_pick .image-container {
@@ -58,7 +57,6 @@
 
 .founder_pick .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow : 0 0 0px rgba(0, 0, 0, 0);
 }
 
 .founder_pick .card:hover {
@@ -121,94 +119,16 @@
     {
         width: 100%;
         height: 100%;
-<<<<<<< HEAD
-        object-fit: contain !important;
-    }
-}
-=======
         object-fit: cover !important;
     }
 }
 
-
-
->>>>>>> 289c9d8 (sec)
-
-
-
-
-
-
-
-/* Founders */
-.founder_pick .image-container {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    /* background-color: #f5f4f4;  */
-    background-color: var(--bs-body-bg);
-    border-radius: 10px;
-}
-
-.founder_pick .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.founder_pick .card {
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.founder_pick .card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-
-.founder_pick .btn {
-    border-radius: 25px;
-    padding: 5px 15px;
-}
-
-.founder_pick .heading {
-    font-family: 'Georgia', serif;
-    color: #333;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.card-body {
-    /* background-color: #f5f4f4; */
-    background-color: var(--bs-body-bg);
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.07); */
-}
-
-.card-title {
-    color: #166e22 !important;
-}
-
-.card {
-    position: relative;
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card .image-container {
-    position: relative;
-}
 
 .discount-tag {
     position: absolute;
     top: 10px;
     left: 10px;
     background-color: #ff3b3b;
-    /* Bright red for discounts */
     color: white;
     font-size: 0.75rem;
     font-weight: bold;
@@ -223,11 +143,11 @@
 
 .card .strikethrough {
     position: relative;
-    color: #3f3f3f; /* Light gray color to indicate the original price */
-    font-size: 1rem; /* Optional, adjust size */
-  }
-  
-  .card .strikethrough:before {
+    color: #3f3f3f;
+    font-size: 1rem;
+}
+
+.card .strikethrough:before {
     content: "";
     position: absolute;
     top: 50%;
@@ -235,11 +155,11 @@
     right: 0;
     color: gray;
     border-top: 2px solid gray;
-    transform: rotate(-10deg); /* Adjust angle as needed */
-  }
+    transform: rotate(-10deg);
+}
 
 
-  
+
 .price {
     display: flex;
     text-align: center;
@@ -252,7 +172,8 @@
     }
 
     .discount-tag {
-        top:30px;
+        top: 30px;
         left: 0px;
     }
 }
+

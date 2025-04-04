@@ -3,163 +3,546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="../CSS/otp.css">
-
+    <title>OTP Verification - Chaand</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./CSS/login.css">
-    <link rel="stylesheet" href="./CSS/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./CSS/css/style.css">
-    <link rel="stylesheet" href="./Fonts/icomoon/style.css">
-    
-    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
     <style>
-
+        :root {
+            --primary-color: #166e22;
+            --primary-light: rgba(22, 110, 34, 0.1);
+            --primary-dark: #0e5017;
+            --white: #ffffff;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            color: var(--primary-color);
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+        
+        .navbar-brand span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        
+        .nav-link {
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .form-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+        
+        .form-card {
+            max-width: 500px;
+            width: 100%;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+        
+        .card-header h3 {
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .footer {
+            background-color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-social a {
+            color: #6c757d;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* Form progress indicator */
+        .form-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .form-progress::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 33.33%;
+        }
+        
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            color: #6c757d;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .step-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active .step-icon {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .progress-step.active .step-text {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .progress-step.completed .step-icon {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .progress-step.completed .step-text {
+            color: var(--primary-color);
+        }
+        
+        /* OTP input styling */
+        .otp-input-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .otp-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .otp-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(22, 110, 34, 0.25);
+            outline: none;
+        }
+        
+        /* Timer styling */
+        .timer {
+            font-size: 1.2rem;
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .timer span {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        /* Animation for OTP inputs */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 1s infinite;
+        }
     </style>
 </head>
 <body>
-    <!-- Marquee -->
-    <div class="marquee-container">
-        <div class="marquee-text">| Linen your Way |</div>
-        <div class="marquee-text">Sustainable | Handcrafted | Timeless luxury</div>
-    </div>
-
     <!-- Navbar -->
-    <div class="site-wrap">
-        <div class="site-navbar bg-white py-2">
-    
-            <div class="search-wrap">
-                <div class="container">
-                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-                <form action="#" method="post">
-                    <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                </form>  
-                </div>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                chaand <span>by Mokshit</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary active" href="register.html">Register</a>
+                    </li>
+                </ul>
             </div>
-    
-            <div class="container">
-                <div class="d-flex align-items-center justify-content-between">
-                <div class="logo">
-                    <div class="site-logo">
-                    <a href="index.html" class="js-logo-clone"><img src="./images/logo b.png" width="200px" alt="logo"></a>
+        </div>
+    </nav> -->
+
+    <!-- OTP Verification Form -->
+    <div class="form-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card form-card animate__animated animate__fadeIn">
+                        <div class="card-header">
+                            <h3>Verify Your Email</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Form Progress Indicator -->
+                            <div class="form-progress">
+                                <div class="progress-step completed">
+                                    <div class="step-icon"><i class="bi bi-check"></i></div>
+                                    <div class="step-text">Registration</div>
+                                </div>
+                                <div class="progress-step active">
+                                    <div class="step-icon">2</div>
+                                    <div class="step-text">Verification</div>
+                                </div>
+                                <div class="progress-step">
+                                    <div class="step-icon">3</div>
+                                    <div class="step-text">Set Password</div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mb-4">
+                                <i class="bi bi-envelope-check text-success" style="font-size: 3rem;"></i>
+                                <h5 class="mt-3">OTP Verification</h5>
+                                <p class="text-muted">We've sent a verification code to your email <span id="userEmail" class="fw-bold">user@example.com</span></p>
+                            </div>
+                            
+                            <form id="otpForm">
+                                <div class="otp-input-container animate__animated animate__fadeInUp">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                                </div>
+                                
+                                <div class="timer text-center mb-4">
+                                    Code expires in <span id="timer">02:00</span>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
+                                    Verify & Continue
+                                </button>
+                                
+                                <div class="text-center">
+                                    <p class="mb-0">Didn't receive the code? <a href="#" id="resendOtp" class="text-decoration-none" style="color: var(--primary-color);">Resend OTP</a></p>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="main-nav d-none d-lg-block">
-                    <nav class="site-navigation text-right text-md-center" role="navigation">
-                    <ul class="site-menu js-clone-nav d-none d-lg-block">
-                        <li><a href="index.html">Home</a> </li>
-                        
-                        <li><a href="product.html">Products</a></li>
-                        <li class="has-children">
-                            <a href="#">Collections</a>
-                            <ul class="dropdown">
-                                <li><a href="/collections.html">Collection Padma</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li><a href="about_us.html">About Us</a></li>
-                        <li><a href="contact_us.html">Contact Us</a></li>
-                    </ul>
-                    </nav>
-                </div>
-                <div class="icons">
-                    <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-                    <a href="login.html" class="icons-btn d-inline-block"><span class="icon-user"></span></a>
-                    <a href="my_cart.html" class="icons-btn d-inline-block bag">
-                    <span class="icon-shopping-bag"></span>
-                    <span class="number">2</span>
-                    </a>
-                    <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
-                </div>
-                </div>
             </div>
-        </div>     
-    </div>
-    
-    <div class="main-container">
-        <div class="left-panel">
-            <h1>OTP Verification</h1>
-        </div>
-        <div class="right-panel">
-            <h2>Enter the OTP</h2>
-            <p>We have sent a 6-digit OTP to your email/phone. Please enter it below.</p>
-            <form id="otpForm">
-                <div class="form-group otp-input-group">
-                    <input type="text" id="otp1" maxlength="1" class="otp-input" oninput="allowOnlyNumbers(event)" autocomplete="off" required>
-                    <input type="text" id="otp2" maxlength="1" class="otp-input" oninput="allowOnlyNumbers(event)" autocomplete="off" required>
-                    <input type="text" id="otp3" maxlength="1" class="otp-input" oninput="allowOnlyNumbers(event)" autocomplete="off" required>
-                    <input type="text" id="otp4" maxlength="1" class="otp-input" oninput="allowOnlyNumbers(event)" autocomplete="off" required>
-                    <input type="text" id="otp5" maxlength="1" class="otp-input" oninput="allowOnlyNumbers(event)" autocomplete="off" required>
-                    <input type="text" id="otp6" maxlength="1" class="otp-input" oninput="allowOnlyNumbers(event)" autocomplete="off" required>
-                </div>
-                <div class="form-options">
-                    <a href="#">Resend OTP</a>
-                </div>
-                <a href="set_password.html"><button type="submit" class="btn">Verify OTP</button></a>
-            </form>
         </div>
     </div>
-    
 
-    <!-- footer -->
-    <footer class="footer">
+    <!-- Footer -->
+    <!-- <footer class="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 text-center text-md-left mb-4" style="align-self: center;">
-                    <img src="./images/footer_logo.png" alt="Brand Logo" class="img-fluid" style="max-width: 200px; align-items:center ; ">
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h4>Quick Links</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="wash_care.html">Wash Care</a></li>
-                        <li><a href="about_us.html">About Us</a></li>
-                        <li><a href="terms_and_conditions.html">Terms & Conditions</a></li>
-                        <li><a href="delivery_and_return_policy.html">Shipping & Exchange</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mb-4 f-sec-3">
-                    <h4>Contact Us</h4>
-                    <a href="mailto:your-email@example.com"><i class="fa-solid fa-envelope"></i> mokshiigada@gmail.com</a><br><br>
-                    <a href="tel:+1234567890"><i class="fa-solid fa-phone"></i> +1 (234) 567-890</a><br><br>
-                    <p><a href="https://www.instagram.com/chaandbymokshii?igsh=dm93OHhjeDJ2b2Zz" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></p>
-                </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Chaand by Mokshit. All rights reserved.
             </div>
         </div>
-    </footer>
+    </footer> -->
 
-
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
     <script>
-        document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
-            input.addEventListener('input', (e) => {
-                if (e.target.value.length === 1 && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
+        // Get registration data from session storage
+        document.addEventListener('DOMContentLoaded', function() {
+            const registrationData = JSON.parse(sessionStorage.getItem('registrationData') || '{}');
+            if (registrationData.email) {
+                document.getElementById('userEmail').textContent = registrationData.email;
+            }
+            
+            // Focus on first OTP input
+            document.querySelector('.otp-input').focus();
+        });
+        
+        // OTP input handling
+        const otpInputs = document.querySelectorAll('.otp-input');
+        
+        otpInputs.forEach((input, index) => {
+            // Auto-focus next input
+            input.addEventListener('input', function() {
+                if (this.value.length === this.maxLength) {
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
                 }
             });
-
-            input.addEventListener('keydown', (e) => {
-
-                if (e.key === 'Backspace' && index > 0 && e.target.value.length === 0) {
-                    inputs[index - 1].focus();
+            
+            // Handle backspace
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !this.value && index > 0) {
+                    otpInputs[index - 1].focus();
                 }
+            });
+            
+            // Add animation on focus
+            input.addEventListener('focus', function() {
+                this.classList.add('pulse');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.classList.remove('pulse');
             });
         });
+        
+        // Timer functionality
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
 
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "00:00";
+                    document.getElementById('resendOtp').classList.add('fw-bold');
+                }
+            }, 1000);
+        }
+        
+        // Start the timer
+        window.onload = function () {
+            const twoMinutes = 60 * 2;
+            const display = document.querySelector('#timer');
+            startTimer(twoMinutes, display);
+        };
+        
+        // Resend OTP
+        document.getElementById('resendOtp').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Reset timer
+            const twoMinutes = 60 * 2;
+            const display = document.querySelector('#timer');
+            startTimer(twoMinutes, display);
+            
+            // Clear OTP inputs
+            otpInputs.forEach(input => {
+                input.value = '';
+            });
+            
+            // Focus on first input
+            otpInputs[0].focus();
+            
+            // Show success message
+            const toast = document.createElement('div');
+            toast.className = 'position-fixed bottom-0 end-0 p-3';
+            toast.style.zIndex = '11';
+            toast.innerHTML = `
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">OTP Resent</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        A new OTP has been sent to your email.
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        });
+        
+        // Form submission
         document.getElementById('otpForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const otp = Array.from(document.querySelectorAll('.otp-input')).map(input => input.value).join('');
-            // alert('Entered OTP: ' + otp);
-            window.location.href = "set_password.html";
-
+            
+            // Get OTP value
+            let otp = '';
+            otpInputs.forEach(input => {
+                otp += input.value;
+            });
+            
+            // Store OTP in session storage
+            // sessionStorage.setItem('otpVerified', 'true');
+            
+            // Redirect to password setup page
+            window.location.href = 'set_password.html';
         });
-
-        function allowOnlyNumbers(event) {
-            const value = event.target.value;
-            event.target.value = value.replace(/[^0-9]/g, '');
-        }
-    </script>
     </script>
 </body>
 </html>

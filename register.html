@@ -3,247 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="../CSS/register.css">
-
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="./CSS/login.css">
-        <link rel="stylesheet" href="./CSS/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./CSS/css/style.css">
-        <link rel="stylesheet" href="./Fonts/icomoon/style.css">
-        <link rel="stylesheet" href="./CSS/alert.css">
-        
-        <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
-
+    <title>Register - Chaand</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
     <style>
-
-        .main-container
-        {
-            height: 90vh !important;
+        :root {
+            --primary-color: #166e22;
+            --primary-light: rgba(22, 110, 34, 0.1);
+            --primary-dark: #0e5017;
+            --white: #ffffff;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            color: var(--primary-color);
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+        
+        .navbar-brand span {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        
+        .nav-link {
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .form-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+        
+        .form-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+        
+        .card-header h3 {
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .form-floating .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(22, 110, 34, 0.25);
+        }
+        
+        .form-floating label {
+            color: #6c757d;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .footer {
+            background-color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-social a {
+            color: #6c757d;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Form progress indicator */
+        .form-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .form-progress::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+        
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 33.33%;
+        }
+        
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            color: #6c757d;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .step-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active .step-icon {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .progress-step.active .step-text {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .progress-step.completed .step-icon {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .progress-step.completed .step-text {
+            color: var(--primary-color);
+        }
+        
+        /* Gender selection styling */
+        .gender-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .gender-option {
+            flex: 1;
+            position: relative;
+        }
+        
+        .gender-option input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .gender-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #ced4da;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gender-option label:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .gender-option input:checked + label {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+        }
+        
+        .gender-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+        
+        .gender-option input:checked + label .gender-icon {
+            color: var(--primary-color);
         }
     </style>
 </head>
 <body>
-    <!-- Marquee -->
-    <div class="marquee-container">
-        <div class="marquee-text">| Linen your Way |</div>
-        <div class="marquee-text">Sustainable | Handcrafted | Timeless luxury</div>
-    </div>
-
     <!-- Navbar -->
-    <div class="site-wrap">
-        <div class="site-navbar bg-white py-2">
-    
-            <div class="search-wrap">
-                <div class="container">
-                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-                <form action="#" method="post">
-                    <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                </form>  
-                </div>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                chaand <span>by Mokshit</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary active" href="register.html">Register</a>
+                    </li>
+                </ul>
             </div>
-    
-            <div class="container">
-                <div class="d-flex align-items-center justify-content-between">
-                <div class="logo">
-                    <div class="site-logo">
-                    <a href="index.html" class="js-logo-clone"><img src="./images/logo b.png" width="200px" alt="logo"></a>
-                    </div>
-                </div>
-                <div class="main-nav d-none d-lg-block">
-                    <nav class="site-navigation text-right text-md-center" role="navigation">
-                    <ul class="site-menu js-clone-nav d-none d-lg-block">
-                        <li><a href="index.html">Home</a> </li>
-                        
-                        <li><a href="product.html">Products</a></li>
-                        <li class="has-children">
-                            <a href="#">Collections</a>
-                            <ul class="dropdown">
-                                <li><a href="/collections.html">Collection Padma</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li><a href="about_us.html">About Us</a></li>
-                        <li><a href="contact_us.html">Contact Us</a></li>
-                    </ul>
-                    </nav>
-                </div>
-                <div class="icons">
-                    <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-                    <a href="#" class="icons-btn d-inline-block"><span class="icon-user"></span></a>
-                    <a href="my_cart.html" class="icons-btn d-inline-block bag">
-                    <span class="icon-shopping-bag"></span>
-                    <span class="number">2</span>
-                    </a>
-                    <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
-                </div>
-                </div>
-            </div>
-        </div>     
-    </div>  
-    
-    <div class="main-container">
-        <div class="left-panel">
-            <h1>Welcome!</h1>
         </div>
-        <div class="right-panel">
-            <h2>Register</h2>
-            <p>Create your account to get started.</p>
-            <form>
-                <!-- Full Name Field -->
-                <div class="form-group">
-                    <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" name="fullname" placeholder="Mokshi Gada" autocomplete="off" required>
-                </div>
-                <!-- Email Field -->
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="chaandbymokshii@gmail.com" autocomplete="off" required>
-                </div>
-                <!-- Contact Number Field -->
-                <div class="form-group">
-                    <label for="contact">Contact Number</label>
-                    <input type="tel" id="contact" name="contact" placeholder="8779212323" oninput="allowOnlyNumbers(event)" autocomplete="off" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <div class="form-options">
-                        <label>
-                            <input type="radio" name="gender" value="male" required>
-                            <span></span> Male
-                        </label>
-                        <label>
-                            <input type="radio" name="gender" value="female" required>
-                            <span></span> Female
-                        </label>
-                        <label>
-                            <input type="radio" name="gender" value="other" required>
-                            <span></span> Other
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="terms" checked>
-                        <label class="form-check-label" for="terms">
-                            By registering, you agree to the <a href="#">Terms & Conditions</a> and <a href="#">Delivery and Return Policy</a>.
-                        </label>
-                    </div>
-                </div>
+    </nav> -->
 
-                <button type="submit" class="btn" onclick="showOtpModal()">Register</button>
-            
-            </form>
-            <div class="signup">
-                Already have an account? <a href="login.html">Login</a>
+    <!-- Registration Form -->
+    <div class="form-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card form-card animate__animated animate__fadeIn">
+                        <div class="card-header">
+                            <h3>Create Your Account</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Form Progress Indicator -->
+                            <div class="form-progress">
+                                <div class="progress-step active">
+                                    <div class="step-icon">1</div>
+                                    <div class="step-text">Registration</div>
+                                </div>
+                                <div class="progress-step">
+                                    <div class="step-icon">2</div>
+                                    <div class="step-text">Verification</div>
+                                </div>
+                                <div class="progress-step">
+                                    <div class="step-icon">3</div>
+                                    <div class="step-text">Set Password</div>
+                                </div>
+                            </div>
+                            
+                            <form id="registrationForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                                            <label for="name">Full Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                                            <label for="email">Email Address</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control" id="contact" placeholder="Contact Number" required>
+                                            <label for="contact">Contact Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Gender</label>
+                                        <div class="gender-options">
+                                            <div class="gender-option">
+                                                <input type="radio" name="gender" id="male" value="male" required>
+                                                <label for="male">
+                                                    <i class="bi bi-gender-male gender-icon"></i>
+                                                    <span>Male</span>
+                                                </label>
+                                            </div>
+                                            <div class="gender-option">
+                                                <input type="radio" name="gender" id="female" value="female">
+                                                <label for="female">
+                                                    <i class="bi bi-gender-female gender-icon"></i>
+                                                    <span>Female</span>
+                                                </label>
+                                            </div>
+                                            <div class="gender-option">
+                                                <input type="radio" name="gender" id="other" value="other">
+                                                <label for="other">
+                                                    <i class="bi bi-person gender-icon"></i>
+                                                    <span>Other</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="address" placeholder="Your Address" style="height: 100px" required></textarea>
+                                        <label for="address">Address</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                                    <label class="form-check-label" for="termsCheck">
+                                        I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a>
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100 py-2 mt-3">
+                                    Continue to Verification <i class="bi bi-arrow-right ms-2"></i>
+                                </button>
+                                
+                                <div class="text-center mt-3">
+                                    <span>Already have an account? </span>
+                                    <a href="login.html" class="text-decoration-none" style="color: var(--primary-color);">Login here</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
 
-    <!-- footer -->
-    <footer class="footer">
+    <!-- Footer -->
+    <!-- <footer class="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 text-center text-md-left mb-4" style="align-self: center;">
-                    <img src="./images/footer_logo.png" alt="Brand Logo" class="img-fluid" style="max-width: 200px; align-items:center ; ">
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h4>Quick Links</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="wash_care.html">Wash Care</a></li>
-                        <li><a href="about_us.html">About Us</a></li>
-                        <li><a href="terms_and_conditions.html">Terms & Conditions</a></li>
-                        <li><a href="delivery_and_return_policy.html">Returns & Exchange</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mb-4 f-sec-3">
-                    <h4>Contact Us</h4>
-                    <a href="mailto:your-email@example.com"><i class="fa-solid fa-envelope"></i> mokshiigada@gmail.com</a><br><br>
-                    <a href="tel:+1234567890"><i class="fa-solid fa-phone"></i> +1 (234) 567-890</a><br><br>
-                    <p><a href="https://www.instagram.com/chaandbymokshii?igsh=dm93OHhjeDJ2b2Zz" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></p>
-                </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Chaand by Mokshit. All rights reserved.
             </div>
         </div>
-    </footer>
+    </footer> -->
 
-    <!-- Custom JS -->
-    <script src="./JS/home.js"></script>
-
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
     <script>
-        function allowOnlyNumbers(event) {
-            const value = event.target.value;
-            event.target.value = value.replace(/[^0-9]/g, '');
-        }
-
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                contact: document.getElementById('contact').value,
+                gender: document.querySelector('input[name="gender"]:checked').value,
+                address: document.getElementById('address').value
+            };
+            
+            // Store form data in session storage for the next steps
+            // sessionStorage.setItem('registrationData', JSON.stringify(formData));
+            
+            // Redirect to OTP verification page
+            window.location.href = 'otp.html';
+        });
+        
+        // Add animation to form elements on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const formElements = document.querySelectorAll('.form-floating, .gender-options, .form-check, button');
+            
+            formElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }, 100 * index);
+            });
+        });
     </script>
 </body>
 </html>
-
-<!-- Get OTP Button -->
-
-
-<div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="otpModalLabel">OTP Request Submitted</h5>
-            </div>
-            <div class="modal-body">
-                Your One-Time Password (OTP) will be sent to your entered email address. If you do not receive it, please check your spam or junk folder.
-            </div>
-            
-            <!-- Modal Footer -->
-                <div class="modal-footer">
-                    <span id="countdownContainer">You can close in <span id="countdown">5</span> seconds.</span>
-                    <a href="otp.html"><button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal" id="closeButton" disabled>Close</button></a>
-                </div>
-
-        </div>
-    </div>
-</div>
-
-<script>
-    function showOtpModal() {
-        const modal = new bootstrap.Modal(document.getElementById('otpModal'), {
-            backdrop: 'static', 
-            keyboard: false 
-        });
-        modal.show();
-
-        const closeButton = document.getElementById('closeButton');
-        const countdownElement = document.getElementById('countdown');
-        const countdownContainer = document.getElementById('countdownContainer');
-
-        let countdown = 5;
-        countdownElement.textContent = countdown;
-        countdownContainer.style.display = 'block';
-        closeButton.disabled = true;
-
-        if (window.otpCountdownInterval) {
-            clearInterval(window.otpCountdownInterval);
-        }
-
-        window.otpCountdownInterval = setInterval(() => {
-            countdown -= 1;
-            countdownElement.textContent = countdown;
-
-            if (countdown <= 0) {
-                clearInterval(window.otpCountdownInterval);
-                closeButton.disabled = false;
-                countdownContainer.style.display = 'none';
-            }
-        }, 1000);
-    }
-
-
-</script>
