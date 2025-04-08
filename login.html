@@ -579,9 +579,14 @@
 
             loginModal.show();
 
-            setTimeout(() =>{
-                closeLoginModal()
-            },5000)
+            setTimeout(() => {
+                document.getElementById('loadingSpinner').style.display = 'none';
+                document.getElementById('successCheckmark').style.display = 'block';
+                document.getElementById('modalMessage').textContent = 'Login successful!';
+                document.getElementById('modalSubMessage').textContent = 'Redirecting to dashboard...';
+
+            }, 2000);
+            
 
             // setTimeout(() => {
             //     document.getElementById('loadingSpinner').style.display = 'none';

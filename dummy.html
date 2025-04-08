@@ -3,741 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set Password - Chaand</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <!-- Custom CSS -->
-    <style>
-        :root {
-            --primary-color: #166e22;
-            --primary-light: rgba(22, 110, 34, 0.1);
-            --primary-dark: #0e5017;
-            --white: #ffffff;
-        }
-        
-        body {
-            background-color: #f8f9fa;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .navbar {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .navbar-brand {
-            color: var(--primary-color);
-            font-family: 'Times New Roman', Times, serif;
-            font-style: italic;
-            font-weight: bold;
-            font-size: 1.8rem;
-        }
-        
-        .navbar-brand span {
-            font-size: 1rem;
-            font-weight: normal;
-        }
-        
-        .nav-link {
-            color: #333;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary-color);
-        }
-        
-        .nav-link.active {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
-        }
-        
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-        
-        .form-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 0;
-        }
-        
-        .form-card {
-            max-width: 500px;
-            width: 100%;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .form-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-        
-        .card-header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-align: center;
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(45deg);
-            z-index: 1;
-        }
-        
-        .card-header h3 {
-            position: relative;
-            z-index: 2;
-            font-weight: 600;
-        }
-        
-        .card-body {
-            padding: 30px;
-        }
-        
-        .form-floating .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(22, 110, 34, 0.25);
-        }
-        
-        .form-floating label {
-            color: #6c757d;
-        }
-        
-        .input-group-text {
-            background-color: var(--white);
-            color: #6c757d;
-            border-color: #ced4da;
-            border-left: none;
-            cursor: pointer;
-        }
-        
-        .input-group-text:hover {
-            color: var(--primary-color);
-        }
-        
-        .footer {
-            background-color: var(--white);
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .footer-links a {
-            color: #6c757d;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-color);
-        }
-        
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .footer-social a {
-            color: #6c757d;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-social a:hover {
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-        
-        /* Form progress indicator */
-        .form-progress {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .form-progress::before {
-            content: "";
-            position: absolute;
-            top: 15px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #e9ecef;
-            z-index: 1;
-        }
-        
-        .progress-step {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 33.33%;
-        }
-        
-        .step-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 8px;
-            color: #6c757d;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .step-text {
-            font-size: 0.8rem;
-            color: #6c757d;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .progress-step.active .step-icon {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-        
-        .progress-step.active .step-text {
-            color: var(--primary-color);
-            font-weight: 500;
-        }
-        
-        .progress-step.completed .step-icon {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-        
-        .progress-step.completed .step-text {
-            color: var(--primary-color);
-        }
-        
-        /* Password strength meter */
-        .password-strength-meter {
-            height: 5px;
-            background-color: #e9ecef;
-            margin-top: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .password-strength-meter div {
-            height: 100%;
-            border-radius: 5px;
-            transition: width 0.3s ease;
-        }
-        
-        .strength-weak {
-            background-color: #dc3545;
-            width: 25%;
-        }
-        
-        .strength-medium {
-            background-color: #ffc107;
-            width: 50%;
-        }
-        
-        .strength-good {
-            background-color: #0dcaf0;
-            width: 75%;
-        }
-        
-        .strength-strong {
-            background-color: #198754;
-            width: 100%;
-        }
-        
-        .password-strength-text {
-            font-size: 0.8rem;
-            margin-top: 5px;
-            color: #6c757d;
-        }
-        
-        /* Password requirements */
-        .password-requirements {
-            margin-top: 15px;
-        }
-        
-        .requirement {
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-            color: #6c757d;
-            font-size: 0.85rem;
-        }
-        
-        .requirement i {
-            margin-right: 8px;
-            font-size: 0.8rem;
-        }
-        
-        .requirement.valid {
-            color: var(--primary-color);
-        }
-        
-        /* Success animation */
-        .success-animation {
-            text-align: center;
-            display: none;
-        }
-        
-        .checkmark {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: block;
-            stroke-width: 2;
-            stroke: var(--primary-color);
-            stroke-miterlimit: 10;
-            margin: 10% auto;
-            box-shadow: inset 0px 0px 0px var(--primary-color);
-            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
-        }
-        
-        .checkmark__circle {
-            stroke-dasharray: 166;
-            stroke-dashoffset: 166;
-            stroke-width: 2;
-            stroke-miterlimit: 10;
-            stroke: var(--primary-color);
-            fill: none;
-            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-        }
-        
-        .checkmark__check {
-            transform-origin: 50% 50%;
-            stroke-dasharray: 48;
-            stroke-dashoffset: 48;
-            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
-        }
-        
-        @keyframes stroke {
-            100% {
-                stroke-dashoffset: 0;
-            }
-        }
-        
-        @keyframes scale {
-            0%, 100% {
-                transform: none;
-            }
-            50% {
-                transform: scale3d(1.1, 1.1, 1);
-            }
-        }
-        
-        @keyframes fill {
-            100% {
-                box-shadow: inset 0px 0px 0px 30px var(--primary-light);
-            }
-        }
-    </style>
+    <title>Document</title>
+    
+<style>
+    .modal-content {
+        border-radius: 8px;
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .modal-header {
+        background-color: #166e22;
+        color: white;
+        border-bottom: none;
+    }
+    
+    .modal-title {
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+    
+    .modal-footer {
+        border-top: 1px solid #f0f0f0;
+        padding: 0.5rem 1rem;
+    }
+    
+    .btn-success {
+        background-color: #166e22;
+        border-color: #166e22;
+    }
+    
+    .btn-success:hover:not(:disabled) {
+        background-color: #0e5017;
+        border-color: #0e5017;
+    }
+    
+    .btn-success:disabled {
+        background-color: #166e22;
+        opacity: 0.65;
+    }
+    
+    .text-success {
+        color: #166e22 !important;
+    }
+</style>
+
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                chaand <span>by Mokshit</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item ms-lg-3">
-                        <a class="nav-link" href="login.html">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-primary active" href="register.html">Register</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Password Setup Form -->
-    <div class="form-container">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card form-card animate__animated animate__fadeIn">
-                        <div class="card-header">
-                            <h3>Set Your Password</h3>
-                        </div>
-                        <div class="card-body">
-                            <!-- Form Progress Indicator -->
-                            <div class="form-progress">
-                                <div class="progress-step completed">
-                                    <div class="step-icon"><i class="bi bi-check"></i></div>
-                                    <div class="step-text">Registration</div>
-                                </div>
-                                <div class="progress-step completed">
-                                    <div class="step-icon"><i class="bi bi-check"></i></div>
-                                    <div class="step-text">Verification</div>
-                                </div>
-                                <div class="progress-step active">
-                                    <div class="step-icon">3</div>
-                                    <div class="step-text">Set Password</div>
-                                </div>
-                            </div>
-                            
-                            <div id="passwordForm">
-                                <div class="text-center mb-4">
-                                    <i class="bi bi-shield-lock text-success" style="font-size: 3rem;"></i>
-                                    <h5 class="mt-3">Create a Strong Password</h5>
-                                    <p class="text-muted">Your password must be strong to keep your account secure</p>
-                                </div>
-                                
-                                <form id="setPasswordForm">
-                                    <div class="mb-4">
-                                        <div class="input-group">
-                                            <div class="form-floating flex-grow-1">
-                                                <input type="password" class="form-control" id="password" placeholder="Password" required>
-                                                <label for="password">Password</label>
-                                            </div>
-                                            <span class="input-group-text" id="togglePassword">
-                                                <i class="bi bi-eye-slash-fill" id="toggleIcon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="password-strength-meter mt-2">
-                                            <div id="strengthBar"></div>
-                                        </div>
-                                        <div class="password-strength-text" id="strengthText">Password strength</div>
-                                        
-                                        <div class="password-requirements">
-                                            <div class="requirement" id="req-length">
-                                                <i class="bi bi-circle"></i> At least 8 characters
-                                            </div>
-                                            <div class="requirement" id="req-uppercase">
-                                                <i class="bi bi-circle"></i> At least one uppercase letter
-                                            </div>
-                                            <div class="requirement" id="req-lowercase">
-                                                <i class="bi bi-circle"></i> At least one lowercase letter
-                                            </div>
-                                            <div class="requirement" id="req-number">
-                                                <i class="bi bi-circle"></i> At least one number
-                                            </div>
-                                            <div class="requirement" id="req-special">
-                                                <i class="bi bi-circle"></i> At least one special character
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="mb-4">
-                                        <div class="input-group">
-                                            <div class="form-floating flex-grow-1">
-                                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
-                                                <label for="confirmPassword">Confirm Password</label>
-                                            </div>
-                                            <span class="input-group-text" id="toggleConfirmPassword">
-                                                <i class="bi bi-eye-slash-fill" id="toggleConfirmIcon"></i>
-                                            </span>
-                                        </div>
-                                        <div class="invalid-feedback" id="passwordMismatch">
-                                            Passwords do not match
-                                        </div>
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-primary w-100 py-2 mt-3" id="submitBtn" disabled>
-                                        Complete Registration
-                                    </button>
-                                </form>
-                            </div>
-                            
-                            <div id="successMessage" class="success-animation">
-                                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-                                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                                </svg>
-                                <h4 class="mt-4">Registration Successful!</h4>
-                                <p class="text-muted">Your account has been created successfully.</p>
-                                <a href="login.html" class="btn btn-primary mt-3">
-                                    Proceed to Login
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    
+<div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header py-2">
+                <h6 class="modal-title" id="otpModalLabel">OTP Request Submitted</h6>
+            </div>
+            
+            <div class="modal-body p-3">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-envelope-check text-success me-2"></i>
+                    <small>OTP will be sent to your email.</small>
                 </div>
+                <small class="text-muted">Please check your spam folder if not received.</small>
+            </div>
+            
+            <div class="modal-footer py-2">
+                <div class="d-flex align-items-center me-auto">
+                    <small id="countdownContainer">Close in <span id="countdown" class="fw-bold text-success">5</span>s</small>
+                </div>
+                <button type="button" class="btn btn-sm btn-success" data-bs-dismiss="modal" id="closeButton" disabled>Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Help Center</a>
-                <a href="#">Contact Us</a>
-            </div>
-            <div class="footer-social">
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-            </div>
-            <div class="copyright">
-                &copy; 2023 Chaand by Mokshit. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Function to start the countdown
+    function startCountdown() {
+        const countdownElement = document.getElementById('countdown');
+        const closeButton = document.getElementById('closeButton');
+        
+        let timeLeft = 5;
+        
+        const countdownInterval = setInterval(() => {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                closeButton.disabled = false;
+                closeButton.classList.add('animate__animated', 'animate__pulse');
+            }
+        }, 1000);
+    }
     
-    <!-- Custom JavaScript -->
-    <script>
-        // Check if user completed previous steps
-        document.addEventListener('DOMContentLoaded', function() {
-            const otpVerified = sessionStorage.getItem('otpVerified');
-            // if (!otpVerified) {
-            //     window.location.href = 'register.html';
-            // }
-        });
+    // Initialize the modal
+    document.addEventListener('DOMContentLoaded', function() {
+        const otpModal = new bootstrap.Modal(document.getElementById('otpModal'));
         
-        // Toggle password visibility
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
-            const toggleIcon = document.getElementById('toggleIcon');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleIcon.classList.remove('bi-eye-slash-fill');
-                toggleIcon.classList.add('bi-eye-fill');
-            } else {
-                passwordInput.type = 'password';
-                toggleIcon.classList.remove('bi-eye-fill');
-                toggleIcon.classList.add('bi-eye-slash-fill');
-            }
-        });
-        
-        // Toggle confirm password visibility
-        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
-            const confirmPasswordInput = document.getElementById('confirmPassword');
-            const toggleConfirmIcon = document.getElementById('toggleConfirmIcon');
-            
-            if (confirmPasswordInput.type === 'password') {
-                confirmPasswordInput.type = 'text';
-                toggleConfirmIcon.classList.remove('bi-eye-slash-fill');
-                toggleConfirmIcon.classList.add('bi-eye-fill');
-            } else {
-                confirmPasswordInput.type = 'password';
-                toggleConfirmIcon.classList.remove('bi-eye-fill');
-                toggleConfirmIcon.classList.add('bi-eye-slash-fill');
-            }
-        });
-        
-        // Password strength checker
-        const password = document.getElementById('password');
-        const strengthBar = document.getElementById('strengthBar');
-        const strengthText = document.getElementById('strengthText');
-        const submitBtn = document.getElementById('submitBtn');
-        
-        // Password requirements
-        const reqLength = document.getElementById('req-length');
-        const reqUppercase = document.getElementById('req-uppercase');
-        const reqLowercase = document.getElementById('req-lowercase');
-        const reqNumber = document.getElementById('req-number');
-        const reqSpecial = document.getElementById('req-special');
-        
-        password.addEventListener('input', function() {
-            const value = password.value;
-            let strength = 0;
-            
-            // Check requirements
-            const hasLength = value.length >= 8;
-            const hasUppercase = /[A-Z]/.test(value);
-            const hasLowercase = /[a-z]/.test(value);
-            const hasNumber = /[0-9]/.test(value);
-            const hasSpecial = /[^A-Za-z0-9]/.test(value);
-            
-            // Update requirement indicators
-            updateRequirement(reqLength, hasLength);
-            updateRequirement(reqUppercase, hasUppercase);
-            updateRequirement(reqLowercase, hasLowercase);
-            updateRequirement(reqNumber, hasNumber);
-            updateRequirement(reqSpecial, hasSpecial);
-            
-            // Calculate strength
-            if (hasLength) strength += 1;
-            if (hasUppercase) strength += 1;
-            if (hasLowercase) strength += 1;
-            if (hasNumber) strength += 1;
-            if (hasSpecial) strength += 1;
-            
-            // Update strength bar
-            strengthBar.className = '';
-            
-            if (strength === 0) {
-                strengthBar.style.width = '0';
-                strengthText.textContent = 'Password strength';
-            } else if (strength <= 2) {
-                strengthBar.classList.add('strength-weak');
-                strengthText.textContent = 'Weak';
-            } else if (strength <= 3) {
-                strengthBar.classList.add('strength-medium');
-                strengthText.textContent = 'Medium';
-            } else if (strength <= 4) {
-                strengthBar.classList.add('strength-good');
-                strengthText.textContent = 'Good';
-            } else {
-                strengthBar.classList.add('strength-strong');
-                strengthText.textContent = 'Strong';
-            }
-            
-            // Enable/disable submit button
-            checkPasswordMatch();
-        });
-        
-        function updateRequirement(element, isValid) {
-            if (isValid) {
-                element.classList.add('valid');
-                element.querySelector('i').classList.remove('bi-circle');
-                element.querySelector('i').classList.add('bi-check-circle-fill');
-            } else {
-                element.classList.remove('valid');
-                element.querySelector('i').classList.remove('bi-check-circle-fill');
-                element.querySelector('i').classList.add('bi-circle');
-            }
-        }
-        
-        // Check if passwords match
-        const confirmPassword = document.getElementById('confirmPassword');
-        const passwordMismatch = document.getElementById('passwordMismatch');
-        
-        confirmPassword.addEventListener('input', checkPasswordMatch);
-        
-        function checkPasswordMatch() {
-            const passwordValue = password.value;
-            const confirmValue = confirmPassword.value;
-            
-            if (confirmValue === '') {
-                passwordMismatch.style.display = 'none';
-                confirmPassword.classList.remove('is-invalid');
-                submitBtn.disabled = true;
-                return;
-            }
-            
-            if (passwordValue !== confirmValue) {
-                passwordMismatch.style.display = 'block';
-                confirmPassword.classList.add('is-invalid');
-                submitBtn.disabled = true;
-            } else {
-                passwordMismatch.style.display = 'none';
-                confirmPassword.classList.remove('is-invalid');
-                
-                // Check if password meets requirements
-                const hasLength = passwordValue.length >= 8;
-                const hasUppercase = /[A-Z]/.test(passwordValue);
-                const hasLowercase = /[a-z]/.test(passwordValue);
-                const hasNumber = /[0-9]/.test(passwordValue);
-                const hasSpecial = /[^A-Za-z0-9]/.test(passwordValue);
-                
-                if (hasLength && hasUppercase && hasLowercase && hasNumber && hasSpecial) {
-                    submitBtn.disabled = false;
-                } else {
-                    submitBtn.disabled = true;
-                }
-            }
-        }
-        
-        // Form submission
-        document.getElementById('setPasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const passwordValue = password.value;
-            
-            // Get registration data from session storage
-            const registrationData = JSON.parse(sessionStorage.getItem('registrationData') || '{}');
-            
-            // Add password to registration data
-            registrationData.password = passwordValue;
-            
-            // Store complete registration data (in a real app, you would send this to your server)
-            sessionStorage.setItem('completeRegistration', JSON.stringify(registrationData));
-            
-            // Show success message
-            document.getElementById('passwordForm').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Clear session storage data
-            setTimeout(() => {
-                sessionStorage.removeItem('registrationData');
-                sessionStorage.removeItem('otpVerified');
-            }, 2000);
-        });
-    </script>
+        // Example of how to show the modal and start countdown
+        // otpModal.show();
+        // startCountdown();
+    });
+</script>
+    
 </body>
 </html>
