@@ -3,866 +3,1040 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chaand | Admin Dashboard - CMS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-
+    <title>CMS Management - GreenShop Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-  --primary-color: #166e22;
-  --white-color: #ffffff;
-  --border-color: #e0e0e0;
-}
+            --primary-color: #166e22;
+            --primary-dark: #0e5016;
+            --primary-light: #2a8c36;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
 
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
-  overflow-x: hidden;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+        }
 
-.header {
-  background-color: var(--white-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color);
-  display: flex;
-  align-items: center;
-}
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
 
-.header-title {
-  font-size: 1.2rem;
-  color: #333;
-}
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-.sidebar {
-  position: fixed;
-  top: 70px;
-  left: 0;
-  height: calc(100vh - 70px);
-  width: 250px;
-  background-color: var(--white-color);
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
-  z-index: 900;
-  overflow-y: auto;
-}
+        .cms-option-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            height: 100%;
+        }
 
-.sidebar-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+        .cms-option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: var(--primary-color);
+        }
 
-.sidebar-menu li {
-  border-bottom: 1px solid var(--border-color);
-}
+        .cms-option-card.active {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(22, 110, 34, 0.1), rgba(42, 140, 54, 0.05));
+        }
 
-.sidebar-menu li a {
-  display: block;
-  padding: 15px 20px;
-  color: #333;
-  text-decoration: none;
-  transition: all 0.3s;
-}
+        .option-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+        }
 
-.sidebar-menu li a:hover,
-.sidebar-menu li a.active {
-  background-color: var(--primary-color);
-  color: var(--white-color);
-}
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
 
-.sidebar-menu li a i {
-  margin-right: 10px;
-  width: 20px;
-  text-align: center;
-}
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
 
-.main-content {
-  margin-left: 250px;
-  margin-top: calc(1rem + 52px);
-  padding: 20px;
-  transition: all 0.3s;
-}
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
 
-@media (max-width: 992px) {
-  .sidebar {
-    width: 70px;
-    transform: translateX(0);
-  }
+        .table thead th {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 1rem;
+        }
 
-  .sidebar-menu li a span {
-    display: none;
-  }
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-color: var(--border-color);
+        }
 
-  .sidebar-menu li a i {
-    margin-right: 0;
-    font-size: 1.2rem;
-  }
+        .action-btn {
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: none;
+            margin: 0 0.25rem;
+            transition: var(--transition);
+        }
 
-  .main-content {
-    margin-left: 70px;
-  }
-}
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
 
-@media (max-width: 768px) {
-  .sidebar {
-    transform: translateX(-100%);
-    width: 250px;
-  }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: var(--box-shadow-hover);
+        }
 
-  .sidebar.active {
-    transform: translateX(0);
-  }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            transition: var(--transition);
+        }
 
-  .sidebar-menu li a span {
-    display: inline-block;
-  }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(22, 110, 34, 0.25);
+        }
 
-  .main-content {
-    margin-left: 0;
-  }
+        .image-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
 
-  .toggle-sidebar {
-    display: block !important;
-  }
+        .image-upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(22, 110, 34, 0.05);
+        }
 
-  .logo img {
-    min-width: 15vw;
-  }
-}
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
 
-.toggle-sidebar {
-  display: none;
-  background-color: var(--primary-color);
-  color: var(--white-color);
-  border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  margin-right: 10px;
-  cursor: pointer;
-}
+        .image-preview {
+            position: relative;
+            display: inline-block;
+            margin: 0.5rem;
+        }
 
-.text-primary {
-  color: var(--primary-color) !important;
-}
+        .preview-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+        }
 
-.bg-primary {
-  background-color: var(--primary-color) !important;
-}
+        .remove-image {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 12px;
+            cursor: pointer;
+        }
 
-.btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-}
+        .carousel-type-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
 
-.btn-primary:hover {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
-}
+        .type-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
 
-@media (min-width: 1500px) {
-  .sidebar {
-    margin-top: 60px;
-  }
+        .type-option:hover {
+            border-color: var(--primary-color);
+        }
 
-  .main-content {
-    margin-top: 125px;
-  }
-}
+        .type-option.active {
+            border-color: var(--primary-color);
+            background-color: rgba(22, 110, 34, 0.1);
+        }
 
-@media ((min-width: 800px) and (max-width: 1200px)) {
-  .sidebar {
-    margin-top: 15px;
-  }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
 
-  .main-content {
-    margin-top: 90px;
-  }
-}
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
 
-@media ((min-width: 1200px) and (max-width: 1500px)) {
-  .sidebar {
-    margin-top: 30px;
-  }
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
 
-  .main-content {
-    margin-top: 100px;
-  }
-}
+        .spinner-border {
+            color: var(--primary-color);
+        }
 
-@media (min-width: 2000px) {
-  .sidebar {
-    margin-top: 100px;
-  }
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
 
-  .main-content {
-    margin-top: 200px;
-  }
-}
-
-.headertext {
-  padding-right: 5vw;
-}
-.dashboard-card {
-  background-color: var(--white-color);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-  height: 100%;
-  transition: transform 0.3s;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.card-icon {
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 15px;
-}
-
-.card-value {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--primary-color);
-  margin-bottom: 5px;
-}
-
-.card-label {
-  font-size: 1rem;
-  color: #666;
-}
-.page-title {
-  color: var(--primary-color);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.cms-card {
-  background-color: var(--white-color);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 25px;
-  margin-bottom: 20px;
-  height: 100%;
-  transition: all 0.3s;
-  cursor: pointer;
-  text-align: center;
-}
-
-.cms-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  background-color: #f8f9fa;
-}
-
-.cms-card .card-icon {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  margin-bottom: 15px;
-}
-
-.cms-card .card-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.cms-card .card-description {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.cms-section {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.card-header {
-  background-color: var(--primary-color) !important;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-  background-color: #0e5017;
-  border-color: #0e5017;
-}
-
-.back-to-options {
-  margin-bottom: 1rem;
-}
-
-#image-preview {
-  max-height: 150px;
-  object-fit: contain;
-}
-
-.table img {
-  object-fit: cover;
-  height: 60px;
-  width: 100px;
-}
-
+        .redirect-info {
+            background: rgba(22, 110, 34, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+        }
     </style>
-
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 </head>
-
 <body>
-    <header class="header">
-        <div class="d-flex align-items-center">
-            <button class="toggle-sidebar me-2">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="logo" style="padding-left: 5vw;">
-                <img src="images/logo.png" alt="" style="max-width: 10vw; max-height: 10vh;">
+
+    <div class="container">
+        <!-- CMS Options -->
+        <div class="row mb-4" id="cmsOptions">
+            <div class="col-md-6">
+                <div class="cms-option-card" data-option="footer" onclick="selectOption('footer')">
+                    <div class="option-icon">
+                        <i class="bi bi-layout-text-window-reverse"></i>
+                    </div>
+                    <h4>Footer Management</h4>
+                    <p class="text-muted mb-0">Manage footer content including contact information and social links</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="cms-option-card" data-option="carousel" onclick="selectOption('carousel')">
+                    <div class="option-icon">
+                        <i class="bi bi-images"></i>
+                    </div>
+                    <h4>Carousel Management</h4>
+                    <p class="text-muted mb-0">Manage homepage carousel slides with images and content</p>
+                </div>
             </div>
         </div>
-        <div class="text-muted headertext">Admin Dashboard</div>
-    </header>
 
-    <aside class="sidebar">
-        <ul class="sidebar-menu">
-            <li>
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="admin_products.html" class="nav-link">
-                    <i class="fas fa-book"></i><span>Products</span>
-                </a>
-            </li>
-            <li>
-                <a href="admin_collection_data.html" class="nav-link">
-                    <i class="fas fa-broadcast-tower"></i><span>Collections</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-broadcast-tower"></i><span>Featured Products</span>
-                </a>
-            </li>
-            <li>
-                <a href="admin_user_data.html" class="nav-link">
-                    <i class="fas fa-clipboard-list"></i><span>User Data</span>
-                </a>
-            </li>
-            <li>
-                <a href="cms.html" class="nav-link active">
-                    <i class="fas fa-users"></i><span>CMS</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-history"></i><span>Orders</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-envelope"></i><span>Contact Us</span></a>
-            </li>
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-search"></i><span>SEO</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
+        <!-- Footer Management Section -->
+        <div class="content-card" id="footerSection" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="mb-0">Footer Settings</h4>
+                <button class="btn btn-primary" onclick="showFooterForm()">
+                    <i class="bi bi-plus-circle me-2"></i>Update Footer
+                </button>
+            </div>
 
-    <main class="main-content">
-        <section id="cms" class="content-section active">
-            <div class="container-fluid">
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h1 class="page-title">CMS</h1>
-                        <p class="text-muted">Manage your website content</p>
-                    </div>
+            <div class="loading-spinner" id="footerLoading">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
+                <p class="mt-2">Loading footer data...</p>
+            </div>
 
-                <!-- CMS Options -->
-                <div class="row" id="cms-options">
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="cms-card" data-target="footer">
-                            <div class="card-icon"><i class="fas fa-shoe-prints"></i></div>
-                            <div class="card-title">Footer</div>
-                            <div class="card-description">Manage footer contact information</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="cms-card" data-target="carousel">
-                            <div class="card-icon"><i class="fas fa-images"></i></div>
-                            <div class="card-title">Carousel</div>
-                            <div class="card-description">Manage homepage carousel slides</div>
-                        </div>
-                    </div>
+            <div class="table-responsive">
+                <table class="table table-hover" id="footerTable">
+                    <thead>
+                        <tr>
+                            <th>Setting</th>
+                            <th>Value</th>
+                            <th>Last Updated</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="footerTableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Carousel Management Section -->
+        <div class="content-card" id="carouselSection" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="mb-0">Carousel Slides</h4>
+                <button class="btn btn-primary" onclick="showCarouselForm()">
+                    <i class="bi bi-plus-circle me-2"></i>Add New Slide
+                </button>
+            </div>
+
+            <div class="loading-spinner" id="carouselLoading">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
+                <p class="mt-2">Loading carousel data...</p>
+            </div>
 
-                <!-- Footer Form Section -->
-                <div id="footer-section" class="cms-section" style="display: none;">
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <button class="btn btn-secondary back-to-options">
-                                <i class="fas fa-arrow-left"></i> Back
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header bg-primary text-white">
-                                    <h5 class="mb-0">Footer Information</h5>
+            <div class="table-responsive">
+                <table class="table table-hover" id="carouselTable">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Subtitle</th>
+                            <th>Type</th>
+                            <th>Redirect</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="carouselTableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Form Modal -->
+    <div class="modal fade" id="footerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Footer Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="footerForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="footerEmail" placeholder="Email">
+                                    <label for="footerEmail">Email Address</label>
                                 </div>
-                                <div class="card-body">
-                                    <form id="footer-form">
-                                        <div class="mb-3">
-                                            <label for="instagram-url" class="form-label">Instagram URL</label>
-                                            <input type="url" class="form-control" id="instagram-url" placeholder="https://instagram.com/youraccount">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="contact-number" class="form-label">Contact Number</label>
-                                            <input type="tel" class="form-control" id="contact-number" placeholder="+91 1234567890">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="email-address" class="form-label">Email Address</label>
-                                            <input type="email" class="form-control" id="email-address" placeholder="contact@example.com">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                    </form>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="tel" class="form-control" id="footerContact" placeholder="Contact">
+                                    <label for="footerContact">Contact Number</label>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="form-floating mb-3">
+                            <input type="url" class="form-control" id="footerInstagram" placeholder="Instagram URL">
+                            <label for="footerInstagram">Instagram URL</label>
+                        </div>
+                    </form>
                 </div>
-
-                <!-- Carousel Section -->
-                <div id="carousel-section" class="cms-section" style="display: none;">
-                    <div class="row mb-3">
-                        <div class="col-12 d-flex justify-content-between align-items-center">
-                            <button class="btn btn-secondary back-to-options">
-                                <i class="fas fa-arrow-left"></i> Back
-                            </button>
-                            <button class="btn btn-primary" id="add-carousel-btn">
-                                <i class="fas fa-plus"></i> Add New Slide
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Carousel Items List -->
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header bg-primary text-white">
-                                    <h5 class="mb-0">Carousel Slides</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" id="carousel-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Image</th>
-                                                    <th>Title</th>
-                                                    <th>Type</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><img src="./images/footer_logo.png" alt="Slide" class="img-thumbnail" style="width: 100px;"></td>
-                                                    <td>Summer Collection</td>
-                                                    <td><span class="badge bg-primary">Link</span></td>
-                                                    <td>
-                                                        <button class="btn btn-sm btn-info edit-carousel"><i class="fas fa-edit"></i></button>
-                                                        <button class="btn btn-sm btn-danger delete-carousel"><i class="fas fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><img src="./images/footer_logo.png" alt="Slide" class="img-thumbnail" style="width: 100px;"></td>
-                                                    <td>New Arrivals</td>
-                                                    <td><span class="badge bg-secondary">Non-Link</span></td>
-                                                    <td>
-                                                        <button class="btn btn-sm btn-info edit-carousel"><i class="fas fa-edit"></i></button>
-                                                        <button class="btn btn-sm btn-danger delete-carousel"><i class="fas fa-trash"></i></button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carousel Add/Edit Form Modal -->
-                <div class="modal fade" id="carousel-modal" tabindex="-1" aria-labelledby="carouselModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header bg-primary text-white">
-                                <h5 class="modal-title" id="carouselModalLabel">Add Carousel Slide</h5>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="carousel-form">
-                                    <div class="mb-3">
-                                        <label class="form-label">Slide Type</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="slide-type" id="type-link" value="link" checked>
-                                            <label class="form-check-label" for="type-link">
-                                                Link (with redirect)
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="slide-type" id="type-nonlink" value="nonlink">
-                                            <label class="form-check-label" for="type-nonlink">
-                                                Non-Link (display only)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="carousel-image" class="form-label">Image</label>
-                                        <input type="file" class="form-control" id="carousel-image" accept="image/*">
-                                        <div class="mt-2" id="image-preview-container" style="display: none;">
-                                            <img id="image-preview" src="#" alt="Preview" class="img-thumbnail" style="max-width: 200px;">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="carousel-title" class="form-label">Title</label>
-                                        <input type="text" class="form-control" id="carousel-title" placeholder="Enter slide title">
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="carousel-subtitle" class="form-label">Subtitle</label>
-                                        <input type="text" class="form-control" id="carousel-subtitle" placeholder="Enter slide subtitle">
-                                    </div>
-                                    
-                                    <div id="link-options">
-                                        <div class="mb-3">
-                                            <label for="redirect-type" class="form-label">Redirect To</label>
-                                            <select class="form-select" id="redirect-type">
-                                                <option value="">Select redirect type</option>
-                                                <option value="category">Category</option>
-                                                <option value="product">Product</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="mb-3" id="category-select-container" style="display: none;">
-                                            <label for="category-select" class="form-label">Select Category</label>
-                                            <select class="form-select" id="category-select">
-                                                <option value="">Select a category</option>
-                                                <option value="1">Men</option>
-                                                <option value="2">Women</option>
-                                                <option value="3">Kids</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="mb-3" id="product-select-container" style="display: none;">
-                                            <label for="product-select" class="form-label">Select Product</label>
-                                            <select class="form-select" id="product-select">
-                                                <option value="">Select a product</option>
-                                                <option value="1">Product 1</option>
-                                                <option value="2">Product 2</option>
-                                                <option value="3">Product 3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" id="save-carousel">Save</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveFooterSettings()">Save Changes</button>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Carousel Form Modal -->
+    <div class="modal fade" id="carouselModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carouselModalTitle">Add New Carousel Slide</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="carouselForm">
+                        <!-- Carousel Type Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Carousel Type</label>
+                            <div class="carousel-type-selector">
+                                <div class="type-option active" data-type="non-link" onclick="selectCarouselType('non-link')">
+                                    <i class="bi bi-image fs-2 text-primary mb-2"></i>
+                                    <h6>Non-Link Carousel</h6>
+                                    <p class="text-muted mb-0">Display only image, title and subtitle</p>
+                                </div>
+                                <div class="type-option" data-type="link" onclick="selectCarouselType('link')">
+                                    <i class="bi bi-link-45deg fs-2 text-primary mb-2"></i>
+                                    <h6>Link Carousel</h6>
+                                    <p class="text-muted mb-0">Include redirect functionality</p>
+                                </div>
+                            </div>
+                            <input type="hidden" id="carouselType" value="non-link">
+                        </div>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="">
+                        <!-- Image Upload -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Carousel Image</label>
+                            <div class="image-upload-area" id="carouselImageUpload">
+                                <i class="bi bi-cloud-upload upload-icon"></i>
+                                <h5>Upload Carousel Image</h5>
+                                <p class="text-muted">Drag and drop or click to select image (Recommended: 1920x600px)</p>
+                                <input type="file" id="carouselImageInput" accept="image/*" style="display: none;">
+                            </div>
+                            <div id="carouselImagePreview" class="mt-3"></div>
+                        </div>
 
-$(document).ready(() => {
-  // Toggle sidebar on mobile
-  $(".toggle-sidebar").click(() => {
-    $(".sidebar").toggleClass("active")
-  })
+                        <!-- Content Fields -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="carouselTitle" placeholder="Title">
+                                    <label for="carouselTitle">Slide Title</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="carouselSubtitle" placeholder="Subtitle">
+                                    <label for="carouselSubtitle">Slide Subtitle</label>
+                                </div>
+                            </div>
+                        </div>
 
-  // Active menu item
-  $(".sidebar-menu li a").click(function () {
-    $(".sidebar-menu li a").removeClass("active")
-    $(this).addClass("active")
-  })
+                        <!-- Redirect Options (for link type) -->
+                        <div id="redirectOptions" style="display: none;">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Redirect Options</label>
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="redirectType">
+                                        <option value="">Select Redirect Type</option>
+                                        <option value="category">Category</option>
+                                        <option value="product">Product</option>
+                                        <option value="custom">Custom URL</option>
+                                    </select>
+                                    <label for="redirectType">Redirect Type</label>
+                                </div>
 
-  $("#carousel-table").DataTable({
-    responsive: true,
-    lengthMenu: [5, 10, 25, 50],
-    pageLength: 5,
-  })
+                                <div id="categorySelect" style="display: none;">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="redirectCategory">
+                                            <option value="">Select Category</option>
+                                            <option value="vegetables">Vegetables</option>
+                                            <option value="fruits">Fruits</option>
+                                            <option value="leafy-greens">Leafy Greens</option>
+                                            <option value="root-vegetables">Root Vegetables</option>
+                                            <option value="cruciferous">Cruciferous</option>
+                                            <option value="herbs">Herbs</option>
+                                        </select>
+                                        <label for="redirectCategory">Category</label>
+                                    </div>
+                                </div>
 
-  // CMS Card Click Handlers
-  $(".cms-card").on("click", function () {
-    const target = $(this).data("target")
-    $("#cms-options").hide()
-    $(`#${target}-section`).fadeIn()
-  })
+                                <div id="productSelect" style="display: none;">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="redirectProduct">
+                                            <option value="">Select Product</option>
+                                            <option value="P001">Organic Tomatoes</option>
+                                            <option value="P002">Fresh Spinach</option>
+                                            <option value="P003">Organic Carrots</option>
+                                            <option value="P004">Bell Peppers</option>
+                                            <option value="P005">Broccoli</option>
+                                        </select>
+                                        <label for="redirectProduct">Product</label>
+                                    </div>
+                                </div>
 
-  // Back button handler
-  $(".back-to-options").on("click", () => {
-    $(".cms-section").hide()
-    $("#cms-options").fadeIn()
-  })
+                                <div id="customUrlInput" style="display: none;">
+                                    <div class="form-floating mb-3">
+                                        <input type="url" class="form-control" id="redirectUrl" placeholder="Custom URL">
+                                        <label for="redirectUrl">Custom URL</label>
+                                    </div>
+                                </div>
 
-  // Add Carousel Button Click
-  $("#add-carousel-btn").on("click", () => {
-    // Reset form
-    $("#carousel-form")[0].reset()
-    $("#image-preview-container").hide()
-    $("#carouselModalLabel").text("Add Carousel Slide")
-    $("#carousel-modal").modal("show")
+                                <div id="redirectPreview" class="redirect-info" style="display: none;">
+                                    <strong>Redirect URL:</strong> <span id="redirectUrlPreview"></span>
+                                </div>
+                            </div>
+                        </div>
 
-    // Show link options by default
-    $("#link-options").show()
-    $("#category-select-container, #product-select-container").hide()
-  })
+                        <!-- Status -->
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="carouselActive" checked>
+                            <label class="form-check-label" for="carouselActive">
+                                Active (Show on website)
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveCarouselSlide()">Save Slide</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  // Edit Carousel Button Click
-  $(".edit-carousel").on("click", function () {
-    const row = $(this).closest("tr")
-    const isLink = row.find(".badge").text() === "Link"
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
-    // Set form values (in a real app, you'd populate with actual data)
-    $("#carouselModalLabel").text("Edit Carousel Slide")
-    $("#carousel-title").val(row.find("td:eq(1)").text())
+    <script>
+        // Sample data
+        const footerData = {
+            email: 'contact@greenshop.com',
+            contact: '+91 9876543210',
+            instagram: 'https://instagram.com/greenshop'
+        };
 
-    if (isLink) {
-      $("#type-link").prop("checked", true)
-      $("#link-options").show()
-    } else {
-      $("#type-nonlink").prop("checked", true)
-      $("#link-options").hide()
-    }
+        const carouselData = [
+            {
+                id: 1,
+                image: '/placeholder.svg?height=300&width=800&text=Slide1',
+                title: 'Fresh Organic Vegetables',
+                subtitle: 'Farm to table freshness guaranteed',
+                type: 'link',
+                redirectType: 'category',
+                redirectValue: 'vegetables',
+                active: true
+            },
+            {
+                id: 2,
+                image: '/placeholder.svg?height=300&width=800&text=Slide2',
+                title: 'Premium Quality Fruits',
+                subtitle: 'Handpicked for perfection',
+                type: 'non-link',
+                active: true
+            },
+            {
+                id: 3,
+                image: '/placeholder.svg?height=300&width=800&text=Slide3',
+                title: 'Special Discount Offer',
+                subtitle: 'Up to 30% off on selected items',
+                type: 'link',
+                redirectType: 'custom',
+                redirectValue: 'https://greenshop.com/offers',
+                active: false
+            }
+        ];
 
-    $("#carousel-modal").modal("show")
-  })
+        let currentEditingId = null;
+        let selectedCarouselImage = null;
 
-  // Delete Carousel Button Click
-  $(".delete-carousel").on("click", function () {
-    if (confirm("Are you sure you want to delete this slide?")) {
-      // In a real app, you'd send an AJAX request to delete the slide
-      $(this).closest("tr").remove()
-    }
-  })
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize animations
+            setTimeout(() => {
+                document.querySelectorAll('.content-card, .cms-option-card').forEach((el, index) => {
+                    el.style.animationDelay = `${index * 0.1}s`;
+                    el.classList.add('fade-in');
+                });
+            }, 100);
 
-  // Slide Type Change Handler
-  $('input[name="slide-type"]').on("change", function () {
-    const type = $(this).val()
-    if (type === "link") {
-      $("#link-options").slideDown()
-    } else {
-      $("#link-options").slideUp()
-    }
-  })
+            setupImageUpload();
+            setupCarouselTypeSelection();
+            setupRedirectOptions();
+        });
 
-  // Redirect Type Change Handler
-  $("#redirect-type").on("change", function () {
-    const type = $(this).val()
-    $("#category-select-container, #product-select-container").hide()
+        function selectOption(option) {
+            // Remove active class from all options
+            document.querySelectorAll('.cms-option-card').forEach(card => {
+                card.classList.remove('active');
+            });
 
-    if (type === "category") {
-      $("#category-select-container").show()
-    } else if (type === "product") {
-      $("#product-select-container").show()
-    }
-  })
+            // Add active class to selected option
+            document.querySelector(`[data-option="${option}"]`).classList.add('active');
 
-  // Image Preview
-  $("#carousel-image").on("change", function () {
-    const file = this.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        $("#image-preview").attr("src", e.target.result)
-        $("#image-preview-container").show()
-      }
-      reader.readAsDataURL(file)
-    }
-  })
+            // Hide all sections
+            document.getElementById('footerSection').style.display = 'none';
+            document.getElementById('carouselSection').style.display = 'none';
 
-  // Save Carousel Button Click
-  $("#save-carousel").on("click", () => {
-    // Validate form
-    if (!validateCarouselForm()) {
-      return
-    }
-
-    // In a real app, you'd send an AJAX request to save the data
-    // For demo purposes, we'll just add a new row to the table
-    const title = $("#carousel-title").val()
-    const type = $('input[name="slide-type"]:checked').val()
-    const typeLabel = type === "link" ? "Link" : "Non-Link"
-    const typeBadgeClass = type === "link" ? "bg-primary" : "bg-secondary"
-
-    // Create a new row (in a real app, you'd use the response from the server)
-    const newRow = `
-            <tr>
-                <td><img src="${$("#image-preview").attr("src") || "images/placeholder.jpg"}" alt="Slide" class="img-thumbnail" style="width: 100px;"></td>
-                <td>${title}</td>
-                <td><span class="badge ${typeBadgeClass}">${typeLabel}</span></td>
-                <td>
-                    <button class="btn btn-sm btn-info edit-carousel"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-sm btn-danger delete-carousel"><i class="fas fa-trash"></i></button>
-                </td>
-            </tr>
-        `
-
-    // Add the new row to the table
-    $("#carousel-table tbody").prepend(newRow)
-
-    // Close the modal
-    $("#carousel-modal").modal("hide")
-
-    // Show success message
-    alert("Carousel slide saved successfully!")
-  })
-
-  // Footer Form Submit Handler
-  $("#footer-form").on("submit", (e) => {
-    e.preventDefault()
-
-    // Validate form
-    if (!validateFooterForm()) {
-      return
-    }
-
-    // In a real app, you'd send an AJAX request to save the data
-    alert("Footer information saved successfully!")
-  })
-
-  // Form Validation Functions
-  function validateCarouselForm() {
-    if (!$("#carousel-title").val()) {
-      alert("Please enter a title for the slide.")
-      return false
-    }
-
-    const type = $('input[name="slide-type"]:checked').val()
-    if (type === "link") {
-      const redirectType = $("#redirect-type").val()
-      if (!redirectType) {
-        alert("Please select a redirect type.")
-        return false
-      }
-
-      if (redirectType === "category" && !$("#category-select").val()) {
-        alert("Please select a category.")
-        return false
-      }
-
-      if (redirectType === "product" && !$("#product-select").val()) {
-        alert("Please select a product.")
-        return false
-      }
-    }
-
-    return true
-  }
-
-  function validateFooterForm() {
-    if (!$("#instagram-url").val()) {
-      alert("Please enter an Instagram URL.")
-      return false
-    }
-
-    if (!$("#contact-number").val()) {
-      alert("Please enter a contact number.")
-      return false
-    }
-
-    if (!$("#email-address").val()) {
-      alert("Please enter an email address.")
-      return false
-    }
-
-    return true
-  }
-
-  // Re-initialize event handlers for dynamically added elements
-  function reInitializeEventHandlers() {
-    $(".edit-carousel")
-      .off("click")
-      .on("click", function () {
-        const row = $(this).closest("tr")
-        const isLink = row.find(".badge").text() === "Link"
-
-        $("#carouselModalLabel").text("Edit Carousel Slide")
-        $("#carousel-title").val(row.find("td:eq(1)").text())
-
-        if (isLink) {
-          $("#type-link").prop("checked", true)
-          $("#link-options").show()
-        } else {
-          $("#type-nonlink").prop("checked", true)
-          $("#link-options").hide()
+            // Show selected section
+            if (option === 'footer') {
+                document.getElementById('footerSection').style.display = 'block';
+                loadFooterData();
+            } else if (option === 'carousel') {
+                document.getElementById('carouselSection').style.display = 'block';
+                loadCarouselData();
+            }
         }
 
-        $("#carousel-modal").modal("show")
-      })
+        function loadFooterData() {
+            const loading = document.getElementById('footerLoading');
+            const tableBody = document.getElementById('footerTableBody');
+            
+            loading.style.display = 'block';
+            tableBody.innerHTML = '';
 
-    $(".delete-carousel")
-      .off("click")
-      .on("click", function () {
-        if (confirm("Are you sure you want to delete this slide?")) {
-          $(this).closest("tr").remove()
+            setTimeout(() => {
+                const footerRows = [
+                    {
+                        setting: 'Email Address',
+                        value: footerData.email,
+                        lastUpdated: '2024-01-15 10:30 AM'
+                    },
+                    {
+                        setting: 'Contact Number',
+                        value: footerData.contact,
+                        lastUpdated: '2024-01-15 10:30 AM'
+                    },
+                    {
+                        setting: 'Instagram URL',
+                        value: footerData.instagram,
+                        lastUpdated: '2024-01-15 10:30 AM'
+                    }
+                ];
+
+                footerRows.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong>${row.setting}</strong></td>
+                        <td>${row.value}</td>
+                        <td>${row.lastUpdated}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary action-btn" onclick="showFooterForm()" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+
+                loading.style.display = 'none';
+            }, 1000);
         }
-      })
-  }
 
-  // Call this function after adding new elements
-  $("#carousel-table").on("draw.dt", () => {
-    reInitializeEventHandlers()
-  })
-})
+        function loadCarouselData() {
+            const loading = document.getElementById('carouselLoading');
+            const tableBody = document.getElementById('carouselTableBody');
+            
+            loading.style.display = 'block';
+            tableBody.innerHTML = '';
 
+            setTimeout(() => {
+                carouselData.forEach(slide => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            <img src="${slide.image}" alt="${slide.title}" 
+                                 style="width: 80px; height: 50px; object-fit: cover; border-radius: 8px;">
+                        </td>
+                        <td><strong>${slide.title}</strong></td>
+                        <td>${slide.subtitle}</td>
+                        <td>
+                            <span class="badge ${slide.type === 'link' ? 'bg-primary' : 'bg-secondary'}">
+                                ${slide.type === 'link' ? 'Link' : 'Non-Link'}
+                            </span>
+                        </td>
+                        <td>
+                            ${slide.type === 'link' ? getRedirectDisplay(slide) : '<span class="text-muted">N/A</span>'}
+                        </td>
+                        <td>
+                            <span class="status-badge ${slide.active ? 'bg-success' : 'bg-danger'} text-white">
+                                ${slide.active ? 'Active' : 'Inactive'}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-primary action-btn" onclick="editCarouselSlide(${slide.id})" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger action-btn" onclick="deleteCarouselSlide(${slide.id})" title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button class="btn btn-sm btn-info action-btn" onclick="toggleSlideStatus(${slide.id})" title="Toggle Status">
+                                <i class="bi bi-toggle-${slide.active ? 'on' : 'off'}"></i>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+
+                loading.style.display = 'none';
+            }, 1000);
+        }
+
+        function getRedirectDisplay(slide) {
+            if (slide.redirectType === 'category') {
+                return `<span class="badge bg-info">Category: ${slide.redirectValue}</span>`;
+            } else if (slide.redirectType === 'product') {
+                return `<span class="badge bg-warning">Product: ${slide.redirectValue}</span>`;
+            } else if (slide.redirectType === 'custom') {
+                return `<span class="badge bg-dark">Custom URL</span>`;
+            }
+            return '<span class="text-muted">N/A</span>';
+        }
+
+        function showFooterForm() {
+            // Populate form with current data
+            document.getElementById('footerEmail').value = footerData.email;
+            document.getElementById('footerContact').value = footerData.contact;
+            document.getElementById('footerInstagram').value = footerData.instagram;
+
+            const modal = new bootstrap.Modal(document.getElementById('footerModal'));
+            modal.show();
+        }
+
+        function saveFooterSettings() {
+            const email = document.getElementById('footerEmail').value;
+            const contact = document.getElementById('footerContact').value;
+            const instagram = document.getElementById('footerInstagram').value;
+
+            // Update data
+            footerData.email = email;
+            footerData.contact = contact;
+            footerData.instagram = instagram;
+
+            // Close modal
+            bootstrap.Modal.getInstance(document.getElementById('footerModal')).hide();
+
+            // Reload data
+            loadFooterData();
+
+            showToast('Footer settings updated successfully!', 'success');
+        }
+
+        function showCarouselForm(slideId = null) {
+            currentEditingId = slideId;
+            const modal = new bootstrap.Modal(document.getElementById('carouselModal'));
+            const modalTitle = document.getElementById('carouselModalTitle');
+
+            if (slideId) {
+                modalTitle.textContent = 'Edit Carousel Slide';
+                const slide = carouselData.find(s => s.id === slideId);
+                if (slide) {
+                    populateCarouselForm(slide);
+                }
+            } else {
+                modalTitle.textContent = 'Add New Carousel Slide';
+                resetCarouselForm();
+            }
+
+            modal.show();
+        }
+
+        function populateCarouselForm(slide) {
+            document.getElementById('carouselTitle').value = slide.title;
+            document.getElementById('carouselSubtitle').value = slide.subtitle;
+            document.getElementById('carouselActive').checked = slide.active;
+            
+            // Set carousel type
+            selectCarouselType(slide.type);
+            
+            if (slide.type === 'link') {
+                document.getElementById('redirectType').value = slide.redirectType;
+                handleRedirectTypeChange();
+                
+                if (slide.redirectType === 'category') {
+                    document.getElementById('redirectCategory').value = slide.redirectValue;
+                } else if (slide.redirectType === 'product') {
+                    document.getElementById('redirectProduct').value = slide.redirectValue;
+                } else if (slide.redirectType === 'custom') {
+                    document.getElementById('redirectUrl').value = slide.redirectValue;
+                }
+            }
+
+            // Show image preview
+            if (slide.image) {
+                const preview = document.getElementById('carouselImagePreview');
+                preview.innerHTML = `
+                    <div class="image-preview">
+                        <img src="${slide.image}" alt="Carousel Image" class="preview-image">
+                        <button type="button" class="remove-image" onclick="removeCarouselImage()">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function resetCarouselForm() {
+            document.getElementById('carouselForm').reset();
+            document.getElementById('carouselType').value = 'non-link';
+            document.getElementById('carouselImagePreview').innerHTML = '';
+            selectedCarouselImage = null;
+            selectCarouselType('non-link');
+        }
+
+        function setupImageUpload() {
+            const uploadArea = document.getElementById('carouselImageUpload');
+            const fileInput = document.getElementById('carouselImageInput');
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('drop', handleImageDrop);
+            fileInput.addEventListener('change', handleImageSelect);
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.style.borderColor = 'var(--primary-color)';
+            e.currentTarget.style.backgroundColor = 'rgba(22, 110, 34, 0.1)';
+        }
+
+        function handleImageDrop(e) {
+            e.preventDefault();
+            e.currentTarget.style.borderColor = 'var(--border-color)';
+            e.currentTarget.style.backgroundColor = '';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleCarouselImage(files[0]);
+            }
+        }
+
+        function handleImageSelect(e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                handleCarouselImage(files[0]);
+            }
+        }
+
+        function handleCarouselImage(file) {
+            if (!file.type.startsWith('image/')) {
+                showToast('Please select a valid image file', 'error');
+                return;
+            }
+
+            selectedCarouselImage = file;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('carouselImagePreview');
+                preview.innerHTML = `
+                    <div class="image-preview">
+                        <img src="${e.target.result}" alt="Carousel Image" class="preview-image">
+                        <button type="button" class="remove-image" onclick="removeCarouselImage()">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                `;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeCarouselImage() {
+            selectedCarouselImage = null;
+            document.getElementById('carouselImagePreview').innerHTML = '';
+            document.getElementById('carouselImageInput').value = '';
+        }
+
+        function setupCarouselTypeSelection() {
+            const typeOptions = document.querySelectorAll('.type-option');
+            typeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const type = this.getAttribute('data-type');
+                    selectCarouselType(type);
+                });
+            });
+        }
+
+        function selectCarouselType(type) {
+            // Update UI
+            document.querySelectorAll('.type-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelector(`[data-type="${type}"]`).classList.add('active');
+            
+            // Update hidden input
+            document.getElementById('carouselType').value = type;
+            
+            // Show/hide redirect options
+            const redirectOptions = document.getElementById('redirectOptions');
+            if (type === 'link') {
+                redirectOptions.style.display = 'block';
+            } else {
+                redirectOptions.style.display = 'none';
+            }
+        }
+
+        function setupRedirectOptions() {
+            const redirectType = document.getElementById('redirectType');
+            redirectType.addEventListener('change', handleRedirectTypeChange);
+        }
+
+        function handleRedirectTypeChange() {
+            const redirectType = document.getElementById('redirectType').value;
+            
+            // Hide all options
+            document.getElementById('categorySelect').style.display = 'none';
+            document.getElementById('productSelect').style.display = 'none';
+            document.getElementById('customUrlInput').style.display = 'none';
+            document.getElementById('redirectPreview').style.display = 'none';
+            
+            // Show relevant option
+            if (redirectType === 'category') {
+                document.getElementById('categorySelect').style.display = 'block';
+            } else if (redirectType === 'product') {
+                document.getElementById('productSelect').style.display = 'block';
+            } else if (redirectType === 'custom') {
+                document.getElementById('customUrlInput').style.display = 'block';
+            }
+        }
+
+        function saveCarouselSlide() {
+            const title = document.getElementById('carouselTitle').value;
+            const subtitle = document.getElementById('carouselSubtitle').value;
+            const type = document.getElementById('carouselType').value;
+            const active = document.getElementById('carouselActive').checked;
+
+            if (!title || !subtitle) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            if (!selectedCarouselImage && !currentEditingId) {
+                showToast('Please select an image', 'error');
+                return;
+            }
+
+            const slideData = {
+                title,
+                subtitle,
+                type,
+                active,
+                image: selectedCarouselImage ? URL.createObjectURL(selectedCarouselImage) : null
+            };
+
+            if (type === 'link') {
+                const redirectType = document.getElementById('redirectType').value;
+                if (!redirectType) {
+                    showToast('Please select a redirect type', 'error');
+                    return;
+                }
+
+                slideData.redirectType = redirectType;
+                
+                if (redirectType === 'category') {
+                    slideData.redirectValue = document.getElementById('redirectCategory').value;
+                } else if (redirectType === 'product') {
+                    slideData.redirectValue = document.getElementById('redirectProduct').value;
+                } else if (redirectType === 'custom') {
+                    slideData.redirectValue = document.getElementById('redirectUrl').value;
+                }
+
+                if (!slideData.redirectValue) {
+                    showToast('Please provide redirect information', 'error');
+                    return;
+                }
+            }
+
+            if (currentEditingId) {
+                // Update existing slide
+                const index = carouselData.findIndex(s => s.id === currentEditingId);
+                if (index > -1) {
+                    carouselData[index] = { ...carouselData[index], ...slideData };
+                }
+                showToast('Carousel slide updated successfully!', 'success');
+            } else {
+                // Add new slide
+                slideData.id = carouselData.length + 1;
+                carouselData.push(slideData);
+                showToast('Carousel slide added successfully!', 'success');
+            }
+
+            // Close modal and reload data
+            bootstrap.Modal.getInstance(document.getElementById('carouselModal')).hide();
+            loadCarouselData();
+        }
+
+        function editCarouselSlide(id) {
+            showCarouselForm(id);
+        }
+
+        function deleteCarouselSlide(id) {
+            if (confirm('Are you sure you want to delete this carousel slide?')) {
+                const index = carouselData.findIndex(s => s.id === id);
+                if (index > -1) {
+                    carouselData.splice(index, 1);
+                    loadCarouselData();
+                    showToast('Carousel slide deleted successfully!', 'success');
+                }
+            }
+        }
+
+        function toggleSlideStatus(id) {
+            const slide = carouselData.find(s => s.id === id);
+            if (slide) {
+                slide.active = !slide.active;
+                loadCarouselData();
+                showToast(`Slide ${slide.active ? 'activated' : 'deactivated'} successfully!`, 'success');
+            }
+        }
+
+        function refreshData() {
+            const activeOption = document.querySelector('.cms-option-card.active');
+            if (activeOption) {
+                const option = activeOption.getAttribute('data-option');
+                if (option === 'footer') {
+                    loadFooterData();
+                } else if (option === 'carousel') {
+                    loadCarouselData();
+                }
+            }
+            showToast('Data refreshed successfully!', 'info');
+        }
+
+        function showToast(message, type) {
+            const toastContainer = document.createElement('div');
+            toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
+            toastContainer.style.zIndex = '9999';
+            
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-white bg-${type === 'error' ? 'danger' : type} border-0`;
+            toast.setAttribute('role', 'alert');
+            
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            document.body.appendChild(toastContainer);
+            
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+            
+            toast.addEventListener('hidden.bs.toast', () => {
+                document.body.removeChild(toastContainer);
+            });
+        }
     </script>
-    <script src="./JS/cms.js"></script>
 </body>
-</html>
+</html> 
