@@ -1,87 +1,764 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaand</title>
+    <title>GreenShop Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./CSS/admin/admin_dashboard.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        /* Top Navbar */
+        .top-navbar {
+            background-color: var(--white);
+            height: var(--navbar-height);
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar-content {
+            height: 100%;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .breadcrumb {
+            margin: 0;
+            background: none;
+            padding: 0;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            color: var(--dark-gray);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+        }
+
+        .user-btn {
+            border-radius: 25px !important;
+            padding: 0.5rem 1rem !important;
+        }
+
+
+        .user-avatar-small {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .user-name-small {
+            font-weight: 500;
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 2rem;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .date-time {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .stats-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .stats-icon.bg-primary {
+            background-color: var(--primary-color);
+        }
+
+        .stats-icon.bg-success {
+            background-color: #28a745;
+        }
+
+        .stats-icon.bg-warning {
+            background-color: #ffc107;
+        }
+
+        .stats-icon.bg-info {
+            background-color: #17a2b8;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-label {
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }   
+
+        .stats-change {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .stats-change.positive {
+            color: #28a745;
+        }
+
+        .stats-change.negative {
+            color: #dc3545;
+        }
+
+        /* Chart Cards */
+        .chart-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .chart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chart-title {
+            font-weight: 600;
+            margin: 0;
+            color: var(--dark-gray);
+        }
+
+        .chart-body {
+            padding: 1.5rem;
+            height: calc(100% - 80px);
+        }
+
+        /* Dropdown Styles */
+        .dropdown-menu {
+            border: none;
+            box-shadow: var(--box-shadow);
+            border-radius: 10px;
+            padding: 0.5rem;
+        }
+
+        .dropdown-item {
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+        }
+
+
+        .dropdown-header {
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1001;
+            }
+            
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .navbar-content {
+                padding: 0 1rem;
+            }
+
+            .dashboard-content {
+                padding: 1rem;
+            }
+
+            .welcome-section {
+                padding: 1.5rem;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .date-time {
+                align-items: start;
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+
+            .user-name-small {
+                display: none;
+            }
+
+            .stats-number {
+                font-size: 1.5rem;
+            }
+
+            .chart-card {
+                height: 300px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
-    <!-- Navbar -->
-    <nav class="navbar d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="#">
-            <img class="logo_img" src="images/logo b.png" alt="Chaand by Mokshii">
-        </a>
-    </nav>
-
-    <div class="container-fluid">
-        <!-- Menu Button -->
-        <div class="menu-toggle-btn" style="margin-left: 0;">
-            <button class="menu-toggle-btn  btn-outline-sec d-lg-none" onclick="toggleMenu()">☰ Menu</button>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <img src="./images/logo b.png" alt="Logo" class="logo">
+            </div>
+            <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+                <i class="bi bi-x"></i>
+            </button>
         </div>
-        
-        <!-- Sidebar -->
-        <div class="sidebar menu-section" id="menuSection">
-            <ul class="list-group">
-                <a href="admin_dashboard.html" class="text-decoration-none"><li class="list-group-item active">Dashboard</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Products</li></a>
-                <a href="admin_add_products.html" class="text-decoration-none"><li class="list-group-item">Add Products</li></a>
-                <a href="admin_collection.html" class="text-decoration-none"><li class="list-group-item">Collections</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Featured Products</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">User Data</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">CMS</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Orders</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Contact Us</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Email User</li></a>
+
+        <div class="sidebar-menu">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-page="dashboard">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="products">
+                        <i class="bi bi-box"></i>
+                        <span>Products</span>
+                        <span class="badge">245</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="orders">
+                        <i class="bi bi-cart-check"></i>
+                        <span>Orders</span>
+                        <span class="badge">12</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="customers">
+                        <i class="bi bi-people"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="analytics">
+                        <i class="bi bi-graph-up"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="inventory">
+                        <i class="bi bi-boxes"></i>
+                        <span>Inventory</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="reviews">
+                        <i class="bi bi-star"></i>
+                        <span>Reviews</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="settings">
+                        <i class="bi bi-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
             </ul>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="row g-3">
-                <div class="page-location shadow-sm">Admin / Add Products</div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="card p-3">
-                        <h5>Total Users</h5>
-                        <p class="fs-4">120</p>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="./images/admin-icon.png" alt="Admin" class="user-avatar">
+                <div class="user-details">
+                    <span class="user-name">Mokshi</span>
+                    <span class="user-role">Owner</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <div class="navbar-content">
+                <div class="navbar-left">
+                    <button class="sidebar-toggle d-lg-none" id="mobileToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="breadcrumb-container">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="card p-3">
-                        <h5>Total Products</h5>
-                        <p class="fs-4">120</p>
+
+                <div class="navbar-right">
+                    <div class="navbar-actions">
+                        <div class="dropdown">
+                            <button class="action-btn user-btn" data-bs-toggle="dropdown">
+                                <img src="./images/admin-icon.png" alt="Admin" class="user-avatar-small">
+                                <span class="user-name-small">Mokshi</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="card p-3">
-                        <h5>Total Orders</h5>
-                        <p class="fs-4">120</p>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <div class="container-fluid">
+                <!-- Welcome Section -->
+                <div class="welcome-section">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h1 class="welcome-title">Welcome back, Mokshi! 👋</h1>
+                            <p class="welcome-subtitle">Here's what's happening with your store today.</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="date-time">
+                                <span id="currentDate"></span>
+                                <span id="currentTime"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="card p-3">
-                        <h5>Pending Orders</h5>
-                        <p class="fs-4">25</p>
+
+                <!-- Stats Cards -->
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stats-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="stats-icon bg-primary">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 class="stats-number" data-target="1247">0</h3>
+                                <p class="stats-label">Total Users</p>
+                                <div class="stats-change positive">
+                                    <i class="bi bi-arrow-up"></i>
+                                    <span>+12.5%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stats-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="stats-icon bg-success">
+                                <i class="bi bi-box"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 class="stats-number" data-target="245">0</h3>
+                                <p class="stats-label">Total Products</p>
+                                <div class="stats-change positive">
+                                    <i class="bi bi-arrow-up"></i>
+                                    <span>+8.2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stats-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="stats-icon bg-warning">
+                                <i class="bi bi-cart-check"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 class="stats-number" data-target="89">0</h3>
+                                <p class="stats-label">Orders Today</p>
+                                <div class="stats-change negative">
+                                    <i class="bi bi-arrow-down"></i>
+                                    <span>-3.1%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="stats-card" data-aos="fade-up" data-aos-delay="400">
+                            <div class="stats-icon bg-info">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <div class="stats-content">
+                                <h3 class="stats-number" data-target="15420">0</h3>
+                                <p class="stats-label">Revenue (₹)</p>
+                                <div class="stats-change positive">
+                                    <i class="bi bi-arrow-up"></i>
+                                    <span>+15.3%</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="card p-3">
-                        <h5>Completed Orders</h5>
-                        <p class="fs-4">95</p>
+
+                <!-- Charts Section -->
+                <div class="row g-4 mb-4">
+                    <div class="col-xl-8">
+                        <div class="chart-card" data-aos="fade-up">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Sales Overview</h5>
+                                <div class="chart-actions">
+                                    <select class="form-select form-select-sm">
+                                        <option>Last 7 days</option>
+                                        <option>Last 30 days</option>
+                                        <option>Last 3 months</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <div class="chart-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Top Categories</h5>
+                            </div>
+                            <div class="chart-body">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
     <script>
-        function toggleMenu() {
-            const menuSection = document.getElementById("menuSection");
-            menuSection.classList.toggle("active");
+        // Admin Dashboard JavaScript
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize dashboard
+            initializeDashboard();
+
+            // Initialize charts
+            initializeCharts();
+
+
+            // Initialize date/time
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+
+        });
+
+        // Initialize Dashboard
+        function initializeDashboard() {
+            // Animate stats numbers
+            animateStatsNumbers();
+
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            const bootstrap = window.bootstrap; // Declare the bootstrap variable
+            if (bootstrap) {
+                tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            }
         }
+
+        // Animate Stats Numbers
+        function animateStatsNumbers() {
+            const statsNumbers = document.querySelectorAll('.stats-number');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.getAttribute('data-target'));
+                        animateNumber(entry.target, 0, target, 2000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            statsNumbers.forEach(number => {
+                observer.observe(number);
+            });
+        }
+
+        // Animate Number Function
+        function animateNumber(element, start, end, duration) {
+            const startTime = performance.now();
+
+            function updateNumber(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(start + (end - start) * easeOutQuart);
+
+                element.textContent = current.toLocaleString();
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    element.textContent = end.toLocaleString();
+                }
+            }
+
+            requestAnimationFrame(updateNumber);
+        }
+
+        // Initialize Charts
+        function initializeCharts() {
+            // Sales Chart
+            const salesCtx = document.getElementById('salesChart');
+            if (salesCtx) {
+                new Chart(salesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [1200, 1900, 3000, 5000, 2000, 3000, 4500],
+                            borderColor: '#166e22',
+                            backgroundColor: 'rgba(22, 110, 34, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#166e22',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6,
+                            pointHoverRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                },
+                                ticks: {
+                                    callback: function (value) {
+                                        return '₹' + value.toLocaleString();
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        elements: {
+                            point: {
+                                hoverBackgroundColor: '#166e22'
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        }
+                    }
+                });
+            }
+
+            // Category Chart
+            const categoryCtx = document.getElementById('categoryChart');
+            if (categoryCtx) {
+                new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Electronics', 'Fashion', 'Home & Garden', 'Sports', 'Books'],
+                        datasets: [{
+                            data: [35, 25, 20, 15, 5],
+                            backgroundColor: [
+                                '#166e22',
+                                '#2a8c36',
+                                '#28a745',
+                                '#17a2b8',
+                                '#ffc107'
+                            ],
+                            borderWidth: 0,
+                            hoverOffset: 10
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true,
+                                    pointStyle: 'circle'
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            }
+        }
+
+
     </script>
 </body>
+
 </html>
