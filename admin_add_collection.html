@@ -3,75 +3,562 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaand</title>
+    <title>Add Collection - GreenShop Admin</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/admin/admin_add_collection.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 2rem;
+        }
+
+        .page-header {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .page-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #6c757d;
+            margin: 0;
+        }
+
+        /* Form Styles */
+        .form-section {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .form-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .image-upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(22, 110, 34, 0.05);
+        }
+
+        .image-upload-area.drag-over {
+            border-color: var(--primary-color);
+            background: rgba(22, 110, 34, 0.1);
+            transform: scale(1.02);
+        }
+
+        .image-upload-area i {
+            font-size: 3rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .uploaded-image {
+            max-width: 200px;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .text-editor-toolbar {
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+            border-radius: 0.375rem 0.375rem 0 0;
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+        }
+
+        .text-editor {
+            border-radius: 0 0 0.375rem 0.375rem !important;
+            border-top: none !important;
+            outline: none;
+        }
+
+        .text-editor:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(22, 110, 34, 0.25);
+        }
+
+        .collection-id-display {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
-    <!-- Navbar -->
-    <nav class="navbar d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="#">
-            <img class="logo_img" src="images/logo b.png" alt="Chaand by Mokshii">
-        </a>
-    </nav>
-
-    <div class="container-fluid">
-        <!-- Menu Button -->
-        <div class="menu-toggle-btn" style="margin-left: 0;">
-            <button class="menu-toggle-btn  btn-outline-sec d-lg-none" onclick="toggleMenu()">☰ Menu</button>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <img src="/placeholder.svg?height=35&width=120" alt="GreenShop Logo" class="logo">
+                <span class="brand-text">GreenShop Admin</span>
+            </div>
+            <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+                <i class="bi bi-x"></i>
+            </button>
         </div>
         
-        <!-- Sidebar -->
-        <div class="sidebar menu-section" id="menuSection">
-            <ul class="list-group">
-                <a href="admin_dashboard.html" class="text-decoration-none"><li class="list-group-item ">Dashboard</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Products</li></a>
-                <a href="admin_add_products.html" class="text-decoration-none"><li class="list-group-item">Add Products</li></a>
-                <a href="admin_collection.html" class="text-decoration-none"><li class="list-group-item active">Collections</li></a>                <a href="#" class="text-decoration-none"><li class="list-group-item">Featured Products</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">User Data</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">CMS</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Orders</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Contact Us</li></a>
-                <a href="#" class="text-decoration-none"><li class="list-group-item">Email User</li></a>
+        <div class="sidebar-menu">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" data-page="dashboard">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html" data-page="products">
+                        <i class="bi bi-box"></i>
+                        <span>Products</span>
+                        <span class="badge">245</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="orders">
+                        <i class="bi bi-cart-check"></i>
+                        <span>Orders</span>
+                        <span class="badge">12</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="customers">
+                        <i class="bi bi-people"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add-product.html" data-page="add-product">
+                        <i class="bi bi-plus-circle"></i>
+                        <span>Add Product</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="add-collection.html" data-page="add-collection">
+                        <i class="bi bi-collection"></i>
+                        <span>Add Collection</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add-admin.html" data-page="add-admin">
+                        <i class="bi bi-person-plus"></i>
+                        <span>Add Admin</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cms.html" data-page="cms">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>CMS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="settings">
+                        <i class="bi bi-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
             </ul>
         </div>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="/placeholder.svg?height=40&width=40" alt="Admin" class="user-avatar">
+                <div class="user-details">
+                    <span class="user-name">John Admin</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="row g-3">
-                <div class="page-location shadow-sm">Admin / Collections</div>
-                <div class="">
-                <form>
-                    <div class="mb-4">
-                        <label for="collectionName" class="form-label mb-0">Collection Name</label>
-                        <input type="text" class="form-control" id="collectionName" placeholder="Enter product name">
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <div class="navbar-content">
+                <div class="navbar-left">
+                    <button class="sidebar-toggle d-lg-none" id="mobileToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="breadcrumb-container">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Collection</li>
+                            </ol>
+                        </nav>
                     </div>
-                    <div class="mb-4">
-                        <label for="collectionDescription" class="form-label mb-0">Description</label>
-                        <textarea class="form-control" id="collectionDescription" rows="3" placeholder="Enter product description"></textarea>
-                    </div>
-
-                    <div class="mb-4 d-flex">
-                        <label for="addToFounderPick" class="form-label mb-0 ">Add to Corousel</label>
-                        <div class="form-check form-switch" style="margin-left: 1rem; position: relative; top: -5px;">
-                            <input type="checkbox" class="form-check-input" id="addToFounderPick">
+                </div>
+                
+                <div class="navbar-right">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="text" placeholder="Search..." class="search-input">
                         </div>
                     </div>
-                    <div class="submit">
-                        <button type="submit" class=""><b>Submit</b></button>
+                    
+                    <div class="navbar-actions">
+                        <div class="dropdown">
+                            <button class="action-btn" data-bs-toggle="dropdown">
+                                <i class="bi bi-bell"></i>
+                                <span class="notification-badge">3</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
+                                <li class="dropdown-header">Notifications</li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-cart text-primary"></i> New order received</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person text-success"></i> New customer registered</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-exclamation-triangle text-warning"></i> Low stock alert</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-center" href="#">View all notifications</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dropdown">
+                            <button class="action-btn user-btn" data-bs-toggle="dropdown">
+                                <img src="/placeholder.svg?height=32&width=32" alt="Admin" class="user-avatar-small">
+                                <span class="user-name-small">John Admin</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Add Collection Content -->
+        <div class="dashboard-content">
+            <div class="container-fluid">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="page-title">Add New Collection</h1>
+                            <p class="page-subtitle">Create a new product collection for your store</p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <button class="btn btn-outline-secondary me-2" onclick="resetForm()">
+                                <i class="bi bi-arrow-clockwise me-2"></i>Reset Form
+                            </button>
+                            <button class="btn btn-success" onclick="saveCollection()">
+                                <i class="bi bi-check-circle me-2"></i>Save Collection
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collection Form -->
+                <form id="collectionForm" class="needs-validation" novalidate>
+                    <!-- Collection ID Section -->
+                    <div class="form-section">
+                        <h5 class="section-title">Collection Identification</h5>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Auto-Generated Collection ID</label>
+                                <div class="collection-id-display" id="collectionIdDisplay">
+                                    COL-2024-001
+                                </div>
+                                <div class="form-text">This unique ID is automatically generated and cannot be changed</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h5 class="section-title">Basic Information</h5>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="collectionName" class="form-label">Collection Name *</label>
+                                <input type="text" class="form-control" id="collectionName" required>
+                                <div class="invalid-feedback">Please provide a collection name.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="collectionDescription" class="form-label">Collection Description *</label>
+                            <div class="text-editor-toolbar mb-2">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="formatText('bold', 'collectionDescription')" title="Bold">
+                                    <i class="bi bi-type-bold"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="formatText('italic', 'collectionDescription')" title="Italic">
+                                    <i class="bi bi-type-italic"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="formatText('underline', 'collectionDescription')" title="Underline">
+                                    <i class="bi bi-type-underline"></i>
+                                </button>
+                            </div>
+                            <div id="collectionDescription" class="form-control text-editor" contenteditable="true" style="min-height: 120px; padding: 0.75rem;" required></div>
+                            <div class="invalid-feedback">Please provide a collection description.</div>
+                        </div>
+                    </div>
+
+                    <!-- Collection Image -->
+                    <div class="form-section">
+                        <h5 class="section-title">Collection Image</h5>
+                        <div class="mb-3">
+                            <label for="collectionImage" class="form-label">Collection Image *</label>
+                            <div class="image-upload-area" id="collectionImageUpload">
+                                <i class="bi bi-cloud-upload"></i>
+                                <p>Click to upload collection image or drag and drop</p>
+                                <small class="text-muted">Supported formats: JPG, PNG, GIF (Max size: 5MB)</small>
+                                <input type="file" id="collectionImage" accept="image/*" hidden required>
+                            </div>
+                            <div id="collectionImagePreview"></div>
+                            <div class="invalid-feedback">Please upload a collection image.</div>
+                        </div>
                     </div>
                 </form>
-                </div>
             </div>
         </div>
     </div>
 
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        function toggleMenu() {
-            const menuSection = document.getElementById("menuSection");
-            menuSection.classList.toggle("active");
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeImageUpload();
+        });
+
+
+        function initializeImageUpload() {
+            const uploadArea = document.getElementById('collectionImageUpload');
+            const fileInput = document.getElementById('collectionImage');
+            const preview = document.getElementById('collectionImagePreview');
+            
+            uploadArea.addEventListener('click', () => fileInput.click());
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('drag-over');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                
+                const files = Array.from(e.dataTransfer.files);
+                if (files.length > 0 && files[0].type.startsWith('image/')) {
+                    handleImageFile(files[0]);
+                }
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleImageFile(e.target.files[0]);
+                }
+            });
+            
+            function handleImageFile(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `
+                        <img src="${e.target.result}" alt="Collection Preview" class="uploaded-image">
+                        <button type="button" class="btn btn-sm btn-danger mt-2" onclick="removeCollectionImage()">
+                            <i class="bi bi-trash"></i> Remove Image
+                        </button>
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeCollectionImage() {
+            document.getElementById('collectionImagePreview').innerHTML = '';
+            document.getElementById('collectionImage').value = '';
+        }
+
+        function formatText(command, targetId) {
+            document.execCommand(command, false, null);
+            document.getElementById(targetId).focus();
+        }
+
+        function resetForm() {
+            if (confirm('Are you sure you want to reset the form? All data will be lost.')) {
+                document.getElementById('collectionForm').reset();
+                document.getElementById('collectionDescription').innerHTML = '';
+                document.getElementById('collectionImagePreview').innerHTML = '';
+                collectionCounter = 1;
+                generateCollectionId();
+                showNotification('Form has been reset', 'info');
+            }
+        }
+
+        function saveCollection() {
+            const form = document.getElementById('collectionForm');
+            const collectionName = document.getElementById('collectionName').value.trim();
+            const collectionDescription = document.getElementById('collectionDescription').innerHTML.trim();
+            const collectionImage = document.getElementById('collectionImage').files[0];
+            
+            // Validate required fields
+            let isValid = true;
+            
+            if (!collectionName) {
+                document.getElementById('collectionName').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('collectionName').classList.remove('is-invalid');
+            }
+            
+            if (!collectionDescription || collectionDescription === '<br>') {
+                document.getElementById('collectionDescription').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('collectionDescription').classList.remove('is-invalid');
+            }
+            
+            if (!collectionImage) {
+                document.getElementById('collectionImageUpload').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('collectionImageUpload').classList.remove('shake');
+                }, 500);
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const saveBtn = event.target;
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '<i class="bi bi-arrow-clockwise spin me-2"></i>Saving Collection...';
+            saveBtn.disabled = true;
+
+            
+            // Simulate API call
+            setTimeout(() => {        
+                // Reset form and increment counter
+                document.getElementById('collectionForm').reset();
+                document.getElementById('collectionDescription').innerHTML = '';
+                document.getElementById('collectionImagePreview').innerHTML = '';
+                
+                // Reset button
+                saveBtn.innerHTML = originalText;
+                saveBtn.disabled = false;
+                
+                showNotification('Collection created successfully!', 'success');
+            }, 2000);
+        }
+
+       
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
         }
     </script>
 </body>
