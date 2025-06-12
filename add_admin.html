@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Admin - GreenShop Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <img src="https://via.placeholder.com/120x40" alt="GreenShop Logo" class="logo">
+                <span class="brand-text">GreenShop Admin</span>
+            </div>
+            <button class="sidebar-toggle d-lg-none" id="sidebarToggle">
+                <i class="bi bi-x"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" data-page="dashboard">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html" data-page="products">
+                        <i class="bi bi-box"></i>
+                        <span>Products</span>
+                        <span class="badge">245</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="orders">
+                        <i class="bi bi-cart-check"></i>
+                        <span>Orders</span>
+                        <span class="badge">12</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="customers">
+                        <i class="bi bi-people"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="add-product.html" data-page="add-product">
+                        <i class="bi bi-plus-circle"></i>
+                        <span>Add Product</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="add-admin.html" data-page="add-admin">
+                        <i class="bi bi-person-plus"></i>
+                        <span>Add Admin</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cms.html" data-page="cms">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>CMS</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-page="settings">
+                        <i class="bi bi-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="https://via.placeholder.com/40" alt="Admin" class="user-avatar">
+                <div class="user-details">
+                    <span class="user-name">John Admin</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <div class="navbar-content">
+                <div class="navbar-left">
+                    <button class="sidebar-toggle d-lg-none" id="mobileToggle">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <div class="breadcrumb-container">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Admin</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                
+                <div class="navbar-right">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="text" placeholder="Search..." class="search-input">
+                        </div>
+                    </div>
+                    
+                    <div class="navbar-actions">
+                        <div class="dropdown">
+                            <button class="action-btn" data-bs-toggle="dropdown">
+                                <i class="bi bi-bell"></i>
+                                <span class="notification-badge">3</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end notification-dropdown">
+                                <li class="dropdown-header">Notifications</li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-cart text-primary"></i> New order received</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person text-success"></i> New customer registered</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-exclamation-triangle text-warning"></i> Low stock alert</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-center" href="#">View all notifications</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dropdown">
+                            <button class="action-btn user-btn" data-bs-toggle="dropdown">
+                                <img src="https://via.placeholder.com/32" alt="Admin" class="user-avatar-small">
+                                <span class="user-name-small">John Admin</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Add Admin Content -->
+        <div class="dashboard-content">
+            <div class="container-fluid">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h1 class="page-title">Add New Admin</h1>
+                            <p class="page-subtitle">Create a new administrator account</p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <button class="btn btn-outline-secondary" onclick="viewAdmins()">
+                                <i class="bi bi-people me-2"></i>View All Admins
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Admin Form -->
+                <div class="form-card">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <form id="addAdminForm" class="needs-validation" novalidate>
+                                <!-- Personal Information -->
+                                <div class="form-section">
+                                    <h5 class="section-title">Personal Information</h5>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="fullName" class="form-label">Full Name *</label>
+                                            <input type="text" class="form-control" id="fullName" required>
+                                            <div class="invalid-feedback">Please provide a full name.</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="username" class="form-label">Username *</label>
+                                            <input type="text" class="form-control" id="username" required>
+                                            <div class="invalid-feedback">Please provide a username.</div>
+                                            <div class="form-text">Username must be unique and contain only letters, numbers, and underscores.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Account Information -->
+                                <div class="form-section">
+                                    <h5 class="section-title">Account Information</h5>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="password" class="form-label">Password *</label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" id="password" required>
+                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                            </div>
+                                            <div class="invalid-feedback">Please provide a password.</div>
+                                            <div class="form-text">Password must be at least 8 characters long.</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="confirmPassword" class="form-label">Confirm Password *</label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" id="confirmPassword" required>
+                                                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                            </div>
+                                            <div class="invalid-feedback">Passwords do not match.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Role Information -->
+                                <div class="form-section">
+                                    <h5 class="section-title">Role & Permissions</h5>
+                                    
+                                    <div class="mb-3">
+                                        <label for="adminRole" class="form-label">Admin Role *</label>
+                                        <select class="form-select" id="adminRole" required>
+                                            <option value="">Choose role...</option>
+                                            <option value="super-admin">Super Administrator</option>
+                                            <option value="admin">Administrator</option>
+                                            <option value="manager">Manager</option>
+                                            <option value="editor">Editor</option>
+                                            <option value="viewer">Viewer</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please select a role.</div>
+                                    </div>
+
+                                    <div class="role-description" id="roleDescription">
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            <span id="roleDescriptionText">Select a role to see permissions</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Form Actions -->
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                                        <i class="bi bi-arrow-clockwise me-2"></i>Reset
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-person-plus me-2"></i>Create Admin
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="admin-script.js"></script>
+    <script src="add-admin.js"></script>
+</body>
+</html>

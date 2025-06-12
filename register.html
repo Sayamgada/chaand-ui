@@ -3,557 +3,1289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Chaand</title>
+    <title>Register - GreenShop</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #166e22;
-            --primary-light: rgba(22, 110, 34, 0.1);
-            --primary-dark: #0e5017;
+            --primary-dark: #0e5016;
+            --primary-light: #2a8c36;
             --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
-        
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--box-shadow);
+            padding: 1rem 0;
         }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
         }
-        
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
+
+        .navbar-nav .nav-link {
+            color: var(--dark-gray) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: var(--transition);
         }
-        
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
         }
-        
-        .form-container {
-            flex: 1;
+
+        /* Registration Container */
+        .registration-container {
+            min-height: calc(100vh - 200px);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 0;
+            padding: 2rem 0;
         }
-        
-        .form-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
+
+        .registration-wrapper {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 1rem;
+            gap: 3rem;
+            align-items: center;
         }
-        
-        .form-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+
+        .registration-info {
+            flex: 1;
+            color: white;
+            padding: 2rem;
         }
-        
-        .card-header {
-            background-color: var(--primary-color);
-            color: var(--white);
+
+        .registration-info h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .registration-info p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .feature-item i {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
             text-align: center;
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .card-header::before {
-            content: "";
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.5rem;
+        }
+
+        .registration-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 500px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .registration-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .registration-header::before {
+            content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(45deg);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        .registration-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
             z-index: 1;
         }
-        
-        .card-header h3 {
+
+        .registration-subtitle {
+            opacity: 0.9;
             position: relative;
-            z-index: 2;
-            font-weight: 600;
+            z-index: 1;
         }
-        
-        .card-body {
-            padding: 30px;
+
+        /* Progress Bar */
+        .progress-container {
+            padding: 1.5rem 2rem 0;
+            background: white;
         }
-        
-        .form-floating .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(22, 110, 34, 0.25);
-        }
-        
-        .form-floating label {
-            color: #6c757d;
-        }
-        
-        .form-check-input:checked {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-    
-        
-        /* Animation classes */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        .slide-up {
-            animation: slideUp 0.5s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        /* Form progress indicator */
-        .form-progress {
+
+        .progress-steps {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 1rem;
         }
-        
-        .form-progress::before {
-            content: "";
-            position: absolute;
-            top: 15px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #e9ecef;
-            z-index: 1;
-        }
-        
+
         .progress-step {
-            position: relative;
-            z-index: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 33.33%;
+            flex: 1;
+            position: relative;
         }
-        
-        .step-icon {
+
+        .progress-step::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+
+        .progress-step:last-child::before {
+            display: none;
+        }
+
+        .step-circle {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background-color: #e9ecef;
+            background: #e9ecef;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 8px;
-            color: #6c757d;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .step-text {
+            font-weight: 600;
             font-size: 0.8rem;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-circle.active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .step-circle.completed {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
             color: #6c757d;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .progress-step.active .step-icon {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-        
-        .progress-step.active .step-text {
-            color: var(--primary-color);
             font-weight: 500;
         }
-        
-        .progress-step.completed .step-icon {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-        
-        .progress-step.completed .step-text {
+
+        .step-label.active {
             color: var(--primary-color);
+            font-weight: 600;
         }
-        
-        /* Gender selection styling */
+
+        /* Form Styles */
+        .registration-body {
+            padding: 2rem;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(22, 110, 34, 0.25);
+        }
+
+        .form-control.is-invalid {
+            border-color: var(--error-color);
+            animation: shake 0.5s ease;
+        }
+
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+
+        .invalid-feedback {
+            display: block;
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .valid-feedback {
+            display: block;
+            color: var(--success-color);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Gender Selection */
         .gender-options {
             display: flex;
-            gap: 15px;
+            gap: 1rem;
         }
-        
+
         .gender-option {
             flex: 1;
             position: relative;
         }
-        
-        .gender-option input {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .gender-option label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px;
-            border: 2px solid #ced4da;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .gender-option label:hover {
-            border-color: var(--primary-color);
-        }
-        
-        .gender-option input:checked + label {
-            border-color: var(--primary-color);
-            background-color: var(--primary-light);
-        }
-        
-        .gender-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #6c757d;
-        }
-        
-        .gender-option input:checked + label .gender-icon {
-            color: var(--primary-color);
-        }
 
-
-
-        /* Modal styling */
-        .modal-content {
-            border: none;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .modal-header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            border-bottom: none;
-        }
-        
-        .modal-body {
-            padding: 30px;
-        }
-        
-        .loading-spinner {
-            width: 3rem;
-            height: 3rem;
-            border-width: 0.25rem;
-            color: var(--primary-color);
-        }
-        
-        .success-checkmark {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto;
-            position: relative;
+        .gender-option input[type="radio"] {
             display: none;
         }
-        
-        .check-icon {
+
+        .gender-option label {
+            display: block;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .gender-option input[type="radio"]:checked + label {
+            border-color: var(--primary-color);
+            background: rgba(22, 110, 34, 0.1);
+            color: var(--primary-color);
+        }
+
+        /* OTP Input */
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .otp-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(22, 110, 34, 0.25);
+        }
+
+        .otp-input.filled {
+            border-color: var(--success-color);
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        /* Buttons */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(22, 110, 34, 0.3);
+        }
+
+        .btn-primary-custom:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary-custom {
+            background: #6c757d;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-secondary-custom:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        /* Modal Styles */
+        .otp-modal {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .otp-modal .modal-dialog {
+            transform: scale(0.7) translateY(-100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .otp-modal.show .modal-dialog {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .otp-modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .otp-modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .otp-icon {
             width: 80px;
             height: 80px;
-            position: relative;
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
-            box-sizing: content-box;
-            border: 4px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            animation: pulse 2s infinite;
         }
-        
-        .check-icon::before {
-            top: 48px;
-            left: 26px;
-            transform: rotate(45deg);
-            width: 15px;
-            height: 4px;
+
+        .otp-icon i {
+            font-size: 2.5rem;
         }
-        
-        .check-icon::after {
-            top: 44px;
-            left: 34px;
-            transform: rotate(135deg);
-            width: 25px;
-            height: 4px;
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
         }
-        
-        .check-icon::before,
-        .check-icon::after {
-            content: '';
-            position: absolute;
-            background-color: var(--primary-color);
-            border-radius: 2px;
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .registration-wrapper {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .registration-info {
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .registration-info h2 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .registration-card {
+                margin: 0 0.5rem;
+            }
+            
+            .registration-body {
+                padding: 1.5rem;
+            }
+            
+            .otp-container {
+                gap: 0.3rem;
+            }
+            
+            .otp-input {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Registration Form -->
-    <div class="form-container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card form-card animate_animated animate_fadeIn">
-                        <div class="card-header">
-                            <h3>Create Your Account</h3>
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-shop me-2"></i>GreenShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Container -->
+    <div class="registration-container" style="margin-top: 80px;">
+    <div class="registration-wrapper">
+        <!-- Left Side - Information -->
+        <div class="registration-info">
+            <h2>Join Our Community</h2>
+            <p>Create your GreenShop account and unlock exclusive benefits, personalized recommendations, and seamless shopping experience.</p>
+            
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Secure & Protected Account</span>
+                </li>
+                <li class="feature-item">
+                    <i class="bi bi-gift"></i>
+                    <span>Exclusive Member Discounts</span>
+                </li>
+                <li class="feature-item">
+                    <i class="bi bi-truck"></i>
+                    <span>Free Shipping on Orders</span>
+                </li>
+                <li class="feature-item">
+                    <i class="bi bi-heart"></i>
+                    <span>Wishlist & Favorites</span>
+                </li>
+                <li class="feature-item">
+                    <i class="bi bi-clock-history"></i>
+                    <span>Order History & Tracking</span>
+                </li>
+            </ul>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Products</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Satisfaction Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Registration Form -->
+        <div class="registration-card">
+            <!-- Header -->
+            <div class="registration-header">
+                <h2 class="registration-title">Create Account</h2>
+                <p class="registration-subtitle">Join GreenShop and start your journey</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-steps">
+                    <div class="progress-step">
+                        <div class="step-circle active" id="step1Circle">1</div>
+                        <div class="step-label active" id="step1Label">Details</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle" id="step2Circle">2</div>
+                        <div class="step-label" id="step2Label">Verify</div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-circle" id="step3Circle">3</div>
+                        <div class="step-label" id="step3Label">Password</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Body -->
+            <div class="registration-body">
+                <form id="registrationForm">
+                    <!-- Step 1: Basic Details -->
+                    <div class="form-step active" id="step1">
+                        <div class="form-group">
+                            <label for="fullName" class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                            <div class="invalid-feedback"></div>
                         </div>
-                        <div class="card-body">
-                            <!-- Form Progress Indicator -->
-                            <div class="form-progress">
-                                <div class="progress-step active">
-                                    <div class="step-icon">1</div>
-                                    <div class="step-text">Registration</div>
-                                </div>
-                                <div class="progress-step">
-                                    <div class="step-icon">2</div>
-                                    <div class="step-text">Verification</div>
-                                </div>
-                                <div class="progress-step">
-                                    <div class="step-icon">3</div>
-                                    <div class="step-text">Set Password</div>
-                                </div>
-                            </div>
-                            
-                            <form id="registrationForm">
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name" required>
-                                            <label for="name">Full Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
-                                            <label for="email">Email Address</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-floating">
-                                            <input type="tel" class="form-control" id="contact" placeholder="Contact Number" required>
-                                            <label for="contact">Contact Number</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Gender</label>
-                                        <div class="gender-options">
-                                            <div class="gender-option">
-                                                <input type="radio" name="gender" id="male" value="male" required>
-                                                <label for="male">
-                                                    <i class="bi bi-gender-male gender-icon"></i>
-                                                    <span>Male</span>
-                                                </label>
-                                            </div>
-                                            <div class="gender-option">
-                                                <input type="radio" name="gender" id="female" value="female">
-                                                <label for="female">
-                                                    <i class="bi bi-gender-female gender-icon"></i>
-                                                    <span>Female</span>
-                                                </label>
-                                            </div>
-                                            <div class="gender-option">
-                                                <input type="radio" name="gender" id="other" value="other">
-                                                <label for="other">
-                                                    <i class="bi bi-person gender-icon"></i>
-                                                    <span>Other</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-4">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" id="address" placeholder="Your Address" style="height: 100px" required></textarea>
-                                        <label for="address">Address</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="termsCheck" required>
-                                    <label class="form-check-label" for="termsCheck">
-                                        I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact" class="form-label">Contact Number *</label>
+                            <input type="tel" class="form-control" id="contact" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Gender *</label>
+                            <div class="gender-options">
+                                <div class="gender-option">
+                                    <input type="radio" id="male" name="gender" value="male" required>
+                                    <label for="male">
+                                        <i class="bi bi-person me-2"></i>Male
                                     </label>
                                 </div>
-                                
-                                <button type="submit" class="btn btn-primary w-100 py-2 mt-3">
-                                    Continue to Verification <i class="bi bi-arrow-right ms-2"></i>
-                                </button>
-                                
-                                <div class="text-center mt-3">
-                                    <span>Already have an account? </span>
-                                    <a href="login.html" class="text-decoration-none" style="color: var(--primary-color);">Login here</a>
+                                <div class="gender-option">
+                                    <input type="radio" id="female" name="gender" value="female" required>
+                                    <label for="female">
+                                        <i class="bi bi-person-dress me-2"></i>Female
+                                    </label>
                                 </div>
-                            </form>
+                                <div class="gender-option">
+                                    <input type="radio" id="other" name="gender" value="other" required>
+                                    <label for="other">
+                                        <i class="bi bi-person-plus me-2"></i>Other
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="address" class="form-label">Address (Optional)</label>
+                            <textarea class="form-control" id="address" rows="3" placeholder="Enter your address"></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-primary-custom" id="nextToOtp">
+                                <span class="btn-text">Continue</span>
+                                <span class="btn-loading d-none">
+                                    <span class="loading-spinner me-2"></span>Checking...
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: OTP Verification -->
+                    <div class="form-step" id="step2">
+                        <div class="text-center mb-4">
+                            <h5>Verify Your Email</h5>
+                            <p class="text-muted">Enter the 6-digit code sent to <span id="emailDisplay" class="fw-bold" style="color: var(--primary-color);"></span></p>
+                        </div>
+
+                        <div class="otp-container">
+                            <input type="text" class="otp-input" maxlength="1" data-index="0">
+                            <input type="text" class="otp-input" maxlength="1" data-index="1">
+                            <input type="text" class="otp-input" maxlength="1" data-index="2">
+                            <input type="text" class="otp-input" maxlength="1" data-index="3">
+                            <input type="text" class="otp-input" maxlength="1" data-index="4">
+                            <input type="text" class="otp-input" maxlength="1" data-index="5">
+                        </div>
+
+                        <div class="text-center mb-4">
+                            <p class="text-muted">Didn't receive the code? 
+                                <button type="button" class="btn btn-link p-0" id="resendOtp" style="color: var(--primary-color);">Resend OTP</button>
+                            </p>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-primary-custom" id="verifyOtp">
+                                <span class="btn-text">Verify OTP</span>
+                                <span class="btn-loading d-none">
+                                    <span class="loading-spinner me-2"></span>Verifying...
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-secondary-custom" id="backToDetails">Back</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Password -->
+                    <div class="form-step" id="step3">
+                        <div class="text-center mb-4">
+                            <h5>Set Your Password</h5>
+                            <p class="text-muted">Create a strong password for your account</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password *</label>
+                            <input type="password" class="form-control" id="password" required>
+                            <div class="invalid-feedback"></div>
+                            <div class="form-text">Password must be at least 8 characters long</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Confirm Password *</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-primary-custom" id="createAccount">
+                                <span class="btn-text">Create Account</span>
+                                <span class="btn-loading d-none">
+                                    <span class="loading-spinner me-2"></span>Creating...
+                                </span>
+                            </button>
+                            <button type="button" class="btn btn-secondary-custom" id="backToOtp">Back</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- OTP Sent Modal -->
+    <div class="modal fade otp-modal" id="otpSentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content otp-modal-content">
+                <div class="otp-modal-header">
+                    <div class="otp-icon">
+                        <i class="bi bi-envelope-check"></i>
+                    </div>
+                    <h4 class="modal-title">OTP Sent Successfully!</h4>
+                    <p class="mb-0">A 6-digit verification code has been sent to your email address.</p>
+                    <p class="mt-2 mb-0"><small>Please check your inbox. If you don't see the email, check your spam folder.</small></p>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="countdown-container">
+                        <p class="mb-0">This dialog will close automatically in</p>
+                        <h3 style="color: var(--primary-color);" id="countdown">5</h3>
+                        <p class="mb-0">seconds</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-        <!-- Login Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Logging In</h5>
-                    </div>
-                    <div class="modal-body text-center py-4">
-                        <div id="loadingSpinner" class="spinner-border loading-spinner mb-3" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <div id="successCheckmark" class="success-checkmark">
-                            <div class="check-icon"></div>
-                        </div>
-                        <h5 id="modalMessage" class="mt-3">Please wait while we verify your credentials...</h5>
-                        <p id="modalSubMessage" class="text-muted">This may take a few moments</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>GreenShop</h5>
+                    <p>Your trusted partner for quality products</p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Quick Links</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white-50">Privacy Policy</a>
+                        <a href="#" class="text-white-50">Terms of Service</a>
+                        <a href="contact.html" class="text-white-50">Support</a>
                     </div>
                 </div>
             </div>
+            <hr class="my-3">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 GreenShop. All rights reserved.</p>
+            </div>
         </div>
+    </footer>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JavaScript -->
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // Form submission
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            validateForm();
+        let currentStep = 1;
+        let otpSent = false;
+        let generatedOtp = '';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeRegistration();
+        });
+
+        function initializeRegistration() {
+            // Initialize OTP inputs
+            initializeOtpInputs();
             
-            function validateForm() {
-                // Get form data
-                const fullname = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const contact = document.getElementById('contact').value;
-                const gender = document.querySelector('input[name="gender"]:checked');
-                const address = document.getElementById('address').value;
-                const termsChecked = document.getElementById('termsCheck').checked;
+            // Button event listeners
+            document.getElementById('nextToOtp').addEventListener('click', handleBasicDetails);
+            document.getElementById('verifyOtp').addEventListener('click', handleOtpVerification);
+            document.getElementById('createAccount').addEventListener('click', handleAccountCreation);
+            document.getElementById('backToDetails').addEventListener('click', () => goToStep(1));
+            document.getElementById('backToOtp').addEventListener('click', () => goToStep(2));
+            document.getElementById('resendOtp').addEventListener('click', resendOtp);
 
-                const email_regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                const mobile_regex = /^\d{10}$/;
+            // Real-time validation
+            setupRealTimeValidation();
+        }
 
-                if (!fullname || !email || !contact || !gender || !address) 
-                {
-                    document.getElementById('error').textContent = "* Please fill all the fields";
-                } 
-                else if (!email_regex.test(email)) 
-                {
-                    document.getElementById('error').textContent = "* Please enter a valid email";
-                } 
-                else if (!mobile_regex.test(contact)) 
-                {
-                    document.getElementById('error').textContent = "* Please enter a valid 10-digit mobile number";
-                } 
-                else 
-                {
+        function initializeOtpInputs() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', function(e) {
+                    const value = e.target.value;
                     
-                    // const genderValue = gender.value;
-                
-                    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {
-                        backdrop: 'static',
-                        keyboard: false
-                    }); 
-
-                    loginModal.show();
-
-                    setTimeout(() => {
-                        document.getElementById('loadingSpinner').style.display = 'none';
-                        document.getElementById('successCheckmark').style.display = 'block';
-                        document.getElementById('modalMessage').textContent = 'Login successful!';
-                        document.getElementById('modalSubMessage').textContent = 'Redirecting to dashboard...';
-
-                    }, 2000);
-                    
-                    function closeLoginModal() {
-                        loginModal.hide();
-                    }
-
-                    $.ajax({
-                        method: 'POST',
-                        url: "<?= base_url('/register_validate'); ?>",
-                        dataType: "json",
-                        data: { 'name': fullname, 'email_id': email, 'contact': contact, 'gender': genderValue, 'address': address },
-                        success: function(response) {
-                            if (response == 1) 
-                            {
-                                hideOtpModal();
-                                window.location.href = "<?= base_url('/otp'); ?>";
-                            } 
-                            else if (response == 0) 
-                            {
-                                hideOtpModal();
-                                document.getElementById('error').textContent = "* Please enter valid credentials";
-                            } 
-                            else if (response == 2) 
-                            {
-                                hideOtpModal();
-                                document.getElementById('error').textContent = "* User already registered";
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            hideOtpModal();
-                            console.error("AJAX Error: ", status, error);
+                    if (value && /^\d$/.test(value)) {
+                        e.target.classList.add('filled');
+                        
+                        // Move to next input
+                        if (index < otpInputs.length - 1) {
+                            otpInputs[index + 1].focus();
                         }
-                    });
-                }
+                    } else {
+                        e.target.classList.remove('filled');
+                        e.target.value = '';
+                    }
+                });
+
+                input.addEventListener('keydown', function(e) {
+                    // Handle backspace
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        otpInputs[index - 1].focus();
+                        otpInputs[index - 1].classList.remove('filled');
+                    }
+                });
+
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text');
+                    
+                    if (/^\d{6}$/.test(pastedData)) {
+                        pastedData.split('').forEach((digit, i) => {
+                            if (i < otpInputs.length) {
+                                otpInputs[i].value = digit;
+                                otpInputs[i].classList.add('filled');
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
+        function setupRealTimeValidation() {
+            // Email validation
+            document.getElementById('email').addEventListener('blur', function() {
+                validateEmail(this.value);
+            });
+
+            // Contact validation
+            document.getElementById('contact').addEventListener('blur', function() {
+                validateContact(this.value);
+            });
+
+            // Password validation
+            document.getElementById('password').addEventListener('input', function() {
+                validatePassword(this.value);
+            });
+
+            // Confirm password validation
+            document.getElementById('confirmPassword').addEventListener('input', function() {
+                validateConfirmPassword(this.value);
+            });
+        }
+
+        function validateEmail(email) {
+            const emailInput = document.getElementById('email');
+            const feedback = emailInput.nextElementSibling;
+            
+            if (!email) {
+                setFieldError(emailInput, 'Email is required');
+                return false;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                setFieldError(emailInput, 'Please enter a valid email address');
+                return false;
+            }
+            
+            setFieldSuccess(emailInput, 'Email format is valid');
+            return true;
+        }
+
+        function validateContact(contact) {
+            const contactInput = document.getElementById('contact');
+            
+            if (!contact) {
+                setFieldError(contactInput, 'Contact number is required');
+                return false;
+            }
+            
+            if (!/^\d{10}$/.test(contact.replace(/\D/g, ''))) {
+                setFieldError(contactInput, 'Please enter a valid 10-digit contact number');
+                return false;
+            }
+            
+            setFieldSuccess(contactInput, 'Contact number is valid');
+            return true;
+        }
+
+        function validatePassword(password) {
+            const passwordInput = document.getElementById('password');
+            
+            if (!password) {
+                setFieldError(passwordInput, 'Password is required');
+                return false;
+            }
+            
+            if (password.length < 8) {
+                setFieldError(passwordInput, 'Password must be at least 8 characters long');
+                return false;
+            }
+            
+            setFieldSuccess(passwordInput, 'Password strength is good');
+            return true;
+        }
+
+        function validateConfirmPassword(confirmPassword) {
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const password = document.getElementById('password').value;
+            
+            if (!confirmPassword) {
+                setFieldError(confirmPasswordInput, 'Please confirm your password');
+                return false;
+            }
+            
+            if (confirmPassword !== password) {
+                setFieldError(confirmPasswordInput, 'Passwords do not match');
+                return false;
+            }
+            
+            setFieldSuccess(confirmPasswordInput, 'Passwords match');
+            return true;
+        }
+
+        function setFieldError(field, message) {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+            const feedback = field.nextElementSibling;
+            if (feedback && feedback.classList.contains('invalid-feedback')) {
+                feedback.textContent = message;
+            }
+        }
+
+        function setFieldSuccess(field, message) {
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+            const feedback = field.nextElementSibling;
+            if (feedback && feedback.classList.contains('invalid-feedback')) {
+                feedback.textContent = '';
+            }
+        }
+
+        async function handleBasicDetails() {
+            const btn = document.getElementById('nextToOtp');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoading = btn.querySelector('.btn-loading');
+
+            // Validate all fields
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+            const gender = document.querySelector('input[name="gender"]:checked');
+
+            let isValid = true;
+
+            if (!name) {
+                setFieldError(document.getElementById('fullName'), 'Full name is required');
+                isValid = false;
             }
 
-            // Store form data in session storage for the next steps
-            // sessionStorage.setItem('registrationData', JSON.stringify(formData));
+            if (!validateEmail(email)) {
+                isValid = false;
+            }
+
+            if (!validateContact(contact)) {
+                isValid = false;
+            }
+
+            if (!gender) {
+                showNotification('Please select your gender', 'error');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Show loading
+            btnText.classList.add('d-none');
+            btnLoading.classList.remove('d-none');
+            btn.disabled = true;
+
+            try {
+                // Simulate API call to check if email/contact exists
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Simulate random check (for demo)
+                const emailExists = Math.random() < 0.3; // 30% chance email exists
+                const contactExists = Math.random() < 0.2; // 20% chance contact exists
+
+                if (emailExists) {
+                    setFieldError(document.getElementById('email'), 'This email is already registered');
+                    isValid = false;
+                }
+
+                if (contactExists) {
+                    setFieldError(document.getElementById('contact'), 'This contact number is already registered');
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    showNotification('Please fix the errors and try again', 'error');
+                    return;
+                }
+
+                // Generate and send OTP
+                generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+                console.log('Generated OTP:', generatedOtp); // For demo purposes
+                
+                // Show OTP sent modal
+                showOtpSentModal(email);
+                
+            } catch (error) {
+                showNotification('Something went wrong. Please try again.', 'error');
+            } finally {
+                btnText.classList.remove('d-none');
+                btnLoading.classList.add('d-none');
+                btn.disabled = false;
+            }
+        }
+
+        function showOtpSentModal(email) {
+            document.getElementById('emailDisplay').textContent = email;
             
-            // Redirect to OTP verification page
-            window.location.href = 'otp.html';
-        });
-        
-        // Add animation to form elements on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            const formElements = document.querySelectorAll('.form-floating, .gender-options, .form-check, button');
+            const modal = new bootstrap.Modal(document.getElementById('otpSentModal'));
+            modal.show();
+
+            // Start countdown
+            let countdown = 5;
+            const countdownElement = document.getElementById('countdown');
             
-            formElements.forEach((element, index) => {
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    modal.hide();
+                    goToStep(2);
+                }
+            }, 1000);
+        }
+
+        async function handleOtpVerification() {
+            const btn = document.getElementById('verifyOtp');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoading = btn.querySelector('.btn-loading');
+
+            // Get OTP value
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const enteredOtp = Array.from(otpInputs).map(input => input.value).join('');
+
+            if (enteredOtp.length !== 6) {
+                showNotification('Please enter the complete 6-digit OTP', 'error');
+                otpInputs[0].focus();
+                return;
+            }
+
+            // Show loading
+            btnText.classList.add('d-none');
+            btnLoading.classList.remove('d-none');
+            btn.disabled = true;
+
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                if (enteredOtp === generatedOtp) {
+                    showNotification('OTP verified successfully!', 'success');
+                    goToStep(3);
+                } else {
+                    showNotification('Invalid OTP. Please try again.', 'error');
+                    // Clear OTP inputs
+                    otpInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                    });
+                    otpInputs[0].focus();
+                }
+            } catch (error) {
+                showNotification('Verification failed. Please try again.', 'error');
+            } finally {
+                btnText.classList.remove('d-none');
+                btnLoading.classList.add('d-none');
+                btn.disabled = false;
+            }
+        }
+
+        async function handleAccountCreation() {
+            const btn = document.getElementById('createAccount');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoading = btn.querySelector('.btn-loading');
+
+            // Validate passwords
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!validatePassword(password) || !validateConfirmPassword(confirmPassword)) {
+                return;
+            }
+
+            // Show loading
+            btnText.classList.add('d-none');
+            btnLoading.classList.remove('d-none');
+            btn.disabled = true;
+
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                showNotification('Account created successfully! Welcome to GreenShop!', 'success');
+                
+                // Redirect after success
                 setTimeout(() => {
-                    element.classList.add('animate_animated', 'animate_fadeInUp');
-                }, 100 * index);
+                    window.location.href = 'login.html';
+                }, 2000);
+                
+            } catch (error) {
+                showNotification('Account creation failed. Please try again.', 'error');
+            } finally {
+                btnText.classList.remove('d-none');
+                btnLoading.classList.add('d-none');
+                btn.disabled = false;
+            }
+        }
+
+        function resendOtp() {
+            const email = document.getElementById('email').value;
+            generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+            console.log('Resent OTP:', generatedOtp); // For demo purposes
+            
+            showNotification('OTP has been resent to your email', 'info');
+        }
+
+        function goToStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(s => {
+                s.classList.remove('active');
             });
-        });
+
+            // Show target step
+            document.getElementById(`step${step}`).classList.add('active');
+
+            // Update progress
+            updateProgress(step);
+            currentStep = step;
+        }
+
+        function updateProgress(step) {
+            // Reset all steps
+            for (let i = 1; i <= 3; i++) {
+                const circle = document.getElementById(`step${i}Circle`);
+                const label = document.getElementById(`step${i}Label`);
+                
+                circle.classList.remove('active', 'completed');
+                label.classList.remove('active');
+                
+                if (i < step) {
+                    circle.classList.add('completed');
+                    circle.innerHTML = '<i class="bi bi-check"></i>';
+                } else if (i === step) {
+                    circle.classList.add('active');
+                    label.classList.add('active');
+                    circle.textContent = i;
+                } else {
+                    circle.textContent = i;
+                }
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
     </script>
 </body>
 </html>

@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Quote - GreenShop</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #166e22;
+            --primary-dark: #0e5016;
+            --primary-light: #2a8c36;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--box-shadow);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--dark-gray) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: var(--transition);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+
+        /* Quote Container */
+        .quote-container {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .quote-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+            color: white;
+        }
+
+        .quote-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Quote Form Card */
+        .quote-form-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light), var(--success-color));
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            border-radius: 2px;
+        }
+
+        /* Form Sections */
+        .form-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .form-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(22, 110, 34, 0.25);
+        }
+
+        .form-control.is-invalid {
+            border-color: var(--error-color);
+            animation: shake 0.5s ease;
+        }
+
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+
+        .invalid-feedback {
+            display: block;
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Business Type Selection */
+        .business-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .business-type-option {
+            position: relative;
+        }
+
+        .business-type-option input[type="radio"] {
+            display: none;
+        }
+
+        .business-type-option label {
+            display: block;
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            background: white;
+        }
+
+        .business-type-option input[type="radio"]:checked + label {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(22, 110, 34, 0.1), rgba(42, 140, 54, 0.05));
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(22, 110, 34, 0.2);
+        }
+
+        .business-type-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Quantity Range */
+        .quantity-range {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quantity-input {
+            flex: 1;
+        }
+
+        .range-separator {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Timeline Selection */
+        .timeline-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .timeline-option {
+            position: relative;
+        }
+
+        .timeline-option input[type="radio"] {
+            display: none;
+        }
+
+        .timeline-option label {
+            display: block;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            background: white;
+        }
+
+        .timeline-option.urgent input[type="radio"]:checked + label {
+            border-color: var(--error-color);
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--error-color);
+        }
+
+        .timeline-option.normal input[type="radio"]:checked + label {
+            border-color: var(--warning-color);
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+
+        .timeline-option.flexible input[type="radio"]:checked + label {
+            border-color: var(--success-color);
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+
+        /* File Upload */
+        .file-upload-area {
+            border: 2px dashed #e9ecef;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(22, 110, 34, 0.05);
+        }
+
+        .file-upload-area.drag-over {
+            border-color: var(--primary-color);
+            background: rgba(22, 110, 34, 0.1);
+            transform: scale(1.02);
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .uploaded-files {
+            margin-top: 1rem;
+        }
+
+        .uploaded-file {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Budget Range */
+        .budget-slider {
+            margin: 1rem 0;
+        }
+
+        .budget-display {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 1rem;
+        }
+
+        /* Button Styles */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 3rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(22, 110, 34, 0.4);
+        }
+
+        .btn-primary-custom:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary-custom {
+            background: #6c757d;
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 3rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .btn-secondary-custom:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .quote-title {
+                font-size: 2.2rem;
+            }
+            
+            .quote-form-card {
+                padding: 2rem;
+            }
+            
+            .form-section {
+                padding: 1.5rem;
+            }
+            
+            .business-type-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .quantity-range {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-shop me-2"></i>GreenShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="get-quote.html">Get Quote</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quote Container -->
+    <div class="quote-container" style="margin-top: 80px;">
+        <div class="container">
+            <!-- Header -->
+            <div class="quote-header fade-in-up">
+                <h1 class="quote-title">Get Your Bulk Order Quote</h1>
+                <p class="quote-subtitle">
+                    Need products in bulk quantities? Whether you're a business, planning corporate gifts, organizing events, or making personal bulk purchases, we offer competitive pricing and customized solutions. Fill out the form below and our team will get back to you with a personalized quote within 24 hours.
+                </p>
+            </div>
+
+            <!-- Quote Form -->
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="quote-form-card fade-in-up" style="animation-delay: 0.2s;">
+                        <h2 class="form-title">Request Your Custom Bulk Quote</h2>
+                        
+                        <form id="quoteForm" class="needs-validation" novalidate>
+                            <!-- Contact Information -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-person-circle"></i>
+                                    Contact Information
+                                </h3>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="companyName" class="form-label">Company/Organization Name</label>
+                                            <input type="text" class="form-control" id="companyName">
+                                            <div class="form-text">Leave blank if this is a personal order</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="contactPerson" class="form-label">Contact Person *</label>
+                                            <input type="text" class="form-control" id="contactPerson" required>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="businessEmail" class="form-label">Email Address *</label>
+                                            <input type="email" class="form-control" id="businessEmail" required>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="businessPhone" class="form-label">Phone Number *</label>
+                                            <input type="tel" class="form-control" id="businessPhone" required>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Order Type *</label>
+                                    <div class="business-type-grid">
+                                        <div class="business-type-option">
+                                            <input type="radio" id="business" name="orderType" value="business" required>
+                                            <label for="business">
+                                                <i class="bi bi-building business-type-icon"></i>
+                                                Business Order
+                                            </label>
+                                        </div>
+                                        <div class="business-type-option">
+                                            <input type="radio" id="corporate-gifts" name="orderType" value="corporate-gifts" required>
+                                            <label for="corporate-gifts">
+                                                <i class="bi bi-gift business-type-icon"></i>
+                                                Corporate Gifts
+                                            </label>
+                                        </div>
+                                        <div class="business-type-option">
+                                            <input type="radio" id="events" name="orderType" value="events" required>
+                                            <label for="events">
+                                                <i class="bi bi-calendar-event business-type-icon"></i>
+                                                Events & Functions
+                                            </label>
+                                        </div>
+                                        <div class="business-type-option">
+                                            <input type="radio" id="personal" name="orderType" value="personal" required>
+                                            <label for="personal">
+                                                <i class="bi bi-person business-type-icon"></i>
+                                                Personal Bulk Order
+                                            </label>
+                                        </div>
+                                        <div class="business-type-option">
+                                            <input type="radio" id="resale" name="orderType" value="resale" required>
+                                            <label for="resale">
+                                                <i class="bi bi-shop business-type-icon"></i>
+                                                Resale Purpose
+                                            </label>
+                                        </div>
+                                        <div class="business-type-option">
+                                            <input type="radio" id="other" name="orderType" value="other" required>
+                                            <label for="other">
+                                                <i class="bi bi-three-dots business-type-icon"></i>
+                                                Other
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Order Details -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-cart"></i>
+                                    Order Details
+                                </h3>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="productCategory" class="form-label">Product Category *</label>
+                                            <select class="form-control" id="productCategory" required>
+                                                <option value="">Select category</option>
+                                                <option value="electronics">Electronics</option>
+                                                <option value="clothing">Clothing & Apparel</option>
+                                                <option value="home-garden">Home & Garden</option>
+                                                <option value="sports">Sports & Outdoors</option>
+                                                <option value="beauty">Beauty & Personal Care</option>
+                                                <option value="automotive">Automotive</option>
+                                                <option value="books">Books & Media</option>
+                                                <option value="toys">Toys & Games</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="specificProducts" class="form-label">Specific Products</label>
+                                            <input type="text" class="form-control" id="specificProducts" placeholder="e.g., Wireless headphones, Cotton t-shirts">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Estimated Quantity Range *</label>
+                                    <div class="quantity-range">
+                                        <div class="quantity-input">
+                                            <label for="minQuantity" class="form-label">Minimum Quantity</label>
+                                            <input type="number" class="form-control" id="minQuantity" min="1" required>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                        <span class="range-separator">to</span>
+                                        <div class="quantity-input">
+                                            <label for="maxQuantity" class="form-label">Maximum Quantity</label>
+                                            <input type="number" class="form-control" id="maxQuantity" min="1" required>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Expected Timeline *</label>
+                                    <div class="timeline-options">
+                                        <div class="timeline-option urgent">
+                                            <input type="radio" id="urgent" name="timeline" value="urgent" required>
+                                            <label for="urgent">
+                                                <strong>Urgent</strong><br>
+                                                <small>1-2 weeks</small>
+                                            </label>
+                                        </div>
+                                        <div class="timeline-option normal">
+                                            <input type="radio" id="normal" name="timeline" value="normal" required>
+                                            <label for="normal">
+                                                <strong>Normal</strong><br>
+                                                <small>3-4 weeks</small>
+                                            </label>
+                                        </div>
+                                        <div class="timeline-option flexible">
+                                            <input type="radio" id="flexible" name="timeline" value="flexible" required>
+                                            <label for="flexible">
+                                                <strong>Flexible</strong><br>
+                                                <small>1-2 months</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Budget & Requirements -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-currency-dollar"></i>
+                                    Budget & Requirements
+                                </h3>
+
+                                <div class="form-group">
+                                    <label for="budgetRange" class="form-label">Budget Range (USD)</label>
+                                    <input type="range" class="form-range budget-slider" id="budgetRange" min="1000" max="100000" step="1000" value="10000">
+                                    <div class="budget-display">
+                                        $<span id="budgetValue">10,000</span> - $<span id="budgetMax">50,000</span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="customization" class="form-label">Customization Required</label>
+                                            <select class="form-control" id="customization">
+                                                <option value="none">No customization needed</option>
+                                                <option value="branding">Branding/Logo</option>
+                                                <option value="packaging">Custom packaging</option>
+                                                <option value="design">Product design changes</option>
+                                                <option value="full">Full customization</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="shippingLocation" class="form-label">Shipping Location *</label>
+                                            <input type="text" class="form-control" id="shippingLocation" placeholder="City, State, Country" required>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="additionalRequirements" class="form-label">Additional Requirements</label>
+                                    <textarea class="form-control" id="additionalRequirements" rows="4" placeholder="Please describe any specific requirements, quality standards, certifications needed, etc."></textarea>
+                                    <div class="form-text">
+                                        <span id="reqCharCount">0</span>/1000 characters
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- File Upload -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-paperclip"></i>
+                                    Supporting Documents (Optional)
+                                </h3>
+
+                                <div class="form-group">
+                                    <label class="form-label">Upload Files</label>
+                                    <div class="file-upload-area" id="fileUploadArea">
+                                        <i class="bi bi-cloud-upload file-upload-icon"></i>
+                                        <p><strong>Click to upload</strong> or drag and drop files here</p>
+                                        <small class="text-muted">Supported formats: PDF, DOC, DOCX, XLS, XLSX, JPG, PNG (Max 10MB each)</small>
+                                        <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" hidden>
+                                    </div>
+                                    <div class="uploaded-files" id="uploadedFiles"></div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Buttons -->
+                            <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+                                <button type="button" class="btn btn-secondary-custom" onclick="resetForm()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Reset Form
+                                </button>
+                                <button type="submit" class="btn btn-primary-custom">
+                                    <span class="btn-text">
+                                        <i class="bi bi-send me-2"></i>Request Quote
+                                    </span>
+                                    <span class="btn-loading d-none">
+                                        <span class="loading-spinner me-2"></span>Submitting...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>GreenShop</h5>
+                    <p>Your trusted partner for bulk orders and business solutions</p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Business Support</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white-50">Bulk Pricing</a>
+                        <a href="#" class="text-white-50">Trade Program</a>
+                        <a href="contact.html" class="text-white-50">Support</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 GreenShop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let uploadedFiles = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeQuoteForm();
+        });
+
+        function initializeQuoteForm() {
+            // Initialize budget slider
+            initializeBudgetSlider();
+            
+            // Initialize file upload
+            initializeFileUpload();
+            
+            // Initialize character counter
+            initializeCharacterCounter();
+            
+            // Real-time validation
+            setupRealTimeValidation();
+            
+            // Form submission
+            document.getElementById('quoteForm').addEventListener('submit', handleFormSubmission);
+        }
+
+        function initializeBudgetSlider() {
+            const budgetSlider = document.getElementById('budgetRange');
+            const budgetValue = document.getElementById('budgetValue');
+            const budgetMax = document.getElementById('budgetMax');
+
+            budgetSlider.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                const maxValue = Math.min(value * 5, 100000);
+                
+                budgetValue.textContent = value.toLocaleString();
+                budgetMax.textContent = maxValue.toLocaleString();
+            });
+        }
+
+        function initializeFileUpload() {
+            const uploadArea = document.getElementById('fileUploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const uploadedFilesContainer = document.getElementById('uploadedFiles');
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('drag-over');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                
+                const files = Array.from(e.dataTransfer.files);
+                handleFileSelection(files);
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                const files = Array.from(e.target.files);
+                handleFileSelection(files);
+            });
+
+            function handleFileSelection(files) {
+                files.forEach(file => {
+                    if (validateFile(file)) {
+                        uploadedFiles.push(file);
+                        displayUploadedFile(file);
+                    }
+                });
+            }
+
+            function validateFile(file) {
+                const allowedTypes = [
+                    'application/pdf',
+                    'application/msword',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'application/vnd.ms-excel',
+                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                    'image/jpeg',
+                    'image/jpg',
+                    'image/png'
+                ];
+
+                if (!allowedTypes.includes(file.type)) {
+                    showNotification('Invalid file type. Please upload PDF, DOC, XLS, or image files.', 'error');
+                    return false;
+                }
+
+                if (file.size > 10 * 1024 * 1024) { // 10MB
+                    showNotification('File size must be less than 10MB.', 'error');
+                    return false;
+                }
+
+                return true;
+            }
+
+            function displayUploadedFile(file) {
+                const fileElement = document.createElement('div');
+                fileElement.className = 'uploaded-file';
+                fileElement.innerHTML = `
+                    <div>
+                        <i class="bi bi-file-earmark me-2"></i>
+                        <span>${file.name}</span>
+                        <small class="text-muted ms-2">(${(file.size / 1024 / 1024).toFixed(2)} MB)</small>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile('${file.name}')">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                `;
+                uploadedFilesContainer.appendChild(fileElement);
+            }
+        }
+
+        function removeFile(fileName) {
+            uploadedFiles = uploadedFiles.filter(file => file.name !== fileName);
+            
+            const uploadedFilesContainer = document.getElementById('uploadedFiles');
+            const fileElements = uploadedFilesContainer.querySelectorAll('.uploaded-file');
+            
+            fileElements.forEach(element => {
+                if (element.textContent.includes(fileName)) {
+                    element.remove();
+                }
+            });
+        }
+
+        function initializeCharacterCounter() {
+            const textarea = document.getElementById('additionalRequirements');
+            const charCount = document.getElementById('reqCharCount');
+
+            textarea.addEventListener('input', function() {
+                const length = this.value.length;
+                charCount.textContent = length;
+                
+                if (length > 1000) {
+                    charCount.style.color = 'var(--error-color)';
+                    this.classList.add('is-invalid');
+                } else {
+                    charCount.style.color = '#6c757d';
+                    this.classList.remove('is-invalid');
+                }
+            });
+        }
+
+        function setupRealTimeValidation() {
+            // Contact person validation
+            document.getElementById('contactPerson').addEventListener('blur', function() {
+                validateRequired(this, 'Contact person is required');
+            });
+
+            // Email validation
+            document.getElementById('businessEmail').addEventListener('blur', function() {
+                validateEmail(this);
+            });
+
+            // Phone validation
+            document.getElementById('businessPhone').addEventListener('blur', function() {
+                validatePhone(this);
+            });
+
+            // Quantity validation
+            document.getElementById('minQuantity').addEventListener('blur', function() {
+                validateQuantity();
+            });
+
+            document.getElementById('maxQuantity').addEventListener('blur', function() {
+                validateQuantity();
+            });
+
+            // Shipping location validation
+            document.getElementById('shippingLocation').addEventListener('blur', function() {
+                validateRequired(this, 'Shipping location is required');
+            });
+        }
+
+        function validateRequired(field, message) {
+            if (!field.value.trim()) {
+                setFieldError(field, message);
+                return false;
+            }
+            setFieldSuccess(field);
+            return true;
+        }
+
+        function validateEmail(field) {
+            const email = field.value.trim();
+            
+            if (!email) {
+                setFieldError(field, 'Email address is required');
+                return false;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                setFieldError(field, 'Please enter a valid email address');
+                return false;
+            }
+            
+            setFieldSuccess(field);
+            return true;
+        }
+
+        function validatePhone(field) {
+            const phone = field.value.trim();
+            
+            if (!phone) {
+                setFieldError(field, 'Phone number is required');
+                return false;
+            }
+            
+            if (!/^\+?[\d\s\-()]{10,}$/.test(phone)) {
+                setFieldError(field, 'Please enter a valid phone number');
+                return false;
+            }
+            
+            setFieldSuccess(field);
+            return true;
+        }
+
+        function validateQuantity() {
+            const minQty = parseInt(document.getElementById('minQuantity').value);
+            const maxQty = parseInt(document.getElementById('maxQuantity').value);
+            const minField = document.getElementById('minQuantity');
+            const maxField = document.getElementById('maxQuantity');
+
+            let isValid = true;
+
+            if (!minQty || minQty < 1) {
+                setFieldError(minField, 'Minimum quantity must be at least 1');
+                isValid = false;
+            } else {
+                setFieldSuccess(minField);
+            }
+
+            if (!maxQty || maxQty < 1) {
+                setFieldError(maxField, 'Maximum quantity must be at least 1');
+                isValid = false;
+            } else if (minQty && maxQty < minQty) {
+                setFieldError(maxField, 'Maximum quantity must be greater than minimum');
+                isValid = false;
+            } else {
+                setFieldSuccess(maxField);
+            }
+
+            return isValid;
+        }
+
+        function setFieldError(field, message) {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+            const feedback = field.nextElementSibling;
+            if (feedback && feedback.classList.contains('invalid-feedback')) {
+                feedback.textContent = message;
+            }
+        }
+
+        function setFieldSuccess(field) {
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+            const feedback = field.nextElementSibling;
+            if (feedback && feedback.classList.contains('invalid-feedback')) {
+                feedback.textContent = '';
+            }
+        }
+
+        async function handleFormSubmission(e) {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoading = btn.querySelector('.btn-loading');
+
+            // Validate all required fields
+            let isValid = true;
+
+            // Contact information validation
+            if (!validateRequired(document.getElementById('contactPerson'), 'Contact person is required')) isValid = false;
+            if (!validateEmail(document.getElementById('businessEmail'))) isValid = false;
+            if (!validatePhone(document.getElementById('businessPhone'))) isValid = false;
+
+            // Order type validation
+            if (!document.querySelector('input[name="orderType"]:checked')) {
+                showNotification('Please select your order type', 'error');
+                isValid = false;
+            }
+
+            // Order details validation
+            if (!document.getElementById('productCategory').value) {
+                setFieldError(document.getElementById('productCategory'), 'Please select a product category');
+                isValid = false;
+            }
+
+            if (!validateQuantity()) isValid = false;
+
+            if (!document.querySelector('input[name="timeline"]:checked')) {
+                showNotification('Please select your expected timeline', 'error');
+                isValid = false;
+            }
+
+            if (!validateRequired(document.getElementById('shippingLocation'), 'Shipping location is required')) isValid = false;
+
+            if (!isValid) return;
+
+            // Show loading
+            btnText.classList.add('d-none');
+            btnLoading.classList.remove('d-none');
+            btn.disabled = true;
+
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                // Success
+                showNotification('Quote request submitted successfully! Our team will contact you within 24 hours.', 'success');
+                
+                // Reset form after delay
+                setTimeout(() => {
+                    resetForm();
+                }, 2000);
+                
+            } catch (error) {
+                showNotification('Failed to submit quote request. Please try again.', 'error');
+            } finally {
+                btnText.classList.remove('d-none');
+                btnLoading.classList.add('d-none');
+                btn.disabled = false;
+            }
+        }
+
+        function resetForm() {
+            if (confirm('Are you sure you want to reset the form? All data will be lost.')) {
+                document.getElementById('quoteForm').reset();
+                document.getElementById('budgetValue').textContent = '10,000';
+                document.getElementById('budgetMax').textContent = '50,000';
+                document.getElementById('reqCharCount').textContent = '0';
+                document.getElementById('uploadedFiles').innerHTML = '';
+                uploadedFiles = [];
+                
+                // Remove validation classes
+                document.querySelectorAll('.form-control').forEach(field => {
+                    field.classList.remove('is-valid', 'is-invalid');
+                });
+                
+                showNotification('Form has been reset', 'info');
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 7000);
+        }
+    </script>
+</body>
+</html>

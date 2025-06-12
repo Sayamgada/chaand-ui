@@ -3,185 +3,791 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chaand</title>
-    
-    <link rel="stylesheet" href="./CSS/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./CSS/css/style.css">
-    <link rel="stylesheet" href="./Fonts/icomoon/style.css">
-    
+    <title>Contact Us - GreenShop</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    
-    <!-- Title Icon -->
-    <link rel="icon" href="./images/favicon.png" type="image/x-icon">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./CSS/home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #166e22;
+            --primary-dark: #0e5016;
+            --primary-light: #2a8c36;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    <link rel="stylesheet" href="./CSS/products/products.css">
-    <link rel="stylesheet" href="./CSS/navbar_footer.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-	<link rel="stylesheet" type="text/css" href="./CSS/contact_us/main.css">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--box-shadow);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--dark-gray) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: var(--transition);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+
+        /* Contact Container */
+        .contact-container {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Contact Cards */
+        .contact-info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            height: 100%;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-light);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .contact-form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+            margin-top: 2rem;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(22, 110, 34, 0.25);
+        }
+
+        .form-control.is-invalid {
+            border-color: var(--error-color);
+            animation: shake 0.5s ease;
+        }
+
+        .form-control.is-valid {
+            border-color: var(--success-color);
+        }
+
+        .invalid-feedback {
+            display: block;
+            color: var(--error-color);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Priority Selection */
+        .priority-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .priority-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .priority-option input[type="radio"] {
+            display: none;
+        }
+
+        .priority-option label {
+            display: block;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .priority-option.low input[type="radio"]:checked + label {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+
+        .priority-option.medium input[type="radio"]:checked + label {
+            border-color: #ffc107;
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .priority-option.high input[type="radio"]:checked + label {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        /* Button Styles */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(22, 110, 34, 0.3);
+        }
+
+        .btn-primary-custom:active {
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(22, 110, 34, 0.4);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(22, 110, 34, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(22, 110, 34, 0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-title {
+                font-size: 2rem;
+            }
+            
+            .contact-form-card {
+                padding: 1.5rem;
+            }
+            
+            .priority-options {
+                flex-direction: column;
+            }
+            
+            .priority-option {
+                min-width: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-
-	<!-- Marquee -->
-    <div class="marquee-container">
-        <div class="marquee-text">| Linen your Way |</div>
-        <div class="marquee-text">Sustainable | Handcrafted | Timeless luxury</div>
-    </div>
-
     <!-- Navbar -->
-    <div class="site-wrap">
-        <div class="site-navbar bg-white py-2">
-    
-            <div class="search-wrap">
-                <div class="container">
-                <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-                <form action="#" method="post">
-                    <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                </form>  
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-shop me-2"></i>GreenShop
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registration.html">Register</a>
+                    </li>
+                </ul>
             </div>
-    
-            <div class="container">
-                <div class="d-flex align-items-center justify-content-between">
-                <div class="logo">
-                    <div class="site-logo">
-                    <a href="index.html" class="js-logo-clone"><img src="./images/logo b.png" width="200px" alt="logo"></a>
+        </div>
+    </nav>
+
+    <!-- Contact Container -->
+    <div class="contact-container" style="margin-top: 80px;">
+        <div class="container">
+            <!-- Header -->
+            <div class="contact-header fade-in-up">
+                <h1 class="contact-title">Get In Touch</h1>
+                <p class="contact-subtitle">
+                    We'd love to hear from you! Send us a message and we'll respond as soon as possible.
+                </p>
+            </div>
+
+            <!-- Contact Info Cards -->
+            <div class="row mb-5">
+                <div class="col-md-4 mb-4">
+                    <div class="contact-info-card fade-in-up" style="animation-delay: 0.1s;">
+                        <div class="contact-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <h5 class="text-center mb-3">Visit Us</h5>
+                        <p class="text-center text-muted">
+                            123 Green Street<br>
+                            Eco City, EC 12345<br>
+                            United States
+                        </p>
                     </div>
                 </div>
-                <div class="main-nav d-none d-lg-block">
-                    <nav class="site-navigation text-right text-md-center" role="navigation">
-                    <ul class="site-menu js-clone-nav d-none d-lg-block">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        
-                        <li><a href="/product.html">Products</a></li>
-                        <li class="has-children"><a href="#">Collections</a>
-                            <ul class="dropdown">
-                                <li><a href="/collections.html">Collection Padma</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="/about_us.html">About Us</a></li>
-                        <li><a href="/contact_us.html">Contact Us</a></li>
-                    </ul>
-                    </nav>
+                <div class="col-md-4 mb-4">
+                    <div class="contact-info-card fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="contact-icon">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <h5 class="text-center mb-3">Call Us</h5>
+                        <p class="text-center text-muted">
+                            <strong>Phone:</strong> +1 (555) 123-4567<br>
+                            <strong>Toll Free:</strong> 1-800-GREEN-SHOP<br>
+                            <strong>Hours:</strong> Mon-Fri 9AM-6PM
+                        </p>
+                    </div>
                 </div>
-                <div class="icons">
-                    <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-                    <a href="login.html" class="icons-btn d-inline-block"><span class="icon-user"></span></a>
-                    <a href="my_cart.html" class="icons-btn d-inline-block bag">
-                        <span class="icon-shopping-bag"></span>
-                        <span class="number">2</span>
-                    </a>
-                    <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
-                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="contact-info-card fade-in-up" style="animation-delay: 0.3s;">
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <h5 class="text-center mb-3">Email Us</h5>
+                        <p class="text-center text-muted">
+                            <strong>General:</strong> info@greenshop.com<br>
+                            <strong>Support:</strong> support@greenshop.com<br>
+                            <strong>Sales:</strong> sales@greenshop.com
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>     
-    </div> 
 
-	<main>
+            <!-- Contact Form -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form-card fade-in-up" style="animation-delay: 0.4s;">
+                        <h2 class="form-title">Send Us a Message</h2>
+                        
+                        <form id="contactForm" class="needs-validation" novalidate>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fullName" class="form-label">Full Name *</label>
+                                        <input type="text" class="form-control" id="fullName" required>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
 
-		<div class="container-fluid contact1">
-			<div class="container-contact1">
-				<div class="contact1-pic js-tilt" data-tilt>
-					<img src="./images/contact_us.png" alt="IMG">
-				</div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contact" class="form-label">Contact Number *</label>
+                                        <input type="tel" class="form-control" id="contact" required>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="subject" class="form-label">Subject *</label>
+                                        <select class="form-control" id="subject" required>
+                                            <option value="">Select a subject</option>
+                                            <option value="general">General Inquiry</option>
+                                            <option value="support">Technical Support</option>
+                                            <option value="billing">Billing Question</option>
+                                            <option value="partnership">Partnership</option>
+                                            <option value="feedback">Feedback</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
 
-				<form class="contact1-form validate-form">
-					<span class="contact1-form-title">
-						Contact Us
-					</span>
-					
-					<div class="wrap-input1 validate-input" data-validate = "Name is required">
-						<input class="input1" type="text" name="name" placeholder="Name">
-						<span class="shadow-input1"></span>
-					</div>
-					
-					<div class="wrap-input1 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input1" type="text" name="email" placeholder="Email">
-						<span class="shadow-input1"></span>
-					</div>
-					
-					<div class="wrap-input1 validate-input" data-validate = "Subject is required">
-						<input class="input1" type="text" name="subject" placeholder="Subject">
-						<span class="shadow-input1"></span>
-					</div>
-					
-					<div class="wrap-input1 validate-input" data-validate = "Message is required">
-						<textarea class="input1" name="message" placeholder="Message"></textarea>
-						<span class="shadow-input1"></span>
-					</div>
-					
-					<div class="container-contact1-form-btn">
-						<button class="contact1-form-btn">
-							<span>
-								Send Email
-								<i class="fa fa-long-arrow-right right_arrow" aria-hidden="true"></i>
-							</span>
-						</button>
-					</div>	
-				</form>
-			</div>
-		</div>
-	</main>
-	
-	<!-- footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 text-center text-md-left mb-4" style="align-self: center;">
-                    <img src="./images/footer_logo.png" alt="Brand Logo" class="img-fluid" style="max-width: 200px; align-items:center ; ">
-                </div>
+                            <div class="form-group">
+                                <label class="form-label">Priority Level *</label>
+                                <div class="priority-options">
+                                    <div class="priority-option low">
+                                        <input type="radio" id="low" name="priority" value="low" required>
+                                        <label for="low">
+                                            <i class="bi bi-circle-fill me-2"></i>Low
+                                        </label>
+                                    </div>
+                                    <div class="priority-option medium">
+                                        <input type="radio" id="medium" name="priority" value="medium" required>
+                                        <label for="medium">
+                                            <i class="bi bi-circle-fill me-2"></i>Medium
+                                        </label>
+                                    </div>
+                                    <div class="priority-option high">
+                                        <input type="radio" id="high" name="priority" value="high" required>
+                                        <label for="high">
+                                            <i class="bi bi-circle-fill me-2"></i>High
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="col-md-4 mb-4">
-                    <h4>Quick Links</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="wash_care.html">Wash Care</a></li>
-                        <li><a href="about_us.html">About Us</a></li>
-                        <li><a href="terms_and_conditions.html">Terms & Conditions</a></li>
-                        <li><a href="delivery_and_return_policy.html">Returns & Exchange</a></li>
-                    </ul>
-                </div>
+                            <div class="form-group">
+                                <label for="query" class="form-label">Your Message *</label>
+                                <textarea class="form-control" id="query" rows="6" placeholder="Please describe your inquiry in detail..." required></textarea>
+                                <div class="invalid-feedback"></div>
+                                <div class="form-text">
+                                    <span id="charCount">0</span>/500 characters
+                                </div>
+                            </div>
 
-                <div class="col-md-4 mb-4 f-sec-3">
-                    <h4>Contact Us</h4>
-                    <a href="mailto:your-email@example.com"><i class="fa-solid fa-envelope"></i> mokshiigada@gmail.com</a><br><br>
-                    <a href="tel:+1234567890"><i class="fa-solid fa-phone"></i> +1 (234) 567-890</a><br><br>
-                    <p><a href="https://www.instagram.com/chaandbymokshii?igsh=dm93OHhjeDJ2b2Zz" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></p>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="newsletter">
+                                    <label class="form-check-label" for="newsletter">
+                                        Subscribe to our newsletter for updates and offers
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary-custom">
+                                    <span class="btn-text">
+                                        <i class="bi bi-send me-2"></i>Send Message
+                                    </span>
+                                    <span class="btn-loading d-none">
+                                        <span class="loading-spinner me-2"></span>Sending...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>GreenShop</h5>
+                    <p>Your trusted partner for quality products</p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Quick Links</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white-50">Privacy Policy</a>
+                        <a href="#" class="text-white-50">Terms of Service</a>
+                        <a href="get-quote.html" class="text-white-50">Get Quote</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 GreenShop. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
-		
-		
-		
-		<!--===============================================================================================-->
-		<script src="./JS/contact_us/jquery-3.2.1.min.js"></script>
-		<!--===============================================================================================-->
-		<script src="./JS/contact_us/popper.js"></script>
-		<script src="./JS/contact_us/bootstrap.min.js"></script>
-		<!--=======================================================	========================================-->
-		<script src="./JS/contact_us/tilt.jquery.min.js"></script>
-		<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
 
-<!--===============================================================================================-->
-	<script src="./JS/contact_us/main.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeContactForm();
+        });
+
+        function initializeContactForm() {
+            const form = document.getElementById('contactForm');
+            const queryTextarea = document.getElementById('query');
+            const charCount = document.getElementById('charCount');
+
+            // Character counter
+            queryTextarea.addEventListener('input', function() {
+                const length = this.value.length;
+                charCount.textContent = length;
+                
+                if (length > 500) {
+                    charCount.style.color = 'var(--error-color)';
+                    this.classList.add('is-invalid');
+                } else {
+                    charCount.style.color = '#6c757d';
+                    this.classList.remove('is-invalid');
+                }
+            });
+
+            // Real-time validation
+            setupRealTimeValidation();
+
+            // Form submission
+            form.addEventListener('submit', handleFormSubmission);
+        }
+
+        function setupRealTimeValidation() {
+            // Name validation
+            document.getElementById('fullName').addEventListener('blur', function() {
+                validateName(this.value);
+            });
+
+            // Email validation
+            document.getElementById('email').addEventListener('blur', function() {
+                validateEmail(this.value);
+            });
+
+            // Contact validation
+            document.getElementById('contact').addEventListener('blur', function() {
+                validateContact(this.value);
+            });
+
+            // Subject validation
+            document.getElementById('subject').addEventListener('change', function() {
+                validateSubject(this.value);
+            });
+
+            // Query validation
+            document.getElementById('query').addEventListener('blur', function() {
+                validateQuery(this.value);
+            });
+        }
+
+        function validateName(name) {
+            const nameInput = document.getElementById('fullName');
+            
+            if (!name.trim()) {
+                setFieldError(nameInput, 'Full name is required');
+                return false;
+            }
+            
+            if (name.trim().length < 2) {
+                setFieldError(nameInput, 'Name must be at least 2 characters long');
+                return false;
+            }
+            
+            setFieldSuccess(nameInput);
+            return true;
+        }
+
+        function validateEmail(email) {
+            const emailInput = document.getElementById('email');
+            
+            if (!email.trim()) {
+                setFieldError(emailInput, 'Email address is required');
+                return false;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                setFieldError(emailInput, 'Please enter a valid email address');
+                return false;
+            }
+            
+            setFieldSuccess(emailInput);
+            return true;
+        }
+
+        function validateContact(contact) {
+            const contactInput = document.getElementById('contact');
+            
+            if (!contact.trim()) {
+                setFieldError(contactInput, 'Contact number is required');
+                return false;
+            }
+            
+            if (!/^\d{10}$/.test(contact.replace(/\D/g, ''))) {
+                setFieldError(contactInput, 'Please enter a valid 10-digit contact number');
+                return false;
+            }
+            
+            setFieldSuccess(contactInput);
+            return true;
+        }
+
+        function validateSubject(subject) {
+            const subjectInput = document.getElementById('subject');
+            
+            if (!subject) {
+                setFieldError(subjectInput, 'Please select a subject');
+                return false;
+            }
+            
+            setFieldSuccess(subjectInput);
+            return true;
+        }
+
+        function validateQuery(query) {
+            const queryInput = document.getElementById('query');
+            
+            if (!query.trim()) {
+                setFieldError(queryInput, 'Please enter your message');
+                return false;
+            }
+            
+            if (query.trim().length < 10) {
+                setFieldError(queryInput, 'Message must be at least 10 characters long');
+                return false;
+            }
+            
+            if (query.length > 500) {
+                setFieldError(queryInput, 'Message cannot exceed 500 characters');
+                return false;
+            }
+            
+            setFieldSuccess(queryInput);
+            return true;
+        }
+
+        function setFieldError(field, message) {
+            field.classList.remove('is-valid');
+            field.classList.add('is-invalid');
+            const feedback = field.nextElementSibling;
+            if (feedback && feedback.classList.contains('invalid-feedback')) {
+                feedback.textContent = message;
+            }
+        }
+
+        function setFieldSuccess(field) {
+            field.classList.remove('is-invalid');
+            field.classList.add('is-valid');
+            const feedback = field.nextElementSibling;
+            if (feedback && feedback.classList.contains('invalid-feedback')) {
+                feedback.textContent = '';
+            }
+        }
+
+        async function handleFormSubmission(e) {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoading = btn.querySelector('.btn-loading');
+
+            // Validate all fields
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const contact = document.getElementById('contact').value;
+            const subject = document.getElementById('subject').value;
+            const query = document.getElementById('query').value;
+            const priority = document.querySelector('input[name="priority"]:checked');
+
+            let isValid = true;
+
+            if (!validateName(name)) isValid = false;
+            if (!validateEmail(email)) isValid = false;
+            if (!validateContact(contact)) isValid = false;
+            if (!validateSubject(subject)) isValid = false;
+            if (!validateQuery(query)) isValid = false;
+
+            if (!priority) {
+                showNotification('Please select a priority level', 'error');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Show loading
+            btnText.classList.add('d-none');
+            btnLoading.classList.remove('d-none');
+            btn.disabled = true;
+
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Success
+                showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                document.getElementById('charCount').textContent = '0';
+                
+                // Remove validation classes
+                document.querySelectorAll('.form-control').forEach(field => {
+                    field.classList.remove('is-valid', 'is-invalid');
+                });
+                
+            } catch (error) {
+                showNotification('Failed to send message. Please try again.', 'error');
+            } finally {
+                btnText.classList.remove('d-none');
+                btnLoading.classList.add('d-none');
+                btn.disabled = false;
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show position-fixed`;
+            notification.style.cssText = 'top: 100px; right: 20px; z-index: 9999; min-width: 300px;';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
+    

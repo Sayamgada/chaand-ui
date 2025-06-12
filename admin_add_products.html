@@ -12,6 +12,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
     <style>
         :root {
             --primary-color: #166e22;
@@ -26,6 +27,90 @@
             --sidebar-width: 280px;
             --navbar-height: 70px;
         }
+
+
+        /* Top Navbar */
+        .top-navbar {
+            background-color: var(--white);
+            height: var(--navbar-height);
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar-content {
+            height: 100%;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .breadcrumb {
+            margin: 0;
+            background: none;
+            padding: 0;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            color: var(--dark-gray);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+        }
+
+        .user-btn {
+            border-radius: 25px !important;
+            padding: 0.5rem 1rem !important;
+        }
+
+
+        .user-avatar-small {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .user-name-small {
+            font-weight: 500;
+        }
+
 
         .main-content {
             margin-left: var(--sidebar-width);
@@ -84,14 +169,29 @@
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .image-upload-container {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /* SKU Identification Styles */
+        .sku-display {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-align: center;
         }
+
+        .sku-note {
+            color: #6c757d;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
 
         .image-upload-area {
             border: 2px dashed #ddd;
@@ -102,11 +202,17 @@
             transition: all 0.3s ease;
             background: #f8f9fa;
             margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
         }
 
         .image-upload-area:hover {
             border-color: var(--primary-color);
             background: rgba(22, 110, 34, 0.05);
+            transform: translateY(-2px);
         }
 
         .image-upload-area.drag-over {
@@ -159,6 +265,264 @@
             opacity: 1;
         }
 
+        /* Color Options Styles */
+        .color-options-container {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-color-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .add-color-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(22, 110, 34, 0.3);
+            color: white;
+        }
+
+        .color-variant {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: #f8f9fa;
+            position: relative;
+            animation: slideInUp 0.5s ease;
+        }
+
+        .color-variant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            position: relative;
+        }
+
+        .color-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .color-name {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .remove-color-btn {
+            background: #dc3545;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .remove-color-btn:hover {
+            background: #c82333;
+            transform: scale(1.1);
+        }
+
+        .color-code-input {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 0.5rem;
+            width: 100px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .color-code-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(22, 110, 34, 0.15);
+            outline: none;
+        }
+
+        /* Size Quantity Styles for Color Variants */
+        .size-quantity-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .size-quantity-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .size-quantity-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .size-label {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            display: block;
+        }
+
+        .size-quantity {
+            text-align: center;
+            font-weight: 600;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            padding: 0.5rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .size-quantity:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(22, 110, 34, 0.15);
+            outline: none;
+        }
+
+        .color-total-quantity {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Product Settings Styles */
+        .product-settings-container {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .toggle-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .toggle-label i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .toggle-description {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+
+        /* Custom Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 30px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        @media ((min-width: 992px) and (max-width: 1500px)) {
+            .toggle-item {
+                display: block;
+            }
+
+            .toggle-item div {
+                padding-bottom: 5px;
+            }
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(30px);
+        }
+
+        .toggle-slider:hover {
+            box-shadow: 0 0 10px rgba(22, 110, 34, 0.3);
+        }
+
         .form-actions {
             background: white;
             border-radius: 10px;
@@ -192,9 +556,26 @@
             box-shadow: 0 0 0 0.2rem rgba(22, 110, 34, 0.25);
         }
 
+        .no-arrows::-webkit-inner-spin-button,
+        .no-arrows::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .no-arrows {
+            -moz-appearance: textfield;
+        }
+
         @media (max-width: 991.98px) {
             .main-content {
                 margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .size-quantity-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
         }
 
@@ -212,6 +593,18 @@
             from {
                 opacity: 0;
                 transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
 
             to {
@@ -243,6 +636,210 @@
         .spin {
             animation: spin 1s linear infinite;
         }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+
+        /* Update size-quantity-grid for better responsiveness */
+        .size-quantity-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Add responsive styles for medium screens */
+        @media (min-width: 768px) and (max-width: 1700px) {
+            .color-variant {
+                padding: 1.25rem;
+            }
+
+            .size-quantity-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .size-quantity-item {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .size-label {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .image-upload-area {
+                padding: 1.5rem 1rem;
+            }
+
+            .image-upload-area i {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .image-upload-area p {
+                font-size: 0.9rem;
+                margin-bottom: 0;
+            }
+        }
+
+        /* Adjust for smaller screens */
+        @media (max-width: 991.98px) {
+            .main-content {
+                margin-left: 0;
+            }
+
+            .color-variant-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .remove-color-btn {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .size-quantity-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .size-quantity-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Fix layout issues at 1024px specifically */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .color-variant {
+                padding: 1rem;
+            }
+
+            .color-variant .row {
+                margin: 0;
+            }
+
+            .color-variant .row>[class*="col-"] {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .size-quantity-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.4rem;
+                margin-bottom: 1rem;
+            }
+
+            .size-quantity-item {
+                padding: 0.5rem 0.25rem;
+            }
+
+            .size-label {
+                font-size: 0.85rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .size-quantity {
+                padding: 0.4rem;
+                font-size: 0.9rem;
+            }
+
+            .image-upload-area {
+                padding: 1rem 0.5rem;
+                min-height: 120px;
+            }
+
+            .image-upload-area i {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .image-upload-area p {
+                font-size: 0.85rem;
+                margin-bottom: 0;
+            }
+
+            .color-total-quantity {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .uploaded-images {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 0.5rem;
+            }
+
+            .uploaded-image-item img {
+                height: 80px;
+            }
+
+            /* Adjust color variant header for better spacing */
+            .color-variant-header {
+                margin-bottom: 1rem;
+                padding-bottom: 0.75rem;
+            }
+
+            .color-info {
+                gap: 0.75rem;
+            }
+
+            .color-preview {
+                width: 35px;
+                height: 35px;
+            }
+
+            .color-code-input {
+                width: 90px;
+                padding: 0.4rem;
+                font-size: 0.9rem;
+            }
+
+            /* Ensure proper column distribution */
+            .color-variant .col-lg-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        /* Additional fix for exactly 1024px */
+        @media (width: 1024px) {
+            .size-quantity-grid {
+                gap: 0.3rem;
+            }
+
+            .size-quantity-item {
+                padding: 0.4rem 0.2rem;
+            }
+
+            .image-upload-area {
+                padding: 0.75rem 0.5rem;
+                min-height: 100px;
+            }
+        }
     </style>
 </head>
 
@@ -271,10 +868,14 @@
                 <div class="form-card">
                     <form id="addProductForm" class="needs-validation" novalidate>
                         <div class="row">
-                            <!-- Basic Information -->
+                            <!-- Left Column -->
                             <div class="col-lg-8">
+                                <!-- Basic Information -->
                                 <div class="form-section">
-                                    <h5 class="section-title">Basic Information</h5>
+                                    <h5 class="section-title">
+                                        <i class="bi bi-info-circle"></i>
+                                        Basic Information
+                                    </h5>
 
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
@@ -319,78 +920,95 @@
                                     </div>
                                 </div>
 
-                                <!-- Pricing Information -->
+                                <!-- Color Options -->
                                 <div class="form-section">
-                                    <h5 class="section-title">Pricing Information</h5>
+                                    <h5 class="section-title">
+                                        <i class="bi bi-palette"></i>
+                                        Color Variants & Inventory
+                                    </h5>
 
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="actualPrice" class="form-label">Actual Price ($) *</label>
-                                            <input type="number" class="form-control" id="actualPrice" step="0.01"
-                                                min="0" required>
-                                            <div class="invalid-feedback">Please provide the actual price.</div>
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="offerPrice" class="form-label">Offer Price ($)</label>
-                                            <input type="number" class="form-control" id="offerPrice" step="0.01"
-                                                min="0">
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="discountPercent" class="form-label">Discount %
-                                                (Auto-calculated)</label>
-                                            <input type="number" class="form-control" id="discountPercent" readonly>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <div class="color-options-container">
+                                        <button type="button" class="add-color-btn" onclick="addColorVariant()">
+                                            <i class="bi bi-plus-circle"></i>
+                                            Add Color Variant
+                                        </button>
 
-                                <!-- Inventory Information -->
-                                <div class="form-section">
-                                    <h5 class="section-title">Inventory Information</h5>
-
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="productQuantity" class="form-label">Quantity *</label>
-                                            <input type="number" class="form-control" id="productQuantity" min="0"
-                                                required>
-                                            <div class="invalid-feedback">Please provide the quantity.</div>
+                                        <div id="colorVariantsContainer">
+                                            <!-- Color variants will be added here dynamically -->
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="productSku" class="form-label">SKU (Auto-generated)</label>
-                                            <input type="text" class="form-control" id="productSku" readonly>
+
+                                        <div class="alert alert-info" id="noColorsAlert">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            Click "Add Color Variant" to start adding product colors with their
+                                            respective quantities and images.
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Image Upload -->
+                            <!-- Right Column -->
                             <div class="col-lg-4">
-                                <div class="image-upload-container">
-                                    <h5 class="section-title">Product Images</h5>
+                                <!-- SKU Section -->
+                                <div class="form-section">
+                                    <h5 class="section-title">
+                                        <i class="bi bi-upc-scan"></i>
+                                        Product Identification
+                                    </h5>
+                                    <div class="mb-2">
+                                        <label class="form-label">Auto-Generated SKU</label>
+                                        <div class="sku-display" id="productSku">CHD-PRD-2025-0001</div>
+                                        <div class="sku-note">This unique ID is automatically generated and cannot be
+                                            changed</div>
+                                    </div>
+                                </div>
 
-                                    <!-- Cover Image -->
-                                    <div class="mb-3">
-                                        <label class="form-label">Cover Image *</label>
-                                        <div class="image-upload-area" id="coverImageUploadArea">
-                                            <i class="bi bi-image"></i>
-                                            <p>Upload cover image</p>
-                                            <input type="file" id="coverImage" accept="image/*" hidden required>
+                                <!-- Product Settings -->
+                                <div class="product-settings-container pt-5">
+                                    <h5 class="section-title">
+                                        <i class="bi bi-gear"></i>
+                                        Product Settings
+                                    </h5>
+
+                                    <div class="toggle-item">
+                                        <div>
+                                            <div class="toggle-label">
+                                                <i class="bi bi-check-circle"></i>
+                                                Is Product Active
+                                            </div>
+                                            <div class="toggle-description">Enable this product for sale</div>
                                         </div>
-                                        <div class="uploaded-images" id="uploadedCoverImage">
-                                            <!-- Cover image will appear here -->
-                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="isActive" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
 
-                                    <!-- Multiple Images -->
-                                    <div class="mb-3">
-                                        <label class="form-label">Additional Images</label>
-                                        <div class="image-upload-area" id="multipleImageUploadArea">
-                                            <i class="bi bi-cloud-upload"></i>
-                                            <p>Drag & drop images here or click to browse</p>
-                                            <input type="file" id="productImages" multiple accept="image/*" hidden>
+                                    <div class="toggle-item">
+                                        <div>
+                                            <div class="toggle-label">
+                                                <i class="bi bi-star"></i>
+                                                Is Product Recommended
+                                            </div>
+                                            <div class="toggle-description">Feature this product as recommended</div>
                                         </div>
-                                        <div class="uploaded-images" id="uploadedImages">
-                                            <!-- Uploaded images will appear here -->
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="isRecommended">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="toggle-item">
+                                        <div>
+                                            <div class="toggle-label">
+                                                <i class="bi bi-lightning"></i>
+                                                Is Product New
+                                            </div>
+                                            <div class="toggle-description">Mark this product as new arrival</div>
                                         </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="isNew">
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -418,284 +1036,533 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                initializeForm();
-                initializeImageUpload();
-                initializePriceCalculation();
-                generateSKU();
+
+        let colorVariantCount = 0;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeForm();
+            generateSKU();
+            initializeToggleSwitches();
+        });
+
+        // Initialize form
+        function initializeForm() {
+            const form = document.getElementById('addProductForm');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                if (form.checkValidity() && validateColorVariants()) {
+                    submitProduct();
+                } else {
+                    const invalidFields = form.querySelectorAll(':invalid');
+                    invalidFields.forEach(field => {
+                        field.classList.add('shake');
+                        setTimeout(() => field.classList.remove('shake'), 500);
+                    });
+                }
+
+                form.classList.add('was-validated');
+            });
+        }
+
+        // Validate color variants
+        function validateColorVariants() {
+            const colorVariants = document.querySelectorAll('.color-variant');
+            if (colorVariants.length === 0) {
+                showNotification('Please add at least one color variant', 'warning');
+                return false;
+            }
+
+            let isValid = true;
+            colorVariants.forEach(variant => {
+                const colorCode = variant.querySelector('.color-code-input').value;
+                const quantities = variant.querySelectorAll('.size-quantity');
+                let hasQuantity = false;
+
+                quantities.forEach(qty => {
+                    if (parseInt(qty.value) > 0) hasQuantity = true;
+                });
+
+                if (!colorCode || !hasQuantity) {
+                    isValid = false;
+                    variant.style.border = '2px solid #dc3545';
+                    setTimeout(() => {
+                        variant.style.border = '2px solid #e9ecef';
+                    }, 3000);
+                }
             });
 
-            // Initialize form
-            function initializeForm() {
-                const form = document.getElementById('addProductForm');
-
-                form.addEventListener('submit', function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-
-                    if (form.checkValidity()) {
-                        submitProduct();
-                    } else {
-                        const invalidFields = form.querySelectorAll(':invalid');
-                        invalidFields.forEach(field => {
-                            field.classList.add('shake');
-                            setTimeout(() => field.classList.remove('shake'), 500);
-                        });
-                    }
-
-                    form.classList.add('was-validated');
-                });
+            if (!isValid) {
+                showNotification('Each color variant must have a color code and at least one size with quantity', 'warning');
             }
 
-            // Initialize image upload
-            function initializeImageUpload() {
-                // Cover image upload
-                const coverUploadArea = document.getElementById('coverImageUploadArea');
-                const coverFileInput = document.getElementById('coverImage');
-                const uploadedCoverImage = document.getElementById('uploadedCoverImage');
+            return isValid;
+        }
 
-                coverUploadArea.addEventListener('click', () => coverFileInput.click());
+        // Add color variant
+        function addColorVariant() {
+            initializePriceCalculation()
+            colorVariantCount++;
+            const container = document.getElementById('colorVariantsContainer');
+            const noColorsAlert = document.getElementById('noColorsAlert');
 
-                coverFileInput.addEventListener('change', (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        handleCoverImage(file);
+            // Hide the no colors alert
+            noColorsAlert.style.display = 'none';
+
+            const colorVariantDiv = document.createElement('div');
+            colorVariantDiv.className = 'color-variant';
+            colorVariantDiv.id = `colorVariant${colorVariantCount}`;
+
+            colorVariantDiv.innerHTML = `
+                <div class="color-variant-header">
+                    <div class="color-info">
+                        <div class="color-preview" id="colorPreview${colorVariantCount}" style="background-color: #000000;"></div>
+                        <div>
+                            <div class="color-name">Color Variant ${colorVariantCount}</div>
+                            <input type="text" class="color-code-input" id="colorCode${colorVariantCount}" 
+                                   placeholder="#0000 id="colorCode${colorVariantCount}"
+                                   placeholder="#000000" value="#000000" onchange="updateColorPreview(${colorVariantCount})">
+                        </div>
+                    </div>
+                    <button type="button" class="remove-color-btn" onclick="removeColorVariant(${colorVariantCount})">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <h6 class="mb-3"><i class="bi bi-rulers me-2"></i>Size Quantities</h6>
+                        <div class="size-quantity-grid">
+                            <div class="size-quantity-item">
+                                <span class="size-label">XS</span>
+                                <input type="number" class="form-control size-quantity no-arrows" 
+                                       id="qty${colorVariantCount}_XS" min="0" value="0" 
+                                       onchange="updateColorTotal(${colorVariantCount})">
+                            </div>
+                            <div class="size-quantity-item">
+                                <span class="size-label">S</span>
+                                <input type="number" class="form-control size-quantity no-arrows" 
+                                       id="qty${colorVariantCount}_S" min="0" value="0" 
+                                       onchange="updateColorTotal(${colorVariantCount})">
+                            </div>
+                            <div class="size-quantity-item">
+                                <span class="size-label">M</span>
+                                <input type="number" class="form-control size-quantity no-arrows" 
+                                       id="qty${colorVariantCount}_M" min="0" value="0" 
+                                       onchange="updateColorTotal(${colorVariantCount})">
+                            </div>
+                            <div class="size-quantity-item">
+                                <span class="size-label">L</span>
+                                <input type="number" class="form-control size-quantity no-arrows" 
+                                       id="qty${colorVariantCount}_L" min="0" value="0" 
+                                       onchange="updateColorTotal(${colorVariantCount})">
+                            </div>
+                            <div class="size-quantity-item">
+                                <span class="size-label">XL</span>
+                                <input type="number" class="form-control size-quantity no-arrows" 
+                                       id="qty${colorVariantCount}_XL" min="0" value="0" 
+                                       onchange="updateColorTotal(${colorVariantCount})">
+                            </div>
+                        </div>
+                        <div class="color-total-quantity" id="colorTotal${colorVariantCount}">
+                            <i class="bi bi-box-seam me-2"></i>Total: 0 units
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <h6 class="mb-3"><i class="bi bi-images me-2"></i>Color Images</h6>
+                        
+                        <!-- Color Cover Image -->
+                        <div class="mb-3">
+                            <label class="form-label">Color Cover Image</label>
+                            <div class="image-upload-area" onclick="document.getElementById('colorCover${colorVariantCount}').click()">
+                                <i class="bi bi-image"></i>
+                                <p>Upload color cover</p>
+                                <input type="file" id="colorCover${colorVariantCount}" accept="image/*" hidden 
+                                       onchange="handleColorCoverImage(${colorVariantCount}, this)">
+                            </div>
+                            <div class="uploaded-images" id="uploadedColorCover${colorVariantCount}">
+                                <!-- Color cover image will appear here -->
+                            </div>
+                        </div>
+
+                        <!-- Multiple Color Images -->
+                        <div class="mb-3">
+                            <label class="form-label">Additional Images</label>
+                            <div class="image-upload-area" onclick="document.getElementById('colorImages${colorVariantCount}').click()">
+                                <i class="bi bi-cloud-upload"></i>
+                                <p>Upload multiple images</p>
+                                <input type="file" id="colorImages${colorVariantCount}" accept="image/*" multiple hidden 
+                                       onchange="handleColorImages(${colorVariantCount}, this)">
+                            </div>
+                            <div class="uploaded-images" id="uploadedColorImages${colorVariantCount}">
+                                <!-- Color images will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h5 class="section-title">
+                        <i class="bi bi-currency-rupee"></i>
+                        Pricing Information
+                    </h5>
+                    <div class="col-md-4 mb-3">
+                        <label for="actualPrice${colorVariantCount}" class="form-label">Actual Price ($) *</label>
+                        <input type="number" class="form-control" id="actualPrice${colorVariantCount}" step="0.01"
+                            min="0" required>
+                        <div class="invalid-feedback">Please provide the actual price.</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="offerPrice${colorVariantCount}" class="form-label">Offer Price ($)</label>
+                        <input type="number" class="form-control" id="offerPrice${colorVariantCount}" step="0.01"
+                            min="0">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="discountPercent${colorVariantCount}" class="form-label">Discount %
+                            (Auto-calculated)</label>
+                        <input type="number" class="form-control" id="discountPercent${colorVariantCount}" readonly>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(colorVariantDiv);
+            initializePriceCalculation(colorVariantCount); // <-- attach for this variant
+
+        }
+
+        // Remove color variant
+        function removeColorVariant(variantId) {
+            const variant = document.getElementById(`colorVariant${variantId}`);
+            if (variant) {
+                variant.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => {
+                    variant.remove();
+
+                    // Show no colors alert if no variants left
+                    const remainingVariants = document.querySelectorAll('.color-variant');
+                    if (remainingVariants.length === 0) {
+                        document.getElementById('noColorsAlert').style.display = 'block';
                     }
-                });
-
-                // Multiple images upload
-                const uploadArea = document.getElementById('multipleImageUploadArea');
-                const fileInput = document.getElementById('productImages');
-                const uploadedImages = document.getElementById('uploadedImages');
-
-                uploadArea.addEventListener('click', () => fileInput.click());
-
-                uploadArea.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    uploadArea.classList.add('drag-over');
-                });
-
-                uploadArea.addEventListener('dragleave', () => {
-                    uploadArea.classList.remove('drag-over');
-                });
-
-                uploadArea.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    uploadArea.classList.remove('drag-over');
-
-                    const files = Array.from(e.dataTransfer.files);
-                    handleImageFiles(files);
-                });
-
-                fileInput.addEventListener('change', (e) => {
-                    const files = Array.from(e.target.files);
-                    handleImageFiles(files);
-                });
+                }, 300);
             }
+        }
 
-            // Handle cover image
-            function handleCoverImage(file) {
+        // Update color preview
+        function updateColorPreview(variantId) {
+            const colorCode = document.getElementById(`colorCode${variantId}`).value;
+            const preview = document.getElementById(`colorPreview${variantId}`);
+
+            // Validate hex color
+            const hexRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+            if (hexRegex.test(colorCode)) {
+                preview.style.backgroundColor = colorCode;
+            } else {
+                preview.style.backgroundColor = '#000000';
+            }
+        }
+
+        // Update color total quantity
+        function updateColorTotal(variantId) {
+            const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+            let total = 0;
+
+            sizes.forEach(size => {
+                const qty = parseInt(document.getElementById(`qty${variantId}_${size}`).value) || 0;
+                total += qty;
+            });
+
+            document.getElementById(`colorTotal${variantId}`).innerHTML = `
+                <i class="bi bi-box-seam me-2"></i>Total: ${total} units
+            `;
+        }
+
+        // Handle color cover image
+        function handleColorCoverImage(variantId, input) {
+            const file = input.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                const container = document.getElementById(`uploadedColorCover${variantId}`);
+
+                reader.onload = function (e) {
+                    container.innerHTML = `
+                        <div class="uploaded-image-item">
+                            <img src="${e.target.result}" alt="Color Cover">
+                            <div class="image-overlay">
+                                <button type="button" class="btn btn-sm btn-danger" onclick="removeColorCoverImage(${variantId})">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Handle color images
+        function handleColorImages(variantId, input) {
+            const files = Array.from(input.files);
+            const container = document.getElementById(`uploadedColorImages${variantId}`);
+
+            files.forEach((file, index) => {
                 if (file.type.startsWith('image/')) {
                     const reader = new FileReader();
-                    const uploadedCoverImage = document.getElementById('uploadedCoverImage');
 
                     reader.onload = function (e) {
-                        uploadedCoverImage.innerHTML = `
-                            <div class="uploaded-image-item">
-                                <img src="${e.target.result}" alt="Cover Image">
-                                <div class="image-overlay">
-                                    <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverImage()">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </div>
+                        const imageDiv = document.createElement('div');
+                        imageDiv.className = 'uploaded-image-item';
+                        imageDiv.innerHTML = `
+                            <img src="${e.target.result}" alt="Color Image">
+                            <div class="image-overlay">
+                                <button type="button" class="btn btn-sm btn-danger" onclick="removeColorImage(this)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </div>
                         `;
 
-                        // Add animation
-                        const imageItem = uploadedCoverImage.querySelector('.uploaded-image-item');
-                        imageItem.style.opacity = '0';
-                        imageItem.style.transform = 'scale(0.8)';
-
-                        setTimeout(() => {
-                            imageItem.style.transition = 'all 0.3s ease';
-                            imageItem.style.opacity = '1';
-                            imageItem.style.transform = 'scale(1)';
-                        }, 100);
+                        container.appendChild(imageDiv);
                     };
 
                     reader.readAsDataURL(file);
                 }
-            }
+            });
+        }
 
-            // Handle multiple image files
-            function handleImageFiles(files) {
-                const uploadedImages = document.getElementById('uploadedImages');
+        // Remove color cover image
+        function removeColorCoverImage(variantId) {
+            document.getElementById(`uploadedColorCover${variantId}`).innerHTML = '';
+            document.getElementById(`colorCover${variantId}`).value = '';
+        }
 
-                files.forEach((file, index) => {
-                    if (file.type.startsWith('image/')) {
-                        const reader = new FileReader();
+        // Remove color image
+        function removeColorImage(button) {
+            const imageItem = button.closest('.uploaded-image-item');
+            imageItem.style.transform = 'scale(0)';
+            imageItem.style.opacity = '0';
+            setTimeout(() => imageItem.remove(), 300);
+        }
 
-                        reader.onload = function (e) {
-                            const imageContainer = document.createElement('div');
-                            imageContainer.className = 'uploaded-image-item';
-                            imageContainer.innerHTML = `
-                                <img src="${e.target.result}" alt="Product Image">
-                                <div class="image-overlay">
-                                    <button type="button" class="btn btn-sm btn-danger" onclick="removeImage(this)">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </div>
-                            `;
+        // Initialize toggle switches
+        function initializeToggleSwitches() {
+            const toggles = document.querySelectorAll('.toggle-switch input');
 
-                            imageContainer.style.opacity = '0';
-                            imageContainer.style.transform = 'scale(0.8)';
-                            uploadedImages.appendChild(imageContainer);
-
-                            setTimeout(() => {
-                                imageContainer.style.transition = 'all 0.3s ease';
-                                imageContainer.style.opacity = '1';
-                                imageContainer.style.transform = 'scale(1)';
-                            }, index * 100);
-                        };
-
-                        reader.readAsDataURL(file);
-                    }
+            toggles.forEach(toggle => {
+                toggle.addEventListener('change', function () {
+                    const slider = this.nextElementSibling;
+                    slider.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        slider.style.transform = 'scale(1)';
+                    }, 200);
                 });
-            }
+            });
+        }
 
-            // Remove cover image
-            function removeCoverImage() {
+
+        // Handle cover image
+        function handleCoverImage(file) {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
                 const uploadedCoverImage = document.getElementById('uploadedCoverImage');
-                const coverFileInput = document.getElementById('coverImage');
 
-                uploadedCoverImage.innerHTML = '';
-                coverFileInput.value = '';
-            }
-
-            // Remove image
-            function removeImage(button) {
-                const imageItem = button.closest('.uploaded-image-item');
-                imageItem.style.transform = 'scale(0)';
-                imageItem.style.opacity = '0';
-
-                setTimeout(() => {
-                    imageItem.remove();
-                }, 300);
-            }
-
-            // Initialize price calculation
-            function initializePriceCalculation() {
-                const actualPrice = document.getElementById('actualPrice');
-                const offerPrice = document.getElementById('offerPrice');
-                const discountPercent = document.getElementById('discountPercent');
-
-                function calculateDiscount() {
-                    const actual = parseFloat(actualPrice.value) || 0;
-                    const offer = parseFloat(offerPrice.value) || 0;
-
-                    if (actual > 0 && offer > 0 && offer < actual) {
-                        const discount = ((actual - offer) / actual * 100).toFixed(2);
-                        discountPercent.value = discount;
-                    } else {
-                        discountPercent.value = '';
-                    }
-                }
-
-                actualPrice.addEventListener('input', calculateDiscount);
-                offerPrice.addEventListener('input', calculateDiscount);
-            }
-
-            // Generate SKU
-            function generateSKU() {
-                const productName = document.getElementById('productName');
-                const collectionName = document.getElementById('collectionName');
-                const productSku = document.getElementById('productSku');
-
-                function updateSKU() {
-                    const name = productName.value.substring(0, 3).toUpperCase();
-                    const collection = collectionName.value.substring(0, 3).toUpperCase();
-                    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-
-                    if (name && collection) {
-                        productSku.value = `${collection}-${name}-${random}`;
-                    }
-                }
-
-                productName.addEventListener('input', updateSKU);
-                collectionName.addEventListener('change', updateSKU);
-            }
-
-            // Submit product
-            function submitProduct() {
-                const submitBtn = document.querySelector('button[type="submit"]');
-                const originalText = submitBtn.innerHTML;
-
-                submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise spin me-2"></i>Adding Product...';
-                submitBtn.disabled = true;
-
-                const formData = {
-                    name: document.getElementById('productName').value,
-                    collection: document.getElementById('collectionName').value,
-                    description: document.getElementById('productDescription').value,
-                    actualPrice: document.getElementById('actualPrice').value,
-                    offerPrice: document.getElementById('offerPrice').value,
-                    discountPercent: document.getElementById('discountPercent').value,
-                    quantity: document.getElementById('productQuantity').value,
-                    sku: document.getElementById('productSku').value,
-                    coverImage: document.querySelector('#uploadedCoverImage img')?.src,
-                    images: Array.from(document.querySelectorAll('#uploadedImages .uploaded-image-item img')).map(img => img.src)
+                reader.onload = function (e) {
+                    uploadedCoverImage.innerHTML = `
+                        <div class="uploaded-image-item">
+                            <img src="${e.target.result}" alt="Cover Image">
+                            <div class="image-overlay">
+                                <button type="button" class="btn btn-sm btn-danger" onclick="removeCoverImage()">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
                 };
 
-                setTimeout(() => {
-                    submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Product Added!';
-                    submitBtn.classList.remove('btn-primary');
-                    submitBtn.classList.add('btn-success');
+                reader.readAsDataURL(file);
+            }
+        }
 
-                    showNotification('Product added successfully!', 'success');
+        // Remove cover image
+        function removeCoverImage() {
+            document.getElementById('uploadedCoverImage').innerHTML = '';
+            document.getElementById('coverImage').value = '';
+        }
 
-                    setTimeout(() => {
-                        if (confirm('Product added successfully! Do you want to add another product?')) {
-                            resetForm();
-                            submitBtn.innerHTML = originalText;
-                            submitBtn.classList.remove('btn-success');
-                            submitBtn.classList.add('btn-primary');
-                            submitBtn.disabled = false;
-                        } else {
-                            window.location.href = 'products.html';
-                        }
-                    }, 2000);
-                }, 2000);
+        // Initialize price calculation
+        function initializePriceCalculation(variantId = '') {
+            const actualPrice = document.getElementById(`actualPrice${variantId}`);
+            const offerPrice = document.getElementById(`offerPrice${variantId}`);
+            const discountPercent = document.getElementById(`discountPercent${variantId}`);
+
+            // If any of the fields are missing, exit early
+            if (!actualPrice || !offerPrice || !discountPercent) return;
+
+            function calculateDiscount() {
+                const actual = parseFloat(actualPrice.value) || 0;
+                const offer = parseFloat(offerPrice.value) || 0;
+
+                if (actual > 0 && offer > 0 && offer < actual) {
+                    const discount = ((actual - offer) / actual * 100).toFixed(2);
+                    discountPercent.value = discount;
+                } else {
+                    discountPercent.value = '';
+                }
             }
 
-            // Reset form
-            function resetForm() {
-                const form = document.getElementById('addProductForm');
-                form.reset();
-                form.classList.remove('was-validated');
+            actualPrice.addEventListener('input', calculateDiscount);
+            offerPrice.addEventListener('input', calculateDiscount);
+        }
 
-                document.getElementById('uploadedCoverImage').innerHTML = '';
-                document.getElementById('uploadedImages').innerHTML = '';
-                document.getElementById('productSku').value = '';
-                document.getElementById('discountPercent').value = '';
+        // Generate SKU
+        function generateSKU() {
+            const productName = document.getElementById('productName');
+            const collectionName = document.getElementById('collectionName');
+            const productSku = document.getElementById('productSku');
 
-                const formSections = document.querySelectorAll('.form-section');
-                formSections.forEach((section, index) => {
-                    section.style.opacity = '0';
-                    section.style.transform = 'translateY(20px)';
+            const currentYear = new Date().getFullYear();
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
 
+            productSku.textContent = `CHD-PRD-${currentYear}-${randomNum.toString().padStart(4, '0')}`;
+
+            function updateSKU() {
+                if (productName.value && collectionName.value) {
+                    let collectionCode = collectionName.value.substring(0, 3).toUpperCase();
+                    const newSku = `CHD-${collectionCode}-${currentYear}-${randomNum.toString().padStart(4, '0')}`;
+
+                    productSku.textContent = newSku;
+                    productSku.classList.add('pulse');
                     setTimeout(() => {
-                        section.style.transition = 'all 0.3s ease';
-                        section.style.opacity = '1';
-                        section.style.transform = 'translateY(0)';
-                    }, index * 100);
+                        productSku.classList.remove('pulse');
+                    }, 1000);
+                }
+            }
+
+            productName.addEventListener('change', updateSKU);
+            collectionName.addEventListener('change', updateSKU);
+        }
+
+        // Submit product
+        function submitProduct() {
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = '<i class="bi bi-arrow-clockwise spin me-2"></i>Adding Product...';
+            submitBtn.disabled = true;
+
+            // Collect color variants data
+            const colorVariants = [];
+            document.querySelectorAll('.color-variant').forEach(variant => {
+                const variantId = variant.id.replace('colorVariant', '');
+                const colorCode = document.getElementById(`colorCode${variantId}`).value;
+
+                const sizes = {};
+                ['XS', 'S', 'M', 'L', 'XL'].forEach(size => {
+                    sizes[size] = document.getElementById(`qty${variantId}_${size}`).value;
                 });
 
-                showNotification('Form reset successfully!', 'info');
+                colorVariants.push({
+                    colorCode: colorCode,
+                    sizes: sizes,
+                    coverImage: document.querySelector(`#uploadedColorCover${variantId} img`)?.src,
+                    images: Array.from(document.querySelectorAll(`#uploadedColorImages${variantId} img`)).map(img => img.src)
+                });
+            });
+
+            const formData = {
+                name: document.getElementById('productName').value,
+                collection: document.getElementById('collectionName').value,
+                description: document.getElementById('productDescription').innerHTML,
+                actualPrice: document.getElementById('actualPrice').value,
+                offerPrice: document.getElementById('offerPrice').value,
+                discountPercent: document.getElementById('discountPercent').value,
+                sku: document.getElementById('productSku').textContent,
+                coverImage: document.querySelector('#uploadedCoverImage img')?.src,
+                colorVariants: colorVariants,
+                settings: {
+                    isActive: document.getElementById('isActive').checked,
+                    isRecommended: document.getElementById('isRecommended').checked,
+                    isNew: document.getElementById('isNew').checked
+                }
+            };
+
+            console.log('Product Data:', formData);
+
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Product Added!';
+                submitBtn.classList.remove('btn-primary');
+                submitBtn.classList.add('btn-success');
+
+                showNotification('Product with color variants added successfully!', 'success');
+
+                setTimeout(() => {
+                    if (confirm('Product added successfully! Do you want to add another product?')) {
+                        resetForm();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.classList.remove('btn-success');
+                        submitBtn.classList.add('btn-primary');
+                        submitBtn.disabled = false;
+                    } else {
+                        window.location.href = 'products.html';
+                    }
+                }, 2000);
+            }, 2000);
+        }
+
+        // Reset form
+        function resetForm() {
+            const form = document.getElementById('addProductForm');
+            form.reset();
+            form.classList.remove('was-validated');
+
+            document.getElementById('uploadedCoverImage').innerHTML = '';
+            document.getElementById('colorVariantsContainer').innerHTML = '';
+            document.getElementById('noColorsAlert').style.display = 'block';
+
+            colorVariantCount = 0;
+
+            document.getElementById('isActive').checked = true;
+            document.getElementById('isRecommended').checked = false;
+            document.getElementById('isNew').checked = false;
+
+            generateSKU();
+            showNotification('Form reset successfully!', 'info');
+        }
+
+        function formatText(command) {
+            document.execCommand(command, false, null);
+            document.getElementById('productDescription').focus();
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
+            notification.style.zIndex = '9999';
+            notification.style.maxWidth = '300px';
+            notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            notification.innerHTML = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Add fadeOut animation
+        const fadeStyle = document.createElement('style');
+        fadeStyle.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(-20px); }
             }
-            function formatText(command) {
-                document.execCommand(command, false, null);
-                document.getElementById('productDescription').focus();
-            }
+        `;
+        document.head.appendChild(fadeStyle);
+
     </script>
 </body>
 
